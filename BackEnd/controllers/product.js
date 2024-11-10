@@ -31,7 +31,7 @@ const createProduct = async (req, res) => {
 };
 
 
-// Get all products + category_name
+// Get all products + category_name if i need it
 async function getAllProducts(req, res) {
     try {
         const result = await pool.query(
@@ -58,7 +58,7 @@ async function getAllProducts(req, res) {
 }
 
 
-// Get products for specific TouristSpots By TouristSpotsId
+// Get products for specific TouristSpots By TouristSpotsId 
 const getProductsByTouristSpotsId = async (req, res) => {
     const {touristSpotsid} = req.params;
 
@@ -91,7 +91,7 @@ const getProductsByTouristSpotsId = async (req, res) => {
 };
 
 
-// Get a specific product By Id + TouristSpots_name
+// Get a specific product By Id + TouristSpots_name if i need it
 const getProductById = async (req, res) => {
     const productId = req.params.productId;
 
