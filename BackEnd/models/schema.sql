@@ -36,7 +36,7 @@ CREATE TABLE users(
   FOREIGN KEY (role_id) REFERENCES roles(id),
   PRIMARY KEY (id)
 );
-"heloo"
+
 
 -- Create a table called **Country_Categories** in the database
 CREATE TABLE Country_Categories(
