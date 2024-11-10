@@ -37,6 +37,7 @@ CREATE TABLE users(
   PRIMARY KEY (id)
 );
 
+
 -- Create a table called **Country_Categories** in the database
 CREATE TABLE Country_Categories(
 id SERIAL PRIMARY KEY,
