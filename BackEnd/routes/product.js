@@ -5,6 +5,7 @@ const authorization = require("../middlewares/authorization");
 const { 
     createProduct,
     getProductsByTouristSpotsId,
+    getAllProducts,
 
     } = require("../controllers/product");
 
@@ -13,6 +14,8 @@ const productRouter = express.Router();
 
 
 productRouter.post("/",authentication, authorization("Admin"),createProduct);
+
+productRouter.get("/",getAllProducts);
 
 productRouter.get("/:touristSpotsid", getProductsByTouristSpotsId);
 

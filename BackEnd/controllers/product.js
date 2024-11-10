@@ -31,6 +31,33 @@ const createProduct = async (req, res) => {
 };
 
 
+// Get all products + category_name
+async function getAllProducts(req, res) {
+    try {
+        const result = await pool.query(
+            'SELECT p.*, c.category_name FROM products p LEFT JOIN Country_Categories c ON p.category_id = c.id'
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'No products found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            products: result.rows
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+}
+
+
 // Get products for specific TouristSpots By TouristSpotsId
 const getProductsByTouristSpotsId = async (req, res) => {
     const {touristSpotsid} = req.params;
@@ -68,5 +95,6 @@ const getProductsByTouristSpotsId = async (req, res) => {
 module.exports = {
     createProduct,
     getProductsByTouristSpotsId,
+    getAllProducts,
     
 };
