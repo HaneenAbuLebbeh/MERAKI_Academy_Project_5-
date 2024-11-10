@@ -84,6 +84,59 @@ const addToCart = async (req, res) => {
 
 
 
+    const getUserCart = async (req, res) => {  
+        const userId = req.token.userId;
+        
+    //JOIN cart_items & products => product_id --- id
+    //JOIN carts & cart_items  => id --- cart_id 
+        try {
+            const result = await pool.query(`
+                SELECT 
+                    carts.id, 
+                    cart_items.id, 
+                    cart_items.product_id, 
+                    cart_items.quantity, 
+                    cart_items.price, 
+                    products.name
+                FROM 
+                    carts
+                LEFT JOIN 
+                    cart_items ON carts.id = cart_items.cart_id
+                LEFT JOIN 
+                    products ON cart_items.product_id = products.id
+                WHERE 
+                    carts.user_id = $1
+            `, [userId]);
+    
+            if (result.rows.length === 0) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Cart not found for this user"
+                });
+            }
+    
+            const cart = {
+                cart_id: result.rows[0].id,
+                items: result.rows.map(row => ({
+                    item_id: row.id,
+                    product_id: row.product_id,
+                    product_name: row.name,
+                    quantity: row.quantity,
+                    price: row.price
+                }))
+            };
+    
+            res.status(200).json({ success: true, cart });
+    
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ success: false, message: err.message });
+        }
+    };
+    
+
 module.exports = {
     addToCart,
+    getUserCart,
+
 };
