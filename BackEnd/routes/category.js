@@ -18,4 +18,4 @@ categoryRouter.get('/' ,getAllCategories);
 categoryRouter.put('/:name',authentication, authorization("Admin","User") ,updateCategoryByName);
 categoryRouter.delete('/:name',deleteCategoryByName);
 
-module.exports = categoryRouter;
+module.exports = categoryRouter; 
