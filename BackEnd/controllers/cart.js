@@ -86,7 +86,7 @@ const addToCart = async (req, res) => {
 
     const getUserCart = async (req, res) => {  
         const userId = req.token.userId;
-        
+
     //JOIN cart_items & products => product_id --- id
     //JOIN carts & cart_items  => id --- cart_id 
         try {
@@ -135,8 +135,86 @@ const addToCart = async (req, res) => {
     };
     
 
+
+    const updateCartQuantity = async (req, res) => {
+        const { product, quantity } = req.body;
+        const userId = req.token.userId;
+    
+        // Check if the quantity is at least 1
+        if (quantity < 1) {
+            return res.status(400).json({ success: false, message: 'Quantity must be at least 1' });
+        }
+    
+        try {
+            // Find the user's cart
+            const cartResult = await pool.query(`
+                SELECT id 
+                FROM carts 
+                WHERE user_id = $1
+            `, [userId]);
+    
+            if (cartResult.rows.length === 0) {
+                return res.status(404).json({ success: false, message: 'Cart not found' });
+            }
+    
+            const cartId = cartResult.rows[0].id;
+    
+            // Check if the product exists in the cart
+            const itemResult = await pool.query(`
+                SELECT id 
+                FROM cart_items 
+                WHERE cart_id = $1 AND product_id = $2
+            `, [cartId, product]);
+    
+            if (itemResult.rows.length === 0) {
+                return res.status(404).json({ success: false, message: 'Product not found in cart' });
+            }
+    
+            const itemId = itemResult.rows[0].id;
+    
+            // Update the quantity of product in the cart
+            await pool.query(`
+                UPDATE cart_items
+                SET quantity = $1
+                WHERE id = $2
+            `, [quantity, itemId]);
+    
+            // get the updated cart with product details
+            const updatedCartResult = await pool.query(`
+                SELECT 
+                    cart_items.id AS item_id, 
+                    cart_items.product_id, 
+                    cart_items.quantity, 
+                    cart_items.price, 
+                    products.name AS product_name
+                FROM cart_items
+                LEFT JOIN products ON cart_items.product_id = products.id
+                WHERE cart_items.cart_id = $1
+            `, [cartId]);
+    
+            const cart = {
+                cart_id: cartId,
+                items: updatedCartResult.rows.map(row => ({
+                    item_id: row.item_id,
+                    product_id: row.product_id,
+                    product_name: row.product_name,
+                    quantity: row.quantity,
+                    price: row.price
+                }))
+            };
+            res.status(200).json({ success: true, cart });
+        } 
+        catch (err) {
+            console.error(err);
+            res.status(500).json({ success: false, message: err.message });
+        }
+    };
+
+
 module.exports = {
     addToCart,
     getUserCart,
+    updateCartQuantity,
+
 
 };
