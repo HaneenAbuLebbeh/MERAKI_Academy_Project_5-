@@ -17,15 +17,11 @@ app.use(cors());
 
 
 // router middleware 
-app.use("/users",userRouter)
+app.use("/users",userRouter) 
 app.use('/products', productRouter)
 app.use('/carts', cartRouter)
 app.use('/touristSpot',touristRouter)
 app.use('/reviews',reviewRouter)
-
-
-
-
 
 
 
