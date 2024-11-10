@@ -153,7 +153,7 @@ const addToCart = async (req, res) => {
                 WHERE user_id = $1
             `, [userId]);
     
-            if (cartResult.rows.length === 0) {
+            /**/if (cartResult.rows.length === 0) {
                 return res.status(404).json({ success: false, message: 'Cart not found' });
             }
     
@@ -211,10 +211,70 @@ const addToCart = async (req, res) => {
     };
 
 
+    const removeFromCart = async (req, res) => {
+        const { product } = req.body; 
+        const userId = req.token.userId;
+    
+        try {
+            // get cart_id of the cart based on user_id
+            const cartResult = await pool.query(`
+                SELECT id 
+                FROM carts 
+                WHERE user_id = $1
+            `, [userId]);
+    
+            if (cartResult.rows.length === 0) {
+                return res.status(404).json({ success: false, message: 'Cart not found' });
+            }
+    
+            const cartId = cartResult.rows[0].id;
+    
+            // Delete the product 
+            await pool.query(`
+                DELETE FROM cart_items
+                WHERE cart_id = $1 AND product_id = $2
+            `, [cartId, product]);
+    
+            // get the updated cart after delete
+            const updatedCartResult = await pool.query(`
+            SELECT 
+                cart_items.id, 
+                cart_items.product_id, 
+                cart_items.quantity, 
+                cart_items.price, 
+                products.name
+            FROM cart_items
+            LEFT JOIN products ON cart_items.product_id = products.id
+            WHERE cart_items.cart_id = $1
+        `, [cartId]);
+    
+            const cart = {
+                cart_id: cartId,
+                items: updatedCartResult.rows.map(row => ({
+                    item_id: row.item_id,
+                    product_id: row.product_id,
+                    product_name: row.product_name,
+                    quantity: row.quantity,
+                    price: row.price
+                }))
+            };
+    
+            res.status(200).json({ success: true, cart, deleted: product });
+    
+        } 
+        catch (err) {
+            console.error(err);
+            res.status(500).json({ success: false, message: err.message });
+        }
+    };
+
+
 module.exports = {
     addToCart,
     getUserCart,
     updateCartQuantity,
+    removeFromCart,
+
 
 
 };
