@@ -107,6 +107,25 @@ FOREIGN KEY (order_id) REFERENCES orders(id),
 FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
+-- Create a table called **carts ** in the database
+CREATE TABLE carts (
+id SERIAL PRIMARY KEY,
+user_id INT NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Create a table called **cart_items ** in the database
+CREATE TABLE cart_items (
+id SERIAL PRIMARY KEY,
+cart_id INT NOT NULL,
+product_id INT NOT NULL,
+quantity INT NOT NULL DEFAULT 1,
+price DECIMAL(10, 2) NOT NULL,
+FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
+FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+
 
 -- create roles and permessions 
 INSERT INTO
