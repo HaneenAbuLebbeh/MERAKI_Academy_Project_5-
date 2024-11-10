@@ -91,10 +91,39 @@ const getProductsByTouristSpotsId = async (req, res) => {
 };
 
 
+// Get a specific product By Id + TouristSpots_name
+const getProductById = async (req, res) => {
+    const productId = req.params.productId;
+
+    try {
+        const result = await pool.query(
+            'SELECT p.*, ts.spot_name FROM products p LEFT JOIN TouristSpots ts ON p.spot_id = ts.id WHERE p.id = $1',
+            [productId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Product not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            product: result.rows[0]
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+};
+
 
 module.exports = {
     createProduct,
     getProductsByTouristSpotsId,
     getAllProducts,
-    
+    getProductById,
 };
