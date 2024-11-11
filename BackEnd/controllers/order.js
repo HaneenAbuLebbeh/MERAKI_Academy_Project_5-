@@ -70,8 +70,51 @@ const createOrder = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-//
+
+
+const getUserOrders = async (req, res) => {
+    const userId = req.token.userId;
+
+    try {
+        // get all orders for the user
+        const ordersResult = await pool.query(`
+            SELECT * 
+            FROM orders 
+            WHERE user_id = $1
+        `, [userId]);
+
+        if (ordersResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'No orders found for this user' });
+        }
+
+        const orderIds = ordersResult.rows.map(order => order.id);
+
+        // get all order items that belong to the user orders
+        const orderItemsResult = await pool.query(`
+            SELECT * 
+            FROM order_items 
+            WHERE order_id = ANY($1::int[])
+        `, [orderIds]);
+
+        // link each order with its items
+        const orders = ordersResult.rows.map(order => {
+            return {
+                ...order,
+                items: orderItemsResult.rows.filter(item => item.order_id === order.id)
+            };
+        });
+
+        return res.status(200).json({ success: true, orders });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
 
 module.exports = { 
     createOrder,
-    }
+    getUserOrders,
+
+}
