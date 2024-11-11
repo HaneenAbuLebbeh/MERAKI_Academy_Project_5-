@@ -9,6 +9,7 @@ const app = express();
 const userRouter=require("./routes/users")
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
+const ordertRouter = require("./routes/order");
 const categoryRouter=require("./routes/category")
 const touristRouter=require("./routes/TouristSpots")
 const reviewRouter=require("./routes/review")
@@ -22,6 +23,7 @@ app.use(cors());
 app.use("/users",userRouter)
 app.use('/products', productRouter)
 app.use('/carts', cartRouter)
+app.use('/orders', ordertRouter)
 app.use('/category', categoryRouter)
 app.use('/touristspot', touristRouter)
 app.use('/review', reviewRouter)
