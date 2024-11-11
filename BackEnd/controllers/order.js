@@ -70,8 +70,121 @@ const createOrder = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-//
+
+
+const getUserOrders = async (req, res) => {
+    const userId = req.token.userId;
+
+    try {
+        // get all orders for the user
+        const ordersResult = await pool.query(`
+            SELECT * 
+            FROM orders 
+            WHERE user_id = $1
+        `, [userId]);
+
+        if (ordersResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'No orders found for this user' });
+        }
+
+        const orderIds = ordersResult.rows.map(order => order.id);
+
+        // get all order items that belong to the user orders
+        const orderItemsResult = await pool.query(`
+            SELECT * 
+            FROM order_items 
+            WHERE order_id = ANY($1::int[])
+        `, [orderIds]);
+
+        // link each order with its items
+        const orders = ordersResult.rows.map(order => {
+            return {
+                ...order,
+                items: orderItemsResult.rows.filter(item => item.order_id === order.id)
+            };
+        });
+
+        return res.status(200).json({ success: true, orders });
+    } 
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
+
+const getOrderById = async (req, res) => {
+    const orderId = req.params.id;
+    const userId = req.token.userId;
+
+    try {
+        // get order details based on orderID & userID 
+        const orderResult = await pool.query(`
+            SELECT * 
+            FROM orders 
+            WHERE id = $1 AND user_id = $2
+        `, [orderId, userId]);
+
+        if (orderResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Order not found' });
+        }
+
+        const order = orderResult.rows[0];
+
+        // get order items
+        const orderItemsResult = await pool.query(`
+            SELECT * 
+            FROM order_items 
+            WHERE order_id = $1
+        `, [orderId]);
+
+        // Add order items to the order details
+        order.items = orderItemsResult.rows;
+
+        res.status(200).json({ success: true, order });
+    } 
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
+const getAllOrders = async (req, res) => {
+    try {
+        // get all orders
+        const ordersResult = await pool.query(`
+            SELECT * 
+            FROM orders
+        `);
+
+        const orders = ordersResult.rows;
+
+        // get order items for each order
+        for (const order of orders) {
+            const orderItemsResult = await pool.query(`
+                SELECT * 
+                FROM order_items 
+                WHERE order_id = $1
+            `, [order.id]);
+
+            // Add order items to the order details
+            order.items = orderItemsResult.rows;
+        }
+
+        res.status(200).json({ success: true, orders });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
 
 module.exports = { 
     createOrder,
-    }
+    getUserOrders,
+    getOrderById,
+    getAllOrders
+}
