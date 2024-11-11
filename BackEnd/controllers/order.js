@@ -105,7 +105,8 @@ const getUserOrders = async (req, res) => {
         });
 
         return res.status(200).json({ success: true, orders });
-    } catch (error) {
+    } 
+    catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: error.message });
     }
@@ -113,8 +114,45 @@ const getUserOrders = async (req, res) => {
 
 
 
+const getOrderById = async (req, res) => {
+    const orderId = req.params.id;
+    const userId = req.token.userId;
+
+    try {
+        // get order details based on orderID & userID 
+        const orderResult = await pool.query(`
+            SELECT * 
+            FROM orders 
+            WHERE id = $1 AND user_id = $2
+        `, [orderId, userId]);
+
+        if (orderResult.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Order not found' });
+        }
+
+        const order = orderResult.rows[0];
+        
+        // get order items
+        const orderItemsResult = await pool.query(`
+            SELECT * 
+            FROM order_items 
+            WHERE order_id = $1
+        `, [orderId]);
+
+        // Add order items to the order details
+        order.items = orderItemsResult.rows;
+
+        res.status(200).json({ success: true, order });
+    } 
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
 module.exports = { 
     createOrder,
     getUserOrders,
-
+    getOrderById
 }
