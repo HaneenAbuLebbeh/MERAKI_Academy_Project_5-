@@ -131,7 +131,7 @@ const getOrderById = async (req, res) => {
         }
 
         const order = orderResult.rows[0];
-        
+
         // get order items
         const orderItemsResult = await pool.query(`
             SELECT * 
@@ -151,8 +151,40 @@ const getOrderById = async (req, res) => {
 };
 
 
+const getAllOrders = async (req, res) => {
+    try {
+        // get all orders
+        const ordersResult = await pool.query(`
+            SELECT * 
+            FROM orders
+        `);
+
+        const orders = ordersResult.rows;
+
+        // get order items for each order
+        for (const order of orders) {
+            const orderItemsResult = await pool.query(`
+                SELECT * 
+                FROM order_items 
+                WHERE order_id = $1
+            `, [order.id]);
+
+            // Add order items to the order details
+            order.items = orderItemsResult.rows;
+        }
+
+        res.status(200).json({ success: true, orders });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
 module.exports = { 
     createOrder,
     getUserOrders,
-    getOrderById
+    getOrderById,
+    getAllOrders
 }
