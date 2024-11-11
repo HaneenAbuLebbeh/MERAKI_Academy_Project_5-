@@ -9,6 +9,7 @@ const app = express();
 const userRouter=require("./routes/users")
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
+const ordertRouter = require("./routes/order");
 
 
 //built-in middleware
@@ -20,6 +21,7 @@ app.use(cors());
 app.use("/users",userRouter)
 app.use('/products', productRouter)
 app.use('/carts', cartRouter)
+app.use('/orders', ordertRouter)
 
 
 
