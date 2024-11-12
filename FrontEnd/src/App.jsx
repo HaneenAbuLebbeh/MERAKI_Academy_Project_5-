@@ -1,9 +1,9 @@
 import './App.css'
 import {Routes,Route} from "react-router-dom"
-import Navbar from './components/navbar'
-import HomePage from './components/HomePage'
-import Register from './components/Register'
-import Login from './components/Login'
+import Navbar from './components/Navbar/Navbar'
+import Login from './components/Login/Login'
+import Register from "./components/Register/Register"
+import HomePage from './components/HomrPage.jsx/HomePage'
 import AdminPanel from "./components/AdminPanel/AdminPanel"
 
 function App() {
