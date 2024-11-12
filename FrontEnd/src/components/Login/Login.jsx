@@ -2,12 +2,14 @@ import React, { useContext ,useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from "axios"
-import { setLogin,setUserId } from '../../Redux/reducers/login';
+
 import { Container, Card, CardContent, TextField, Button, Typography } from '@mui/material'
 import {Grid} from'@mui/material'
  import loginImage from "../assets/login.pic.jpeg" 
+ import { GoogleLogin } from '@react-oauth/google';
+ import { GoogleOAuthProvider } from '@react-oauth/google';/****/
 
-
+ // Log in with email and password
 const Login = ({ isOpen, onClose }) => {
     const isLoggedIn=useSelector((initialState)=> initialState.login.isLoggedIn)
 const navgite=useNavigate()
@@ -52,8 +54,25 @@ axios.post("http://localhost:5000/users/login", body ,).then((result)=>{
   setError({ api: "Login failed. Please try again." });
 })}
 
+
+// log in with Google
+const handleGoogleLogin = (credentialResponse) => {
+  const token = credentialResponse.credential;
+  axios.post("http://localhost:5000/users/google-login", { idToken: token })
+    .then((res) => {
+      dispatch(setLogin(res.data.token));
+      dispatch(setUserId(res.data.userId));
+      navigate(res.data.isAdmin ? "/adminPanel" : "/");
+    })
+    .catch((err) => {
+      setError({ api: "Google login failed. Please try again." });
+    });
+};
+
+
   return (
-    
+  <GoogleOAuthProvider clientId="480182998123-4qcfjj4047u2nbrf00d5mbtv8m5k5bsv.apps.googleusercontent.com"> 
+
     <Container component="main" maxWidth="md" className="login-container">
     <Card className="login-card"> 
       <Grid container>
@@ -104,12 +123,18 @@ axios.post("http://localhost:5000/users/login", body ,).then((result)=>{
       <Button onClick={()=>{
         navgite("/Register")
       }}>Create account</Button>
+
+      <GoogleLogin 
+                onSuccess={handleGoogleLogin} 
+                onError={() => setError({ api: "Google login failed. Please try again." })} 
+      />
+
           </CardContent>
         </Grid>
       </Grid>
     </Card>
   </Container>
-   
+  </GoogleOAuthProvider>
   )
 }
 
