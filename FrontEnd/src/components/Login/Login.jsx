@@ -71,7 +71,7 @@ const handleGoogleLogin = (credentialResponse) => {
 
 
   return (
-  <GoogleOAuthProvider clientId="480182998123-4qcfjj4047u2nbrf00d5mbtv8m5k5bsv.apps.googleusercontent.com"> 
+  <GoogleOAuthProvider clientId="39413300053-q0n8cd5pp9acdci0dtbdacvqfj4qn1sp.apps.googleusercontent.com"> 
 
     <Container component="main" maxWidth="md" className="login-container">
     <Card className="login-card"> 

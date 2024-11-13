@@ -117,8 +117,8 @@ const googleLogin = async (req, res) => {
         if (!user) {
             // If the user does not exist, create it
             const insertResult = await pool.query(
-                'INSERT INTO users (email, firstName, password, role_id) VALUES ($1, $2, $3, $4) RETURNING *',
-                [email, name, 'google-auth', role_id] 
+                'INSERT INTO users (email, firstName, password, role_id, age, country, lastname) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+                [email, name, 'google-auth', role_id, 0,'default_country',name  ] 
             );
             user = insertResult.rows[0];
         }
