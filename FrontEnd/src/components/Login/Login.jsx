@@ -2,13 +2,13 @@ import React, { useContext ,useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from "axios"
-import { setLogin,setUserId } from '../../Redux/reducers/login';
 import { Container, Card, CardContent, TextField, Button, Typography } from '@mui/material'
 import {Grid} from'@mui/material'
- import loginImage from "../assets/login.pic.jpeg" 
+ import loginImage from "../../assets/login.pic.jpeg" 
  import { GoogleLogin } from '@react-oauth/google';
  import { GoogleOAuthProvider } from '@react-oauth/google';/****/
-
+ import {setLogin,setUserId} from "../../../Redux/reducers/login"
+//hello there 
  // Log in with email and password
 const Login = ({ isOpen, onClose }) => {
     const isLoggedIn=useSelector((initialState)=> initialState.login.isLoggedIn)

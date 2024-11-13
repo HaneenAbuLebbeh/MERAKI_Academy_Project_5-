@@ -2,7 +2,7 @@ import React , {useContext, useState} from 'react'
 import axios from "axios"
 
 import { useNavigate } from 'react-router-dom'
- import registerimage from "../assets/register.pic.jpeg" 
+ import registerimage from "../../assets/register.pic.jpeg" 
 
 import { Container, Card, CardContent, TextField, Button, Typography, Grid } from '@mui/material'
 
