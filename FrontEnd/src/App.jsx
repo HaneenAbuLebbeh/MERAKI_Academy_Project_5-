@@ -33,6 +33,8 @@ function App() {
     <Route path="/my-orders" element={<Orders/>} />
     <Route path="/Orders/:id" element={<OrderConfirmtion/>} />
     <Route path="/checkout" element={<CheckOutpage/>} />
+    <Route path="/Products/:touristSpotsid" element={<Products/>} />
+    <Route path="/products/details/:productId" element={<ProductDetailes/>} />
 
     </Routes>
     </>
