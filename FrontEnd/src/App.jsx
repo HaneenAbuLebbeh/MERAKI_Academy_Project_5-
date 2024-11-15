@@ -13,11 +13,29 @@ import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
 import Orders from './components/Orders/Orders'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
+
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';  
+
 function App() {
 
 
   return (
     <>
+
+    <ToastContainer
+    position="top-right"
+    autoClose={3000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    style={{ top: '50px' }}
+    />
+
     <Navbar/>
     <Routes>
     <Route path="/Navbar" element={<Navbar/>}/>
