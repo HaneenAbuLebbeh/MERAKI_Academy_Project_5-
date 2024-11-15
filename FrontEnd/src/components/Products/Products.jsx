@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts, toggleFavorite } from "../../../Redux/reducers/products"
 import axios from 'axios';
@@ -8,6 +9,7 @@ import { MdLocalFireDepartment } from 'react-icons/md';
 import './Products.css'
 
 const Products = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products.products);  
     const favorites = useSelector((state) => state.products.favorites);
@@ -42,17 +44,17 @@ return (
   <section className="alll-cards">
       {products && products.length > 0 ? (
           products.map((product) => (
-              <div key={product._id} className="food-card">
+              <div key={product.id} className="food-card">
                   <div className="img-wrapper">
                       <img
                           src={product.image}
                           alt={product.name}
                           className="product-image"
-                          onClick={() => handleproductClick(product._id)}  
+                          onClick={() => handleproductClick(product.id)}  
                       />
                       <FaHeart
-                          className={`favorite-icon ${favorites.includes(product._id) ? 'favorited' : ''}`}
-                          onClick={() => toggleFavoriteHandler(product._id)} 
+                          className={`favorite-icon ${favorites.includes(product.id) ? 'favorited' : ''}`}
+                          onClick={() => toggleFavoriteHandler(product.id)} 
                       />
                   </div>
                   <div className="details">

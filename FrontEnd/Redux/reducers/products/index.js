@@ -5,6 +5,10 @@ export const productsSlice = createSlice({
     initialState: {
         products: [],       
         favorites: [],       
+
+        productDetails: null,
+        isLoading: false,
+        error: null,
     },
     reducers: {
         setProducts: (state, action) => {
@@ -22,10 +26,25 @@ export const productsSlice = createSlice({
                 // If it's not, add it
                 state.favorites.push(productId);
             }
-        }
+        },
+
+        setProductDetails: (state, action) => {
+            state.productDetails = action.payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+
+        setLoading: (state, action) => {
+            state.isLoading = action.payload;
+        },
+
+        setError: (state, action) => {
+            state.error = action.payload;
+            state.isLoading = false;
+        },
     }
 });
 
-export const { setProducts, toggleFavorite } = productsSlice.actions;
+export const { setProducts, toggleFavorite, setProductDetails, setLoading, setError } = productsSlice.actions;
 
 export default productsSlice.reducer;
