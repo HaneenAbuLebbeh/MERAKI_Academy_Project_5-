@@ -7,7 +7,8 @@ import { setLoading, setProductDetails, setError } from "../../../Redux/reducers
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './ProductDetails.css';
-
+import Cart from '../Cart/cart';
+import { DotLoader} from "react-spinners"; //loading spinner
 
 const ProductDetailes = () => {
   const navigate = useNavigate();
@@ -69,19 +70,33 @@ const ProductDetailes = () => {
 
                     {/* Quantity control*/}
                     <div className="quantity-selector">
-                <button className="quantity-btn" onClick={decreaseQuantity} disabled={quantity === 1}>-</button>
-                <span className="quantity-display">{quantity}</span>
-                <button className="quantity-btn" onClick={increaseQuantity}>+</button>
-            </div>
+                        <button className="quantity-btn" onClick={decreaseQuantity} disabled={quantity === 1}>-</button>
+                        <span className="quantity-display">{quantity}</span>
+                        <button className="quantity-btn" onClick={increaseQuantity}>+</button>
+                    </div>
 
 
                     <p className="total-price">Total Price : ${totalPrice}</p>
 
-                    
+                      {/* add to cart button */}
+                      <div className="cart-component">
+                            <Cart 
+                                productId={productDetails.id} 
+                                productName={productDetails.name} 
+                                productPrice={productDetails.price} 
+                                quantity={quantity} 
+                                hideQuantityControls={true}  
+                            />
+                        </div>
+
                 </div>
             </div>
         ) : (
-            <p className="loading-message">Loading product details...</p>
+
+          <div className="loading-indicator">
+          <DotLoader color="#3498db" size={50} />
+          </div>
+          
         )}
 
          {/* View Menu Button */}
