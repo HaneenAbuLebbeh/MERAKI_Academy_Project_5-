@@ -7,6 +7,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { TextField, Button, Typography, Rating, Box, Paper } from "@mui/material"
+import { TbTemperatureCelsius } from "react-icons/tb";
 
 const TouristSpotsDeatils = () => {
   const isLoggedIn=useSelector((initialState)=> initialState.login.isLoggedIn)
@@ -23,6 +24,7 @@ const [rating, setRating] = useState("")
 const [spotInfo, setspotInfo] = useState("")
 const [message, setMessage] = useState("")
 const [spotId, setSpotId] = useState("")
+const [weather, setWeather] = useState("")
 
 
 
@@ -100,8 +102,9 @@ const getWeather = async (city) => {
   const url = `https://api.weatherbit.io/v2.0/current?city=${spotInfo[0]?.spot_name}&key=${apiKey}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url); 
     const data = await response.json();
+    setWeather(data)
     console.log(data); 
   } catch (error) {
     console.error('Error fetching weather:', error);
@@ -111,19 +114,37 @@ useEffect(()=>{
 getWeather()
 },[])
 
+if (!weather) {
+  return <p>Loading weather data...</p>; 
+}
 
 
+const weatherData = weather.data && weather.data[0];
 
 
+ /* console.log(weather.data[0].weather.description) */
+ console.log(weatherData.weather.description)
+/* console.log(weather.data[0].app_temp)    */
 
 
+ 
 
 
   return (
     <>
     <div>
       
-     <h1>{spotInfo[0]?.spot_name}</h1> 
+      <h1>{spotInfo[0]?.spot_name}</h1> 
+    
+      <h2>Weather in Amman</h2>,
+      
+       <h3>{weatherData.weather.description} {weatherData.app_temp}<TbTemperatureCelsius />
+       </h3> 
+
+
+
+
+    
 
     </div>
     <iframe 

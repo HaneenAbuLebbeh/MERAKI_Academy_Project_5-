@@ -13,12 +13,16 @@ import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
 import Orders from './components/Orders/Orders'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
+import SocketMessages from './components/Socket/SocketMessages'
+import SendSocketMessages from './components/Socket/SendSocketMessages'
+import ReceiveSocketMessages from './components/Socket/ReciveSocketMessages'
 function App() {
 
 
   return (
     <>
     <Navbar/>
+    <SocketMessages>
     <Routes>
     <Route path="/Navbar" element={<Navbar/>}/>
     <Route path="/" element={<HomePage/>}/>
@@ -35,8 +39,13 @@ function App() {
     <Route path="/checkout" element={<CheckOutpage/>} />
     <Route path="/Products/:touristSpotsid" element={<Products/>} />
     <Route path="/products/details/:productId" element={<ProductDetailes/>} />
+    <Route path="/SocketMessages" element={<SocketMessages/>} />
+    <Route path="/send-socket-message" element={<SendSocketMessages/>} />
+    <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
+    
 
     </Routes>
+    </SocketMessages>
     </>
   )
 }

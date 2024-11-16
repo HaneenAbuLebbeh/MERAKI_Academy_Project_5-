@@ -8,6 +8,8 @@ const HomePage = () => {
   return (
     <div>
         <h3 onClick={()=>{navigate("/TouristSpots-Detailes")}}>Tourst detailes page</h3>
+        <h3 onClick={()=>{navigate("/send-socket-message")}}>send messages</h3>
+        <h3 onClick={()=>{navigate("/recive-socket-message")}}>send messages</h3>
     </div>
   )
 }
