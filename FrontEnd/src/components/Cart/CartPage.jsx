@@ -74,7 +74,23 @@ function CartPage() {
             console.error('Error removing product:', err);
         }
     };
-    
+
+    /****Calculate the cart summary****/
+    const calculateCartSummary = () => {
+        const vatRate = 0.05;
+        const deliveryFee = 2.0;
+        if (Array.isArray(cart) && cart.length > 0) {
+            const subtotal = cart.reduce((acc, item) => acc + item.productPrice * item.quantity, 0);
+            const vat = subtotal * vatRate;
+            const total = subtotal + vat + deliveryFee;
+            return { subtotal, vat, deliveryFee, total };
+        }
+        return { subtotal: 0, vat: 0, deliveryFee, total: 0 };
+    };
+
+    const { subtotal, vat, deliveryFee, total } = calculateCartSummary();
+
+
   return (
     <div>
 
