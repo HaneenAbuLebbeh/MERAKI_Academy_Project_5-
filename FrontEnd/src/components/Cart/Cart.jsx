@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCart } from "../../../Redux/reducers/Cart" ;
+import {addToCart} from "../../../Redux/reducers/cart"
 
 
 const Cart = ({ productId, productName, productPrice, quantity, setQuantity }) => {
