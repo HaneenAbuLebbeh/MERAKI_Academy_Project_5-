@@ -97,7 +97,8 @@ const addToCart = async (req, res) => {
                     cart_items.product_id, 
                     cart_items.quantity, 
                     cart_items.price, 
-                    products.name
+                    products.name,
+                    products.image 
                 FROM 
                     carts
                 LEFT JOIN 
@@ -122,7 +123,8 @@ const addToCart = async (req, res) => {
                     product_id: row.product_id,
                     product_name: row.name,
                     quantity: row.quantity,
-                    price: row.price
+                    price: row.price,
+                    image: row.image
                 }))
             };
     
@@ -186,7 +188,8 @@ const addToCart = async (req, res) => {
                     cart_items.product_id, 
                     cart_items.quantity, 
                     cart_items.price, 
-                    products.name AS product_name
+                    products.name AS product_name,
+                    products.image
                 FROM cart_items
                 LEFT JOIN products ON cart_items.product_id = products.id
                 WHERE cart_items.cart_id = $1
@@ -199,7 +202,8 @@ const addToCart = async (req, res) => {
                     product_id: row.product_id,
                     product_name: row.product_name,
                     quantity: row.quantity,
-                    price: row.price
+                    price: row.price,
+                    image: row.image,
                 }))
             };
             res.status(200).json({ success: true, cart });
@@ -242,7 +246,8 @@ const addToCart = async (req, res) => {
                 cart_items.product_id, 
                 cart_items.quantity, 
                 cart_items.price, 
-                products.name
+                products.name,
+                products.image
             FROM cart_items
             LEFT JOIN products ON cart_items.product_id = products.id
             WHERE cart_items.cart_id = $1
@@ -255,7 +260,8 @@ const addToCart = async (req, res) => {
                     product_id: row.product_id,
                     product_name: row.product_name,
                     quantity: row.quantity,
-                    price: row.price
+                    price: row.price,
+                    image: row.image
                 }))
             };
     
