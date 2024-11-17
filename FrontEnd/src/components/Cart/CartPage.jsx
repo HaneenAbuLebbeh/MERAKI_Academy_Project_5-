@@ -22,6 +22,8 @@ function CartPage() {
                 const response = await axios.get('http://localhost:5000/carts', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
+                console.log(response.data)
+                console.log(response.data.cart)
                 // If items exist
                 if (response.data && response.data.cart) {
                     dispatch(updateCart(response.data.cart.items)); //setUpdate cart in Redux
@@ -35,6 +37,7 @@ function CartPage() {
             catch (err) {
                 console.error('Error fetching cart:', err);
                 setError('Failed to load the cart.');
+                dispatch(updateCart([]));
             }
     };
         fetchCart();
@@ -43,12 +46,16 @@ function CartPage() {
 
     /****Update the quantity of a product in the cart****/
     const handleUpdateQuantity = async (productId, newQuantity) => {
+        dispatch(updateQuantity({ productId, newQuantity })); 
+        console.log('Request data:', { product: productId, quantity: newQuantity });
         try {
             const response = await axios.put(
                 'http://localhost:5000/carts/updateQuantity',
                 { product: productId, quantity: newQuantity },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
+            console.log('Response:', response.data);
+
             if (response.data && response.data.cart) {
                 dispatch(updateCart(response.data.cart.items)); // Update cart in Redux
             }
@@ -67,7 +74,8 @@ function CartPage() {
                 data: { product: productId },
             });
             if (response.data && response.data.deleted) {
-                dispatch(removeFromCart(productId)); // Remove item from Redux
+                //dispatch(removeFromCart(productId)); // Remove item from Redux
+                dispatch(updateCart(response.data.cart.items))
             }
         } 
         catch (err) {
@@ -80,7 +88,7 @@ function CartPage() {
         const vatRate = 0.05;
         const deliveryFee = 2.0;
         if (Array.isArray(cart) && cart.length > 0) {
-            const subtotal = cart.reduce((acc, item) => acc + item.productPrice * item.quantity, 0);
+            const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
             const vat = subtotal * vatRate;
             const total = subtotal + vat + deliveryFee;
             return { subtotal, vat, deliveryFee, total };
@@ -90,10 +98,92 @@ function CartPage() {
 
     const { subtotal, vat, deliveryFee, total } = calculateCartSummary();
 
+    const handleCheckout = () => {
+        navigate('/checkout');
+        window.location.reload(); // Reload the page
+    };
+
 
   return (
-    <div>
+    <div className="all-the-page">
+        <div className="cart-page">
+                <h1 className="YourCart">Your Cart</h1>
+                {error && <p className="error-message">{error}</p>}
+                {Array.isArray(cart) && cart.length > 0 ? (
+                    <div className="cart-items">
+                        {cart.map((item, index) => (
+                            item.quantity > 0 && (
+                            <div key={item.product_id} className="cart-item slide-up-animation">
+                                <div className="item-image">
+                                    <img src={item.image} alt={item.product_name} className="product-imagee" />
+                                </div>
+                                <div className="item-details">
+                                    <h2>{item.product_name}</h2>
+                                    <p>
+                                        Price per unit: <strong>${item.price}</strong>
+                                    </p>
+                                    
+                                    <div className="quantity-controls">
+                                        <button
+                                            onClick={() => handleUpdateQuantity(item.product_id
+                                                , item.quantity - 1)}
+                                            disabled={item.quantity === 1}
+                                        >
+                                            -
+                                        </button>
+                                        <span>{item.quantity}</span>
+                                        <button
+                                            onClick={() => handleUpdateQuantity(item.product_id, item.quantity + 1)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <button
+                                        onClick={() => handleRemoveProduct(item.
+                                        product_id)}
+                                        className="remove-button"
+                                    >
+                                        <i className="fas fa-trash"></i>{/* Delete icon */}
+                                    </button>
+                                    <p>
+                                        Total Price: <strong>${(item.price * item.quantity).toFixed(2)}</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        )
+                        ))}
 
+                        {/* Order Summary */}
+                        <div className="order-summary">
+                            <h3>Cart Summary</h3>
+                            <div className="summary-item">
+                                <span>Subtotal</span>
+                                <span>${subtotal.toFixed(2)}</span>
+                            </div>
+                            <div className="summary-item">
+                                <span>Delivery Fee</span>
+                                <span>{deliveryFee === 0 ? 'Free' : `$${deliveryFee.toFixed(2)}`}</span>
+                            </div>
+                            <div className="summary-item vat">
+                                <span>VAT (5%)</span>
+                                <span>${vat.toFixed(2)}</span>
+                            </div>
+                            <div className="summary-item total">
+                                <span>Total</span>
+                                <span>${total.toFixed(2)}</span>
+                            </div>
+                            <div className="buttons-container">
+                                <button onClick={() => navigate(-1)} className="button-">
+                                    Add More
+                                </button>
+                                <button onClick={handleCheckout}>Proceed to Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <p>Your cart is empty.</p>
+                )}
+        </div>
     </div>
     
   )
