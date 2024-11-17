@@ -119,10 +119,20 @@ const gittouristSpostsByName=(req,res)=>{
   
   const spot=req.params.spot
  
-  const query=`SELECT * FROM touristspots LEFT JOIN images i ON touristspots.id = i.tourist_spot_id
-LEFT JOIN reviews r ON touristspots.id = r.spot_id
-LEFT JOIN users ON r.user_id= users.id
-WHERE touristspots.spot_name =$1 AND touristspots.is_deleted = 0;`
+  const query=` SELECT * from touristspots ,
+    
+    COALESCE(
+      (SELECT json_agg(image_url) FROM images WHERE tourist_spot_id = touristspots.id),
+      '[]'::json) AS images, 
+    
+    COALESCE(
+      (SELECT json_agg(json_build_object('rating', r.rating, 'comment', r.comment, 'first_name', u.firstname)) 
+       FROM reviews r
+       LEFT JOIN users u ON r.user_id = u.id 
+       WHERE r.spot_id = touristspots.id),
+      '[]'::json) AS reviews
+ 
+  WHERE touristspots.spot_name =$1 AND touristspots.is_deleted = 0;`
 
   const data=[spot]
   pool.query(query,data).then((result) => {

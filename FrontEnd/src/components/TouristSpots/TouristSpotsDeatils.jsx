@@ -7,6 +7,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { TextField, Button, Typography, Rating, Box, Paper } from "@mui/material"
+import { TbTemperatureCelsius } from "react-icons/tb";
 
 const TouristSpotsDeatils = () => {
   const isLoggedIn=useSelector((initialState)=> initialState.login.isLoggedIn)
@@ -23,6 +24,8 @@ const [rating, setRating] = useState("")
 const [spotInfo, setspotInfo] = useState("")
 const [message, setMessage] = useState("")
 const [spotId, setSpotId] = useState("")
+const [weather, setWeather] = useState("")
+
 
 
   const getSpotByName=async()=>{
@@ -57,6 +60,7 @@ function srcset(image, width, height, rows = 1, cols = 1) {
 
 
 const handleSubmit=()=>{
+  console.log("clicked")
   if (isLoggedIn){
     const newError = {};
     if  (!comment) newError.lastName = "comment is required.";
@@ -76,6 +80,7 @@ axios.post("http://localhost:5000/review", body)
 .then((result) => {
   if (result.status === 200) {
     setSuccessMessage("Your Comment added successful!");
+    console.log("comment sent")
     
   }
 })
@@ -89,14 +94,57 @@ axios.post("http://localhost:5000/review", body)
   }
 }
 
+console.log(spotInfo[0])
 
+
+const getWeather = async (city) => {
+  const apiKey = 'f6de574895244be8b1db01f15b083a07';
+  const url = `https://api.weatherbit.io/v2.0/current?city=${spotInfo[0]?.spot_name}&key=${apiKey}`;
+
+  try {
+    const response = await fetch(url); 
+    const data = await response.json();
+    setWeather(data)
+    console.log(data); 
+  } catch (error) {
+    console.error('Error fetching weather:', error);
+  }
+};
+useEffect(()=>{
+getWeather()
+},[])
+
+if (!weather) {
+  return <p>Loading weather data...</p>; 
+}
+
+
+const weatherData = weather.data && weather.data[0];
+
+
+ /* console.log(weather.data[0].weather.description) */
+ console.log(weatherData.weather.description)
+/* console.log(weather.data[0].app_temp)    */
+
+
+ 
 
 
   return (
     <>
     <div>
       
-     <h1>{spotInfo[0]?.spot_name}</h1> 
+      <h1>{spotInfo[0]?.spot_name}</h1> 
+    
+      <h2>Weather in Amman</h2>,
+      
+       <h3>{weatherData.weather.description} {weatherData.app_temp}<TbTemperatureCelsius />
+       </h3> 
+
+
+
+
+    
 
     </div>
     <iframe 
@@ -108,13 +156,13 @@ axios.post("http://localhost:5000/review", body)
     <br />
    <h2>{spotInfo[0]?.country_spot}</h2>
    <p>{spotInfo[0]?.description}</p>
-   <img src={spotInfo[7]?.image_url} alt={spotInfo[7]?.alt_text}/>
+   <img src={spotInfo[0]?.images[0]} alt={spotInfo[0]?.alt_text}/>
    <h1>Photogallery</h1>
-   <ImageList sx={{ width: '100%', height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '15px' }} rowHeight={200} gap={8}>
-        {spotInfo&& spotInfo.map((image, index) => (
+      <ImageList sx={{ width: '100%', height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '15px' }} rowHeight={200} gap={8}>
+        {spotInfo[0]&& spotInfo[0].images.map((image, index) => (
           <ImageListItem key={image.id} sx={{ width: 'calc(33.333% - 10px)', height: 'auto' }}>
             <img
-              {...srcset(image.image_url, 250, 200, 1, 1)}
+              {...srcset(image, 250, 200, 1, 1)}
               alt={image.alt_text}
               loading="lazy"
               style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} 
@@ -135,7 +183,7 @@ axios.post("http://localhost:5000/review", body)
             />
           </ImageListItem>
         ))}
-      </ImageList> 
+      </ImageList>   
       
       <Box
       component={Paper}
@@ -184,6 +232,31 @@ axios.post("http://localhost:5000/review", body)
         Save
       </Button>
     </Box>
+
+    <Box>
+      {spotInfo[0]&&spotInfo[0].reviews.map((review, index) => (
+        <Paper key={index} sx={{ padding: 2, marginBottom: 2, borderRadius: 2, boxShadow: 2 }}>
+         
+          <Typography variant="h6" component="div">
+            {review.first_name}
+          </Typography>
+
+         
+          <Typography variant="body1" component="p" sx={{ marginBottom: 1 }}>
+            {review.comment}
+          </Typography>
+
+          
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Rating name={`rating-${index}`} value={review.rating} readOnly />
+            <Typography variant="body2" color="textSecondary">
+              {review.rating} / 5
+            </Typography>
+          </Box>
+        </Paper>
+      ))}
+    </Box>
+
 
     </>
   );
