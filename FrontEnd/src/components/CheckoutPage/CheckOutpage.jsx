@@ -53,7 +53,7 @@ const CheckOutpage = () => {
   }, []);
 
 
-                                                                  gi
+                                      
   const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -102,6 +102,20 @@ const CheckOutpage = () => {
   };
 
 
+    /****Calculate the order summary****/
+    const calculateCartSummary = () => {
+      const vatRate = 0.05;
+      const deliveryFee = 2.0;
+      if (Array.isArray(cart) && cart.length > 0 ) {
+          const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+          const vat = subtotal * vatRate;
+          const total = subtotal + vat + deliveryFee;
+          return { subtotal, vat, deliveryFee, total };
+      }
+      return { subtotal: 0, vat: 0, deliveryFee, total: 0 };
+  };
+
+  const { subtotal, vat, deliveryFee, total } = calculateCartSummary();
 
 
 return (
