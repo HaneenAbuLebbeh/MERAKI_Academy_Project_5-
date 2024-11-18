@@ -111,11 +111,57 @@ const updateToursitspots=(req,res)=>{
           err: err,
         });
       });
+    
+    
+    
+     }
+const gittouristSpostsByName=(req,res)=>{
+  
+  const spot=req.params.spot
+ 
+  const query=` SELECT * from touristspots ,
+    
+    COALESCE(
+      (SELECT json_agg(image_url) FROM images WHERE tourist_spot_id = touristspots.id),
+      '[]'::json) AS images, 
+    
+    COALESCE(
+      (SELECT json_agg(json_build_object('rating', r.rating, 'comment', r.comment, 'first_name', u.firstname)) 
+       FROM reviews r
+       LEFT JOIN users u ON r.user_id = u.id 
+       WHERE r.spot_id = touristspots.id),
+      '[]'::json) AS reviews
+ 
+  WHERE touristspots.spot_name =$1 AND touristspots.is_deleted = 0;`
 
-}
+  const data=[spot]
+  pool.query(query,data).then((result) => {
+      if (result.rows.length === 0) {
+        res.status(404).json({
+          success: false,
+          message: `The country: ${spot} has no spots`,
+          result: result.rows
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: `All Tourist spot Details for the country: ${spot}`,
+          result: result.rows,
+        });
+      } 
+    })
+    .catch((err) => { 
+      console.log(err)
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+  
+  }
 
 
 
 
-
-module.exports={createTouristSpot,gitAlltouristSpostsById,deleteTouristSpot,updateToursitspots}
+module.exports={createTouristSpot,gitAlltouristSpostsById,deleteTouristSpot,updateToursitspots,gittouristSpostsByName}

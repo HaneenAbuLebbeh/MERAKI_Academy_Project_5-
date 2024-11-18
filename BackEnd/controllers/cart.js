@@ -101,18 +101,22 @@ const addToCart = async (req, res) => {
                     products.image 
                 FROM 
                     carts
-                LEFT JOIN 
+                LEFT JOIN    
                     cart_items ON carts.id = cart_items.cart_id
-                LEFT JOIN 
+                LEFT JOIN  
                     products ON cart_items.product_id = products.id
                 WHERE 
                     carts.user_id = $1
             `, [userId]);
     
-            if (result.rows.length === 0) {
+            if (result.rows.length === 0 || !result.rows.length) {
                 return res.status(404).json({
-                    success: false,
-                    message: "Cart not found for this user"
+                    success: true,
+                    message: "Cart not found for this user",
+                    cart: {
+                        cart_id: null,
+                        items: []
+                    }
                 });
             }
     

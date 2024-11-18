@@ -149,10 +149,35 @@ const googleLogin = async (req, res) => {
     }
 };
 
+const getUserbyId=async(req,res)=>{
+  const user_id=req.params.id
+const query=`SELECT * FROM users where users.id=$1 AND is_deleted=0 `
+
+const data=[user_id]
+pool.query(query,data).then((result) => {
+  res.status(200).json({
+    success: true,
+    message: "User info",
+    result:result.rows 
+  });
+})
+.catch((err) => {
+  console.log(err)
+  res.status(409).json({
+    success: false,
+    message: "Can't find UserInfo",
+    err,
+  });
+});
+
+
+
+}
 
 
   module.exports={
     register,
     login,
-    googleLogin
+    googleLogin,
+    getUserbyId
   }
