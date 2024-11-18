@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-       items: [],  // Items added to the cart
-        total: 0,   // Total-price of items in the cart
+       items: JSON.parse(localStorage.getItem('cartItems')) || [],  // Items added to the cart
+        total:JSON.parse(localStorage.getItem('cartTotal')) || 0,   // Total-price of items in the cart
     },
     
     reducers: {
@@ -21,6 +21,10 @@ export const cartSlice = createSlice({
             else {
             state.items.push({ productId, productName, productPrice, quantity });
             }
+
+                        // Save to LocalStorage //
+                        localStorage.setItem('cartItems', JSON.stringify(state.items));
+                        localStorage.setItem('cartTotal', JSON.stringify(state.total));
         }, 
 
         /****set the cart updateCart****/
@@ -37,6 +41,10 @@ export const cartSlice = createSlice({
                 state.items = [];
                 state.total = 0;
             }
+
+                        // Save to LocalStorage //
+                        localStorage.setItem('cartItems', JSON.stringify(state.items));
+                        localStorage.setItem('cartTotal', JSON.stringify(state.total));
         },
 
         
@@ -50,8 +58,13 @@ export const cartSlice = createSlice({
             } 
             
             // Update the total-price
-           /* state.total = state.items.reduce(
+            /* state.total = state.items.reduce(
                 (acc, item) => acc + item.productPrice * item.quantity,0);*/
+
+
+                      // Save to LocalStorage //
+                        localStorage.setItem('cartItems', JSON.stringify(state.items));
+                        localStorage.setItem('cartTotal', JSON.stringify(state.total));
         },
 
         /***Remove a specific product from the cart***/
@@ -62,6 +75,10 @@ export const cartSlice = createSlice({
             // Update the total-price
             state.total = state.items.reduce(
                 (acc, item) => acc + item.productPrice * item.quantity,0);
+
+                       // Save to LocalStorage
+                        localStorage.setItem('cartItems', JSON.stringify(state.items));
+                        localStorage.setItem('cartTotal', JSON.stringify(state.total));
         },
 
         /***Clear the entire cart***/
