@@ -15,7 +15,7 @@ const {
 const ordertRouter = express.Router();
 
 
-ordertRouter.post('/',authentication,  createOrder);
+ordertRouter.post('/',authentication,authorization("User","Admin"),  createOrder);
 
 ordertRouter.get('/',authentication, authorization("User","Admin"), getUserOrders);
 

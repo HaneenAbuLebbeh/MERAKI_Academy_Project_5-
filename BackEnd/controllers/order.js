@@ -47,13 +47,13 @@ const createOrder = async (req, res) => {
         const orderId = orderResult.rows[0].id;
 
         // Add order items 
-        cartResult.rows.forEach(async (item) => {
-            await pool.query(`
+        await Promise.all(cartResult.rows.map(item => {
+            return pool.query(`
                 INSERT INTO order_items 
                 (order_id, product_id, quantity, price) 
                 VALUES ($1, $2, $3, $4)
             `, [orderId, item.product_id, item.quantity, item.price]);
-        });
+        }));
 
         // Delete the user cart after completing the order
         await pool.query(`
