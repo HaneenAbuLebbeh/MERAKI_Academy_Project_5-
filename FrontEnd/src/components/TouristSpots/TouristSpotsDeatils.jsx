@@ -96,10 +96,10 @@ axios.post("http://localhost:5000/review", body)
 
 console.log(spotInfo[0])
 
-
+spotInfo[0]?.spot_name
 const getWeather = async (city) => {
   const apiKey = 'f6de574895244be8b1db01f15b083a07';
-  const url = `https://api.weatherbit.io/v2.0/current?city=${spotInfo[0]?.spot_name}&key=${apiKey}`;
+  const url = `https://api.weatherbit.io/v2.0/current?city=Siena &key=${apiKey}`;
 
   try {
     const response = await fetch(url); 
@@ -263,17 +263,6 @@ const weatherData = weather.data && weather.data[0];
 };
    
 
-
-
-
-
-  {/*  <img src={spotInfo[0]?.image_url} alt={spotInfo[7]?.alt_text}/>
-   <img src={spotInfo[1]?.image_url} alt={spotInfo[7]?.alt_text}/>
-   <img src={spotInfo[2]?.image_url} alt={spotInfo[7]?.alt_text}/>
-   <img src={spotInfo[3]?.image_url} alt={spotInfo[7]?.alt_text}/>
-   <img src={spotInfo[4]?.image_url} alt={spotInfo[7]?.alt_text}/>
-   <img src={spotInfo[5]?.image_url} alt={spotInfo[7]?.alt_text}/>
-   <img src={spotInfo[6]?.image_url} alt={spotInfo[7]?.alt_text}/> */}
 
 
 

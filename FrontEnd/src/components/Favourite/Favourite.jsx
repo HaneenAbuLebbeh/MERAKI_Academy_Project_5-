@@ -11,15 +11,17 @@ import Favorite from '@mui/icons-material/Favorite';
 import axios from 'axios'
 import Grid from '@mui/joy/Grid'
 import { useDispatch, useSelector } from "react-redux";
-const TouristSpots = () => {
+const Favourite = () => {
 const [categoryList, setCategoryList] = useState("")
 const [weather, setWeather] = useState({})
 const [temp, setTemp] = useState([])
 const categoryId=11
 const userId=useSelector((initialState)=> initialState.login.userId)
+
 const getSpotsByCategoryId=async()=>{
+    console.log("imhere")
   try {
-    const result = await axios.get(`http://localhost:5000/touristSpot/${categoryId}`);
+    const result = await axios.get(`http://localhost:5000/favourite/${userId}`);
     console.log(result.data)
 
 if (result?.data?.success){
@@ -34,6 +36,12 @@ if (error.response) {
 }
 setMessage("Error happened while Get Data, please try again");
 }}
+
+useEffect(() => {
+    console.log('useEffect is triggered')
+    getSpotsByCategoryId();
+  }, []);
+  
 
 const getWeather = async (city) => {
   const apiKey = 'f6de574895244be8b1db01f15b083a07';
@@ -52,9 +60,6 @@ const getWeather = async (city) => {
 };
 
 
-useEffect(() => {
-  getSpotsByCategoryId();
-}, []);
 
 
 console.log(categoryList)
@@ -76,7 +81,7 @@ axios.post("http://localhost:5000/favourite/add", body ).then((result)=>{
   console.log("spot added successfully")
 }).catch((err)=>{
   console.log(err)
-})
+}) 
 
 
 }
@@ -160,7 +165,7 @@ console.log(userId)
     
     
     </>
-  )
-}
+  )}
 
-export default TouristSpots 
+
+export default Favourite 
