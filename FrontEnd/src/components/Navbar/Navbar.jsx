@@ -135,14 +135,14 @@ const Navbar = () => {
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User" src="./src/assets/user.png" />
+                    <Avatar alt="User" src="./src/assets/user.jpg" />
                   </IconButton>
                 </Tooltip>
-                <Box sx={{ color: "action.active" }}>
+                {/* <Box sx={{ color: "action.active" }}>
                   <Badge color="secondary" variant="dot">
                     <MailIcon />
                   </Badge>
-                </Box>
+                </Box> */}
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"
