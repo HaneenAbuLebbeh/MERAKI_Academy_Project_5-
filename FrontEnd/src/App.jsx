@@ -24,7 +24,7 @@ import CartPage from './components/Cart/CartPage'
 import { ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';  
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import Favourite from './components/Favourite/Favourite'
 
 
 function App() {
@@ -70,7 +70,7 @@ function App() {
     
 
     <Route path="/cart" element={<CartPage />} />
-
+    <Route path="/Favourite" element={<Favourite />} />
 
     </Routes>
     </SocketMessages>
