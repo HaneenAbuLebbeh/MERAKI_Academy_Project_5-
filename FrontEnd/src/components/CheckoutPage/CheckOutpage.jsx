@@ -17,13 +17,14 @@ const CheckOutpage = () => {
   const cart = useSelector((state) => state.cart.items);
 
   const [shippingAddress, setShippingAddress] = useState({
-      fullAddress: '',
+      full_address: '',
       street: '',
       city: '',
       state: '',
       country: '',
-      coordinates: { latitude: 25.276987, longitude: 55.296249 }, // Default coordinates (default location)
-  });
+      latitude: 25.276987, // Default coordinates (default location)
+      longitude: 55.296249,
+    });
 
   const [paymentMethod, setPaymentMethod] = useState('');
   const [note, setNotes] = useState('');
@@ -32,12 +33,16 @@ const CheckOutpage = () => {
   const handleLocationChange = (location) => {
       setShippingAddress((prev) => ({
           ...prev,
-          coordinates: location,
+          //coordinates: location,
+          latitude: location.latitude,
+          longitude: location.longitude,
       }));
   };
 
-   console.log("hi this is the cart");
-   console.log(cart);
+  console.log("hi this is the cart");
+  console.log(cart);
+
+                                                                    
 
   useEffect(() => {
       // Automatically fetch user's location on mount
@@ -53,7 +58,7 @@ const CheckOutpage = () => {
   }, []);
 
 
-                                      
+                                                                  
   const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -62,45 +67,58 @@ const CheckOutpage = () => {
         return;
     }
 
-    if (!shippingAddress.coordinates || !shippingAddress.coordinates.latitude || !shippingAddress.coordinates.longitude) {
+    if (!shippingAddress ||
+        !shippingAddress.full_address ||
+        !shippingAddress.latitude ||
+        !shippingAddress.longitude
+        ) {
         setError('Please enter address coordinates.');
         return;
     }
 
-    const { fullAddress, street, city, state, country } = shippingAddress;
-    if (!fullAddress || !street || !city || !state || !country) {
+    const { full_address, street, city, state, country, latitude, longitude  } = shippingAddress;
+    if (!full_address || !street || !city || !state || !country) {
         setError('Please fill in all shipping address fields.');
         return;
     }
 
-    const orderItems = cart.map(item => ({
-        product: item.productId,
+    /*const orderItems = cart.map(item => ({
+        product: item.product_id,
         quantity: item.quantity,
-        price: item.productPrice,
-    }));
+        price: item.price,
+    }));*/
+
+    //console.log('Order items:', orderItems);
+    console.log('Shipping address:', shippingAddress);
+
+    console.log('Shipping address:', shippingAddress);
 
     try {
+      console.log('Shipping address:', shippingAddress);
+
         const response = await axios.post('http://localhost:5000/orders', {
             shippingAddress,
             paymentMethod,
             note,
-            orderItems,
         }, {
             headers: { Authorization: `Bearer ${token}` },
         });
         
+        console.log("response:",response.data)
           if (response.data.success) {
               dispatch(clearCart()); // Clear the cart after successful order
-              navigate(`/order/${response.data.order._id}`);
+              navigate(`/order/${response.data.orderId}`);
           }
       }
 
       catch (err) {
+        console.log('Shipping address:', shippingAddress);
+
           setError('Failed to create request');
           console.error('Error creating order:', err.response || err.message);
       }
   };
-
+                                                                  
 
     /****Calculate the order summary****/
     const calculateCartSummary = () => {
@@ -116,11 +134,123 @@ const CheckOutpage = () => {
   };
 
   const { subtotal, vat, deliveryFee, total } = calculateCartSummary();
-
+                                                                  
 
 return (
   <div className="checkout-container cart-page ">
+      <div className="checkout-header">
+          <h1>Checkout</h1>
+          {error && <p className="error-message">{error}</p>}
+      </div>
 
+      <form onSubmit={handleSubmit} className='slide-up-animation'>
+          <div className="checkout-header">
+              <h2>Shipping Address</h2>
+          </div>
+          
+          <input 
+              type="text" 
+              className="input-field" 
+              placeholder="Full Address" 
+              onChange={(e) => setShippingAddress({ ...shippingAddress, full_address: e.target.value })} 
+              required 
+          />
+
+          <input 
+              type="text" 
+              className="input-field" 
+              placeholder="Street" 
+              onChange={(e) => setShippingAddress({ ...shippingAddress, street: e.target.value })} 
+              required 
+          />
+
+          <input 
+              type="text" 
+              className="input-field" 
+              placeholder="City" 
+              onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })} 
+              required 
+          />
+
+          <input 
+              type="text" 
+              className="input-field" 
+              placeholder="Country" 
+              onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })} 
+              required 
+          />
+
+          <input 
+              type="text" 
+              className="input-field" 
+              placeholder="Phone Number" 
+              onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })} 
+              required 
+          />
+
+          {/* Show Location and Map */}
+          <LocationComponent onLocationChange={handleLocationChange} />
+          {/* Directly rendering the MapComponent here */}
+          <MapComponent latitude={shippingAddress.latitude} longitude={shippingAddress.longitude} /> {/* Pass coordinates to map component */}
+
+          <div className="checkout-header">
+              <h2>Payment Method</h2>
+          </div>
+
+          <div className="payment-options">
+              <label className="payment-option">
+                  <input 
+                      type="radio" 
+                      value="Cash" 
+                      checked={paymentMethod === 'Cash'} 
+                      onChange={(e) => setPaymentMethod(e.target.value)} 
+                  />
+                  <FaMoneyBillAlt /> Cash
+              </label>
+
+              <label className="payment-option">
+                  <input 
+                      type="radio" 
+                      value="creditCard" 
+                      checked={paymentMethod === 'creditCard'} 
+                      onChange={(e) => setPaymentMethod(e.target.value)} 
+                  />
+                  <FaCreditCard /> Credit Card
+              </label>
+          </div>
+
+          <div className="checkout-header">
+              <h2>Special Requests</h2>
+          </div>
+          
+          <textarea 
+              className="textarea-field" 
+              placeholder="Any special requests..." 
+              onChange={(e) => setNotes(e.target.value)} 
+          />
+
+          <div className="order-summary">
+              <h3>Cart Summary</h3>
+              <div className="summary-item">
+                  <span>Subtotal</span>
+                  <span>${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="summary-item">
+                  <span>Delivery Fee</span>
+                  <span>{deliveryFee === 0 ? 'Free' : `$${deliveryFee.toFixed(2)}`}</span>
+              </div>
+              <div className="summary-item vat">
+                  <span>VAT (5%)</span>
+                  <span>${vat.toFixed(2)}</span>
+              </div>
+              <div className="summary-item total">
+                  <span>Total</span>
+                  <span>${total.toFixed(2)}</span>
+              </div>
+          </div>
+          
+          <button type="submit" className="submit-button">Submit Order</button>
+      </form>
   </div>
 );
 };
