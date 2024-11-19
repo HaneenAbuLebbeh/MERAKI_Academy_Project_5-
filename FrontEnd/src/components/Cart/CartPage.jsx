@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './cartpage.css';
 import { updateCart, updateQuantity, removeFromCart } from "../../../Redux/reducers/cart"
+import { setLoading } from "../../../Redux/reducers/products"
+import { DotLoader} from "react-spinners"; //loading spinner
 
 
 function CartPage() {
@@ -13,11 +15,13 @@ function CartPage() {
 
     const cart = useSelector((state) => state.cart.items);
     const token = useSelector((state) => state.login.token);
+    const isLoading = useSelector((state) => state.products.isLoading);  
     const [error, setError] = useState(null);
 
     /****Fetch cart-data from the d.b****/
     useEffect(() => {
         const fetchCart = async () => {
+            dispatch(setLoading(true)); 
             try {
                 const response = await axios.get('http://localhost:5000/carts', {
                     headers: { Authorization: `Bearer ${token}` },
@@ -26,24 +30,37 @@ function CartPage() {
                 console.log(response.data.cart)
                 // If items exist
                 if (response.data && response.data.cart) {
-                    dispatch(updateCart(response.data.cart.items)); //setUpdate cart in Redux
+                    dispatch(updateCart(response.data.cart.items || [])); //setUpdate cart in Redux
+                    console.log(cart)
                 } 
                 // If no items exist
                 else {
                     dispatch(updateCart([])); 
+                    console.log(cart)
                 }
             } 
             
             catch (err) {
+                if (error.response?.status === 404) {
+                    //console.log(error.response.data.message);
+                    setCart({ cart_id: null, items: [] });
+                }
+                else {
                 console.error('Error fetching cart:', err);
                 setError('Failed to load the cart.');
                 dispatch(updateCart([]));
+                }
             }
+
+            finally { // End loading
+                dispatch(setLoading(false));
+            };
     };
         fetchCart();
     }, [token, dispatch]);
 
-
+    console.log(cart)
+    
     /****Update the quantity of a product in the cart****/
     const handleUpdateQuantity = async (productId, newQuantity) => {
         dispatch(updateQuantity({ productId, newQuantity })); 
@@ -87,7 +104,7 @@ function CartPage() {
     const calculateCartSummary = () => {
         const vatRate = 0.05;
         const deliveryFee = 2.0;
-        if (Array.isArray(cart) && cart.length > 0) {
+        if (Array.isArray(cart) && cart.length > 0 ) {
             const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
             const vat = subtotal * vatRate;
             const total = subtotal + vat + deliveryFee;
@@ -109,7 +126,13 @@ function CartPage() {
         <div className="cart-page">
                 <h1 className="YourCart">Your Cart</h1>
                 {error && <p className="error-message">{error}</p>}
-                {Array.isArray(cart) && cart.length > 0 ? (
+
+            {isLoading ? (
+                <div className="loading-indicator">
+                    <DotLoader color="#3498db" size={60} />
+                </div>
+            ) :
+                Array.isArray(cart) && cart.filter(item => item.product_id && item.quantity > 0).length > 0 && cart.length>0? (
                     <div className="cart-items">
                         {cart.map((item, index) => (
                             item.quantity > 0 && (
@@ -154,6 +177,7 @@ function CartPage() {
                         ))}
 
                         {/* Order Summary */}
+                        {cart.length > 0 && subtotal > 0 && (
                         <div className="order-summary">
                             <h3>Cart Summary</h3>
                             <div className="summary-item">
@@ -179,6 +203,7 @@ function CartPage() {
                                 <button onClick={handleCheckout}>Proceed to Checkout</button>
                             </div>
                         </div>
+                        )}
                     </div>
                 ) : (
                     <p>Your cart is empty.</p>
