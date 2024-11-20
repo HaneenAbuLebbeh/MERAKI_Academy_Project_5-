@@ -7,13 +7,17 @@ import store from "../Redux/store.js"
 import './index.css'
 import App from './App.jsx'
  import { ThemeProvider, createTheme } from '@mui/material/styles'; 
+ 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2',
+      main: '#1976d2',  // Define primary color under the 'palette' object
+    },
+    secondary: {
+      main: '#9c27b0',  // Optional: Define secondary color
     },
   },
 });
