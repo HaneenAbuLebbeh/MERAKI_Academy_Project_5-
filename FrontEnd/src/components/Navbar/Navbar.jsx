@@ -47,6 +47,9 @@ const Navbar = () => {
   const handleSignInClick = () => {
     navigate("/Login");
   };
+  const navigateToFavourites=()=>{
+    navigate("/Favourite");
+  }
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
@@ -131,18 +134,18 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             {isLoggedIn ? (
-              // If user is logged in, show avatar and settings menu
+              
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User" src="./src/assets/user.png" />
+                    <Avatar alt="User" src="./src/assets/user.jpg" />
                   </IconButton>
                 </Tooltip>
-                <Box sx={{ color: "action.active" }}>
+                {/* <Box sx={{ color: "action.active" }}>
                   <Badge color="secondary" variant="dot">
                     <MailIcon />
                   </Badge>
-                </Box>
+                </Box> */}
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"
@@ -160,7 +163,7 @@ const Navbar = () => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem key={setting} onClick={setting === "Favourites" ? navigateToFavourites :handleCloseUserMenu}>
                       <Typography sx={{ textAlign: "center" }}>
                         {setting}
                       </Typography>

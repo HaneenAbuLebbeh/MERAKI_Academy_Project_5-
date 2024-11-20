@@ -24,7 +24,7 @@ const ordertRouter = require("./routes/order");
 const categoryRouter=require("./routes/category")
 const touristRouter=require("./routes/TouristSpots")
 const reviewRouter=require("./routes/review")
-
+const favouriteRouter=require("./routes/favorite")
 //built-in middleware
 app.use(express.json());
 app.use(cors());
@@ -38,7 +38,7 @@ app.use('/orders', ordertRouter)
 app.use('/category', categoryRouter)
 app.use('/touristspot', touristRouter)
 app.use('/review', reviewRouter)
-
+app.use('/favourite', favouriteRouter)
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
