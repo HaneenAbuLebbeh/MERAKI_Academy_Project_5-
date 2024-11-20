@@ -2,13 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from "../../../Redux/reducers/products";
 import { DotLoader} from "react-spinners"; //loading spinner
+import './OrderConfirmation.css'
 
 
 const OrderConfirmation = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const token = useSelector((state) => state.login.token);
     const { id } = useParams(); 
@@ -69,15 +71,14 @@ const OrderConfirmation = () => {
 
             <p>Be ready! our representative will contact you soon!</p>
             
-            <h2>Order Details:</h2>
-
       {isLoading ? (
                 <div className="loading-indicator">
                     <DotLoader color="#3498db" size={50} />
                 </div>
                 ) :
                 orderDetails ? (
-                      <>
+                      <>  
+                          <h2>Order Details:</h2>
                           <p>Order Number: {orderDetails.id}</p>
                           <p>Shipping Address: {orderDetails.full_address}</p>
                           <p>Total: {orderDetails.total_amount
