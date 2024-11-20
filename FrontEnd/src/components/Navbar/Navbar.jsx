@@ -51,6 +51,11 @@ const Navbar = () => {
     navigate("/Favourite");
   }
 
+  const navigateToAccount=()=>{
+    navigate("/Account");
+  }
+
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
@@ -163,7 +168,13 @@ const Navbar = () => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
+
+                    <MenuItem key={setting} onClick={setting === "Favourites" ? navigateToFavourites 
+                     : setting === 'Account' ? navigateToAccount
+                    :handleCloseUserMenu}>
+
                     <MenuItem key={setting} onClick={setting === "Favourites" ? navigateToFavourites :handleCloseUserMenu}>
+
                       <Typography sx={{ textAlign: "center" }}>
                         {setting}
                       </Typography>
