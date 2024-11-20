@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { setLoading } from "../../../Redux/reducers/products";
+import { DotLoader} from "react-spinners"; //loading spinner
 
 
 const OrderConfirmation = () => {
@@ -12,10 +14,14 @@ const OrderConfirmation = () => {
     const { id } = useParams(); 
     const [orderDetails, setOrderDetails] = useState(null);
     const [error, setError] = useState(null);
+    const isLoading = useSelector((state) => state.products.isLoading);  
 
 
     const fetchOrderDetails = async () => {
         try {
+            // Start loading
+            dispatch(setLoading(true));
+
             const response = await axios.get(`http://localhost:5000/orders/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -30,10 +36,16 @@ const OrderConfirmation = () => {
                 setError('Failed to fetch order details.');
             }
         } 
+
         catch (err) {
             console.error('Error fetching order details:', err);
             setError('Failed to fetch order details.');
         }
+
+        finally {
+          // Stop loading
+          dispatch(setLoading(false));
+      }
     };
 
     useEffect(() => {
@@ -48,6 +60,35 @@ const OrderConfirmation = () => {
     return (
         <div className="order-confirmation-container">
             <h1>Your order has been received!</h1>
+            <div className="video-container">
+                  <video width="600" autoPlay loop muted>
+                    <source src="/tawseel.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+            </div>
+
+            <p>Be ready! our representative will contact you soon!</p>
+            
+            <h2>Order Details:</h2>
+
+      {isLoading ? (
+                <div className="loading-indicator">
+                    <DotLoader color="#3498db" size={50} />
+                </div>
+                ) :
+                orderDetails ? (
+                      <>
+                          <p>Order Number: {orderDetails.id}</p>
+                          <p>Shipping Address: {orderDetails.full_address}</p>
+                          <p>Total: {orderDetails.total_amount
+                          }</p>
+                          <p>Payment Method: {orderDetails.payment_method}</p>
+                          <button onClick={() => navigate('/my-orders')}>View all previous orders</button>
+                      </>
+                  ) : (
+                      error && <p style={{ color: 'red' }}>{error}</p>
+                      )}
+              
         </div>
     );
 }
