@@ -25,7 +25,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Favourite from './components/Favourite/Favourite'
+
 import AccountSettings from './components/Account/Account'
+
+
+
 
 function App() {
 
@@ -70,8 +74,14 @@ function App() {
     
 
     <Route path="/cart" element={<CartPage />} />
+
     <Route path="/Favourite" element={<Favourite />} />
     <Route path="/Account" element={<AccountSettings />} />
+
+    <Route path="/order/:id" element={<OrderConfirmtion/>} />
+
+    <Route path="/Favourite" element={<Favourite />} />
+
 
     </Routes>
     </SocketMessages>
