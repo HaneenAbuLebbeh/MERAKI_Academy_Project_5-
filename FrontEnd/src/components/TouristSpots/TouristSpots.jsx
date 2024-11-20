@@ -13,8 +13,7 @@ import Grid from '@mui/joy/Grid'
 import { useDispatch, useSelector } from "react-redux";
 
 import { useTheme } from '@mui/material/styles'
-const TouristSpots = () => {
-  const theme = useTheme()
+
 
 const TouristSpots = () => {
 
