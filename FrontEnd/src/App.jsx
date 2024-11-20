@@ -67,6 +67,7 @@ function App() {
     
 
     <Route path="/cart" element={<CartPage />} />
+    <Route path="/order/:id" element={<OrderConfirmtion/>} />
 
 
     </Routes>
