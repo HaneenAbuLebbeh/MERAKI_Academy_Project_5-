@@ -11,7 +11,12 @@ import Favorite from '@mui/icons-material/Favorite';
 import axios from 'axios'
 import Grid from '@mui/joy/Grid'
 import { useDispatch, useSelector } from "react-redux";
+
+import { useTheme } from '@mui/material/styles'
+
+
 const TouristSpots = () => {
+
 const [categoryList, setCategoryList] = useState("")
 const [weather, setWeather] = useState({})
 const [temp, setTemp] = useState([])
