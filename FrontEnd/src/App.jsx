@@ -13,7 +13,7 @@ import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
 import Orders from './components/Orders/Orders'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
-
+import UserOrders from './components/Orders/userorders'
 
 
 import SocketMessages from './components/Socket/SocketMessages'
@@ -67,6 +67,8 @@ function App() {
     <Route path="/checkout" element={<CheckOutpage/>} />
     <Route path="/Products/:touristSpotsid" element={<Products/>} />
     <Route path="/products/details/:productId" element={<ProductDetailes/>} />
+    <Route path="/my-PreviousOrders" element={<UserOrders/>} />
+
 
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
