@@ -45,7 +45,7 @@ function Footer() {
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 ">
           {/* <!-- Content --> */}
           <div className='logo-container' style={{display:'flex',flexDirection:"row", justifyContent:"flex-start",}}>
-            <img  src='./src/assets/Logo3.png' style={{width:"20rem", height:"15rem", margin:"0px 0px "}}/>
+            <img  src='./src/assets/Logo4.png' style={{width:"20rem", height:"15rem", margin:"0px 0px "}}/>
             
           {/* <p>
             
