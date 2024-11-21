@@ -59,7 +59,8 @@ function CartPage() {
         fetchCart();
     }, [token, dispatch]);
 
-
+    console.log(cart)
+    
     /****Update the quantity of a product in the cart****/
     const handleUpdateQuantity = async (productId, newQuantity) => {
         dispatch(updateQuantity({ productId, newQuantity })); 
