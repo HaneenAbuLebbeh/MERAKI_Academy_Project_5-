@@ -171,13 +171,50 @@ pool.query(query,data).then((result) => {
 });
 
 
-
 }
+
+const updateUserInfo=async(req,res)=>{
+const { firstname, lastname, age, country, email, password } = req.body
+const userId=req.params.id
+
+
+let hashedPassword = password;
+if (password) {
+  hashedPassword = await bcrypt.hash(password, 10);
+}
+
+const query=`UPDATE users
+      SET firstname = $1, lastname = $2, age = $3, country = $4, email = $5, password = $6
+      WHERE id = $7
+      RETURNING *;`
+
+const data=[firstname, lastname, age, country, email, hashedPassword,userId]
+
+pool.query(query,data).then((result) => {
+  res.status(200).json({
+    success: true,
+    message: "User info updated successfully",
+    result: result.rows
+  });
+})
+.catch((err) => {
+  res.status(409).json({
+    success: false,
+    message: "Can't updated user info",
+    err: console.log(err)
+  });
+})
+}
+
+
+
+
 
 
   module.exports={
     register,
     login,
     googleLogin,
-    getUserbyId
+    getUserbyId,
+    updateUserInfo
   }

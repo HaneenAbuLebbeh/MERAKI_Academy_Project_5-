@@ -1,4 +1,4 @@
-const pool= require("../models/db") 
+ const pool= require("../models/db") 
 
 const createTouristSpot=(req,res)=>{
 const {category_id,spot_name,description,image_url,virtual_tour_url}=req.body

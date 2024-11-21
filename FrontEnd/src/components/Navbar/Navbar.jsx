@@ -13,7 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
@@ -23,7 +22,7 @@ const settings = ["Account", "Favourites", "Orders", "Logout"];
 
 const Navbar = () => {
   const isLoggedIn = useSelector(
-    (initialState) => initialState.login.isLoggedIn
+    (state) => state.login.isLoggedIn // Corrected selector syntax
   );
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -48,6 +47,27 @@ const Navbar = () => {
     navigate("/Login");
   };
 
+  const navigateToFavourites = () => {
+    navigate("/Favourite");
+    handleCloseUserMenu(); // Close the menu when navigating
+  };
+
+  const navigateToAccount = () => {
+    navigate("/Account");
+    handleCloseUserMenu(); // Close the menu when navigating
+  };
+
+  const navigateToOrders = () => {
+    navigate("/Orders");
+    handleCloseUserMenu(); // Close the menu when navigating
+  };
+
+  const navigateToLogout = () => {
+    // Add your logout logic here (e.g., clear session)
+    navigate("/Logout");
+    handleCloseUserMenu(); // Close the menu when navigating
+  };
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
@@ -58,9 +78,7 @@ const Navbar = () => {
               src="./src/assets/Logo4.png"
               alt="Logo"
               style={{ height: "85px", width: "200px" }}
-              onClick={() => {
-                navigate("/");
-              }}
+              onClick={() => navigate("/")}
             />
           </Box>
 
@@ -131,11 +149,10 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             {isLoggedIn ? (
-              // If user is logged in, show avatar and settings menu
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User" src="./src/assets/user.png" />
+                    <Avatar alt="User" src="./src/assets/user.jpg" />
                   </IconButton>
                 </Tooltip>
                 <Box sx={{ color: "action.active" }}>
@@ -160,7 +177,20 @@ const Navbar = () => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem
+                      key={setting}
+                      onClick={
+                        setting === "Favourites"
+                          ? navigateToFavourites
+                          : setting === "Account"
+                          ? navigateToAccount
+                          : setting === "Orders"
+                          ? navigateToOrders
+                          : setting === "Logout"
+                          ? navigateToLogout
+                          : handleCloseUserMenu
+                      }
+                    >
                       <Typography sx={{ textAlign: "center" }}>
                         {setting}
                       </Typography>
