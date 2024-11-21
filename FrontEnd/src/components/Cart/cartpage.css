@@ -50,3 +50,95 @@
     position: relative;
     transition: transform 0.2s ease-in-out;
 }
+
+.cart-item:hover {
+    transform: scale(1.02);
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    position: relative;
+}
+
+.product-imagee {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); 
+}
+
+.item-details {
+    flex: 0.7887 1;
+}
+
+.YourCart{
+    margin-bottom: 10px;
+}
+
+.item-details h2 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+    text-align: center;
+}
+
+.item-details p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-controls button {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    padding: 7.5px 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 16px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-controls span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.remove-button {
+    background: none !important;
+    border: none;
+    color: #ff4c4c;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+
+
