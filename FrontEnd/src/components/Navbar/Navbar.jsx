@@ -88,9 +88,9 @@ const Navbar = () => {
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: 'white', // Set the default background color to white
     '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: '#BEBEC0', // Change the background color on hover
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -133,7 +133,7 @@ const Navbar = () => {
               id="logo"
               src="./src/assets/Screenshot 2024-11-14 201237.png"
               alt="Logo"
-              style={{ height: "85px", width: "200px" }}
+              style={{ height: "70px", width: "200px" }}
               onClick={() => navigate("/")}
             />
           </Box>
@@ -172,7 +172,7 @@ const Navbar = () => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
+                vertical: "center",
                 horizontal: "left",
               }}
               keepMounted
@@ -184,7 +184,7 @@ const Navbar = () => {
               onClose={handleCloseNavMenu}
             >
               {pages.map((page) => (
-                <MenuItem key={page}   onClick={(
+                <MenuItem key={page} sx={{ textAlign: "center", fontSize: "16px", fontFamily: "Roboto" }}  onClick={
                   page === "Top Spots"
                     ? navigateToSpots
                     : page === "Market"
@@ -193,9 +193,9 @@ const Navbar = () => {
                     ? navigateToCart
                     : page === "About Us"
                     ? navigateToAbout
-                    : handleCloseUserMenu)
+                    : handleCloseUserMenu
                 }>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                  <Typography >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -277,7 +277,7 @@ const Navbar = () => {
                           : handleCloseUserMenu
                       }
                     >
-                      <Typography sx={{ textAlign: "center" }}>
+                      <Typography >
                         {setting}
                       </Typography>
                     </MenuItem>
