@@ -10,7 +10,6 @@ import TouristSpotsDeatils from './components/TouristSpots/TouristSpotsDeatils'
 import Cart from './components/Cart/cart'
 import Products from './components/Products/Products'
 import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
-import Orders from './components/Orders/Orders'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
 import UserOrders from './components/Orders/userorders'
@@ -62,7 +61,6 @@ function App() {
     <Route path="/TouristSpots-Detailes" element={<TouristSpotsDeatils/>} />
     <Route path="/Products/:category_id" element={<Products/>} />
     <Route path="/Products/Detailes/:product_id" element={<ProductDetailes/>} />
-    <Route path="/my-orders" element={<Orders/>} />
     <Route path="/Orders/:id" element={<OrderConfirmtion/>} />
     <Route path="/checkout" element={<CheckOutpage/>} />
     <Route path="/Products/:touristSpotsid" element={<Products/>} />
