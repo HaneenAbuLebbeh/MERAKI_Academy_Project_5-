@@ -16,6 +16,8 @@ import {
     Paper
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 const UserOrders = () => {
     const token = useSelector(state => state.login.token);
     const [orders, setOrders] = useState([]);
@@ -51,7 +53,7 @@ const UserOrders = () => {
         fetchOrders();
     }, []);
 
-
+    
     const handleSnackbarClose = () => {
         setOpenSnackbar(false);
     };
@@ -94,6 +96,56 @@ const UserOrders = () => {
                 }
             />
         </Box>
+    );
+};
+
+
+const OrderRow = ({ order }) => {
+    const [open, setOpen] = useState(false);
+    const toggleDetails = () => {
+        setOpen(!open);
+    };
+    return (
+        <>
+            <TableRow >
+                <TableCell>{order.id}</TableCell>
+                <TableCell>${order.total_amount}</TableCell>
+                <TableCell>{new Date(order.created_at).toLocaleDateString('en-US')}</TableCell>
+                <TableCell>{order.isDelivered ? 'Yes' : 'No'}</TableCell>
+                <TableCell>
+                    <IconButton onClick={toggleDetails}>
+                        <ExpandMoreIcon />
+                    </IconButton>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell colSpan={5} sx={{ padding: 0 }}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box sx={{ margin: 1 }}>
+                            <Typography variant="h6">Order Items:</Typography>
+                            <Table size="small"  className='slide-up-animation'>
+                                <TableHead>
+                                    <TableRow >
+                                        <TableCell>Product Name</TableCell>
+                                        <TableCell>Quantity</TableCell>
+                                        <TableCell>Price</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody >
+                                    {order.items.map((item) => (
+                                        <TableRow key={item.id}>
+                                            <TableCell>{item.name}</TableCell>
+                                            <TableCell>{item.quantity}</TableCell>
+                                            <TableCell>${item.price}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </Box>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
+        </>
     );
 };
 
