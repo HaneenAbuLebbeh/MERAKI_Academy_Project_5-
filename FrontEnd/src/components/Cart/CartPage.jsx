@@ -6,6 +6,7 @@ import './cartpage.css';
 import { updateCart, updateQuantity, removeFromCart } from "../../../Redux/reducers/cart"
 import { setLoading } from "../../../Redux/reducers/products"
 import { DotLoader} from "react-spinners"; //loading spinner
+import './cartpage.css';
 
 
 function CartPage() {
