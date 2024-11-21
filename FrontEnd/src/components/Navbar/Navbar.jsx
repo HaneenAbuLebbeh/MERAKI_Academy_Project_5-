@@ -51,6 +51,20 @@ const Navbar = () => {
     navigate("/Login");
   };
 
+  const navigateToSpots=()=>{
+    navigate("/TouristSpots")
+  };
+  const navigateToMarket=()=>{
+    navigate("/Products")
+  };
+
+  const navigateToCart=()=>{
+    navigate("/cart")
+  };
+
+  const navigateToAbout=()=>{
+    navigate("/About")
+  };
   const navigateToFavourites = () => {
     navigate("/Favourite");
     handleCloseUserMenu(); // Close the menu when navigating
@@ -117,7 +131,7 @@ const Navbar = () => {
           <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
             <img
               id="logo"
-              src="./src/assets/Logo4.png"
+              src="./src/assets/Screenshot 2024-11-14 201237.png"
               alt="Logo"
               style={{ height: "85px", width: "200px" }}
               onClick={() => navigate("/")}
@@ -170,7 +184,17 @@ const Navbar = () => {
               onClose={handleCloseNavMenu}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page}   onClick={(
+                  page === "Top Spots"
+                    ? navigateToSpots
+                    : page === "Market"
+                    ? navigateToMarket
+                    : page === "Cart"
+                    ? navigateToCart
+                    : page === "About Us"
+                    ? navigateToAbout
+                    : handleCloseUserMenu)
+                }>
                   <Typography sx={{ textAlign: "center" }}>{page}</Typography>
                 </MenuItem>
               ))}
@@ -182,7 +206,7 @@ const Navbar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
+                sx={{ mx: 3, color: "black", display: "block" }}
               >
                 {page}
               </Button>
