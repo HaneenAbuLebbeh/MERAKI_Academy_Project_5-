@@ -15,7 +15,7 @@ function Welcome() {
     
       <Carousel.Item  interval={5000}>
       <video autoPlay muted loop className="header-background" >
-          <source src="./src/assets/video2.mp4" type="video/mp4" />
+          <source src="./src/assets/sunset1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video> 
         <Carousel.Caption>
@@ -29,7 +29,7 @@ function Welcome() {
       </Carousel.Item>
       <Carousel.Item interval={5000}>
       <video autoPlay muted loop className="header-background" >
-          <source src="./src/assets/.mp4" type="video/mp4" />
+          <source src="./src/assets/v2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video> 
         <Carousel.Caption>
@@ -43,7 +43,7 @@ function Welcome() {
       </Carousel.Item>
       <Carousel.Item interval={5000}>
       <video autoPlay muted loop className="header-background" >
-          <source src="./src/assets/.mp4" type="video/mp4" />
+          <source src="./src/assets/v3.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video> 
         <Carousel.Caption>
