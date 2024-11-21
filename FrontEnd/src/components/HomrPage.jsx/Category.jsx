@@ -70,7 +70,7 @@ console.log(category);
       ))}
       
     </Row>
-    <div className="pagination" style={{color:"#F0F0F2", justifyContent:"center"}}>
+    {/* <div className="pagination" style={{color:"#F0F0F2", justifyContent:"center"}}>
     <nav aria-label="Page navigation example" >
   <ul class="pagination">
     <li class="page-item">
@@ -88,7 +88,7 @@ console.log(category);
     </li>
   </ul>
 </nav>
-  </div>
+  </div> */}
   </div>
   )
 }

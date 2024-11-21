@@ -1,28 +1,23 @@
-import {React,useState,useEffect} from 'react'
-import Navbar from '../Navbar/Navbar'
+import { React, useState, useEffect } from "react";
+import Navbar from "../Navbar/Navbar";
 
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import axios from 'axios'
-import Welcome from "./Welcome"
-import Category from "./Category"
+import axios from "axios";
+import Welcome from "./Welcome";
+import Category from "./Category";
+import Footer from "../footer/footer";
 const HomePage = () => {
   return (
     <>
-    <div>
-        <Welcome/>
-    </div> 
-      <Category/>
+      <div>
+        <Welcome />
+      </div>
+      <Category />
+      <Footer />
+    </>
+  );
+};
 
-      </>
-)}
-
-
-
-
-
-
-
-export default HomePage
+export default HomePage;

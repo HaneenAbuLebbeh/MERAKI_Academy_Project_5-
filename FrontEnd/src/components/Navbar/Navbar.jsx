@@ -16,6 +16,10 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
+import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const pages = ["Top Spots", "Market", "Cart", "About Us"];
 const settings = ["Account", "Favourites", "Orders", "Logout"];
@@ -67,6 +71,44 @@ const Navbar = () => {
     navigate("/Logout");
     handleCloseUserMenu(); // Close the menu when navigating
   };
+  const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto',
+    },
+  }));
+  
+  const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch',
+      },
+    },
+  }));
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
@@ -146,20 +188,40 @@ const Navbar = () => {
               </Button>
             ))}
           </Box>
-
+          <Box>
+<Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+</Box>
           <Box sx={{ flexGrow: 0 }}>
             {isLoggedIn ? (
               <>
                 <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User" src="./src/assets/user.jpg" />
-                  </IconButton>
+                  
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 2 }}
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              // aria-controls={menuId}
+              aria-haspopup="true"
+              
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+                  
                 </Tooltip>
-                <Box sx={{ color: "action.active" }}>
+                {/* <Box sx={{ color: "action.active" }}>
                   <Badge color="secondary" variant="dot">
                     <MailIcon />
                   </Badge>
-                </Box>
+                </Box> */}
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"
