@@ -1,7 +1,7 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import "./style.css"
-import Input from '@mui/joy/Input';
+// import {Input} from '@mui/joy/Input';
 import Box from "@mui/material/Box";
 function Welcome() {
   return (
@@ -23,7 +23,7 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="solid"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="solid"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
@@ -37,7 +37,7 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="soft"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="soft"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
@@ -52,7 +52,7 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
@@ -66,7 +66,7 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
