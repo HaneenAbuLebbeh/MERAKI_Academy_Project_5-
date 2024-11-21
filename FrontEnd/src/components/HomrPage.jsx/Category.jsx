@@ -44,11 +44,11 @@ console.log(category);
       {category?.map((elem) => (
         <Col key={elem.id} xs={12} md={4} lg={3}>
          <div className="mb-2">
-          <div className="card" style={{ width: "18rem", height: "20rem", backgroundColor:"#7FB2F0" }}>
+          <div className="card" style={{ width: "20rem", height: "22rem", backgroundColor:"#BEBEC0" }}>
             <img
               src={elem.image_url}
               className="card-img-top"
-              style={{ width: "18rem", height: "10rem" }}
+              style={{ width: "20rem", height: "16rem" }}
             />
             <div className="card-body ">
               <Link className="mx-auto" 

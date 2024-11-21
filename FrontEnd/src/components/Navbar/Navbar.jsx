@@ -125,7 +125,7 @@ const Navbar = () => {
   }));
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
@@ -157,7 +157,7 @@ const Navbar = () => {
             LOGO
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } ,justifyContent:"space-around"}}>
             <IconButton
               size="large"
               aria-label="menu"
