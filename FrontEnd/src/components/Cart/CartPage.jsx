@@ -180,7 +180,7 @@ function CartPage() {
                         {/* Order Summary */}
                         {cart.length > 0 && subtotal > 0 && (
                         <div className="order-summary">
-                            <h3>Cart Summary</h3>
+                            <h4 className='H3CartSummary'>Cart Summary</h4>
                             <div className="summary-item">
                                 <span>Subtotal</span>
                                 <span>${subtotal.toFixed(2)}</span>
