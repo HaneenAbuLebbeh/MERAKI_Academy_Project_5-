@@ -10,10 +10,9 @@ import TouristSpotsDeatils from './components/TouristSpots/TouristSpotsDeatils'
 import Cart from './components/Cart/cart'
 import Products from './components/Products/Products'
 import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
-import Orders from './components/Orders/Orders'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
-
+import UserOrders from './components/Orders/userorders'
 
 
 import SocketMessages from './components/Socket/SocketMessages'
@@ -60,28 +59,21 @@ function App() {
     <Route path="/adminPanel" element={<AdminPanel/>} />
     <Route path="/TouristSpots" element={<TouristSpots/>} />
     <Route path="/TouristSpots-Detailes" element={<TouristSpotsDeatils/>} />
-    <Route path="/Products/:category_id" element={<Products/>} />
-    <Route path="/Products/Detailes/:product_id" element={<ProductDetailes/>} />
-    <Route path="/my-orders" element={<Orders/>} />
-    <Route path="/Orders/:id" element={<OrderConfirmtion/>} />
-    <Route path="/checkout" element={<CheckOutpage/>} />
+
     <Route path="/Products/:touristSpotsid" element={<Products/>} />
     <Route path="/products/details/:productId" element={<ProductDetailes/>} />
+    <Route path="/cart" element={<CartPage />} />
+    <Route path="/checkout" element={<CheckOutpage/>} />
+    <Route path="/order/:id" element={<OrderConfirmtion/>} />
+    <Route path="/my-PreviousOrders" element={<UserOrders/>} />
 
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
     <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
     
 
-    <Route path="/cart" element={<CartPage />} />
-
     <Route path="/Favourite" element={<Favourite />} />
     <Route path="/Account" element={<AccountSettings />} />
-
-    <Route path="/order/:id" element={<OrderConfirmtion/>} />
-
-    <Route path="/Favourite" element={<Favourite />} />
-
 
     </Routes>
     </SocketMessages>
