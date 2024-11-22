@@ -126,3 +126,110 @@
 }
 
 
+/*****************************.
+./
+
+/*Default color***Heart icon*/
+.favorite-icon {
+    position: absolute;
+    top: 20px; 
+    right:20px; 
+    color: #ccc; /*Default color*/
+    font-size: 24px; 
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.favorite-icon:hover {
+    color: #ff6f61; 
+}
+
+/*Color when become Favourite***Heart icon*/.favorite-icon.favorited {
+    color: #ff4d4d; 
+}
+
+.details {
+    padding: 20px;
+
+
+    background: linear-gradient(135deg, #ff8a00, #da1b60); 
+    background: linear-gradient(120deg, #56ccf2, #74ebd5);
+/**/background: linear-gradient(120deg, #9be7c6, #00bcd4);
+    /***/background: linear-gradient(120deg, #74ebd5, #9face6);
+
+
+    border-radius: 0 0 20px 20px; 
+    color: #fff; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 188.5px;     /***********************/
+}
+
+
+.details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px; 
+    margin-top: 24px ;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+
+
+.time-rating {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-top: 10px;
+
+}
+
+
+
+.time-rating p {
+    display: flex;
+    align-items: center;
+    /*gap: 5px;*/ 
+    margin-top: 0 !important; /* Reduce the distance above to raise them*/
+    font-size: 1rem;
+    margin-bottom: 30px !important;
+    font-family: 'Arial', sans-serif;
+}
+
+.time-rating i {
+    color: #ffd700; 
+}
+
+.price {
+    font-size: 18px; 
+  /*  color: hsl(0, 19%, 88%); */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 5px; /* Space between icon and text */
+    margin: 20px 0 30px;
+
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    font-family: 'Arial', sans-serif;
+
+}
+
+.price .material-icons {
+    font-size: 24px; 
+    color: red; 
+    
+}
+
+/*****************/
+.red-icon {
+    font-size: 24px; 
+    color: red; 
+}
+.ratee {
+    font-size: 16px; 
+}
