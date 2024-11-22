@@ -198,10 +198,10 @@ function CartPage() {
                                 <span>${total.toFixed(2)}</span>
                             </div>
                             <div className="buttons-container">
-                                <button onClick={() => navigate(-1)} className="button-">
+                                <button onClick={() => navigate(-1)} className="button-cart">
                                     Add More
                                 </button>
-                                <button onClick={handleCheckout}>Proceed to Checkout</button>
+                                <button className="button-cart" onClick={handleCheckout}>Proceed to Checkout</button>
                             </div>
                         </div>
                         )}
