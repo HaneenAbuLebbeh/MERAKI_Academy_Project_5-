@@ -31,6 +31,7 @@ import AccountSettings from './components/Account/Account'
 
 
 
+
 function App() {
 
 
@@ -58,8 +59,8 @@ function App() {
     <Route path="/Register" element={<Register/>}/>
     <Route path="/Login" element={<Login/>}/>
     <Route path="/adminPanel" element={<AdminPanel/>} />
-    <Route path="/TouristSpots" element={<TouristSpots/>} />
-    <Route path="/TouristSpots-Detailes" element={<TouristSpotsDeatils/>} />
+    <Route path="/TouristSpots/:categoryId" element={<TouristSpots/>} />
+    <Route path="/TouristSpots/:categoryId/TouristSpots-Detailes/:spotname" element={<TouristSpotsDeatils/>} />
     <Route path="/Products/:category_id" element={<Products/>} />
     <Route path="/Products/Detailes/:product_id" element={<ProductDetailes/>} />
     <Route path="/my-orders" element={<Orders/>} />

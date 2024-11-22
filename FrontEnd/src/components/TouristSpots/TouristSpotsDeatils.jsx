@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { TextField, Button, Typography, Rating, Box, Paper } from "@mui/material"
 import { TbTemperatureCelsius } from "react-icons/tb";
+import { useParams } from 'react-router-dom';
 
 const TouristSpotsDeatils = () => {
   const isLoggedIn=useSelector((initialState)=> initialState.login.isLoggedIn)
@@ -16,6 +17,7 @@ const TouristSpotsDeatils = () => {
   
 console.log(userId)
 const placeName='Amman'
+const {spotname}=useParams()
 const [error, setError] = useState({});
 const [name, setName] = useState("")
 const [comment, setComment] = useState("")
@@ -30,7 +32,7 @@ const [weather, setWeather] = useState("")
 
   const getSpotByName=async()=>{
     try {
-      const result = await axios.get(`http://localhost:5000/touristSpot/name/${placeName}`);
+      const result = await axios.get(`http://localhost:5000/touristSpot/name/${spotname}`);
       console.log(result.data)
 
 if (result?.data?.success){
