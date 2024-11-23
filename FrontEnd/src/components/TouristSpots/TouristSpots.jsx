@@ -142,7 +142,7 @@ console.log(userId)
                   </Link>
                 </Typography>
                 <Typography level="body-sm">
-                  <Link href="#multiple-actions">{ 'Italy'}</Link>
+                {elem.country_spot}
                 </Typography>
               </CardContent>
               <CardOverflow variant="soft">

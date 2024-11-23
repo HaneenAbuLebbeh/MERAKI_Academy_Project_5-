@@ -6,9 +6,13 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { TextField, Button, Typography, Rating, Box, Paper } from "@mui/material"
+import { TextField, Button, Typography, Rating, Box, Paper,Grid, Card, CardContent } from "@mui/material"
 import { TbTemperatureCelsius } from "react-icons/tb";
 import { useParams } from 'react-router-dom';
+import { WiDaySunny  } from 'react-icons/wi'; 
+import { FaShoppingCart } from 'react-icons/fa'
+import HotelIcon from '@mui/icons-material/Hotel'
+import MdLocationOnIcon from '@mui/icons-material/LocationOn'; 
 
 const TouristSpotsDeatils = () => {
   const isLoggedIn=useSelector((initialState)=> initialState.login.isLoggedIn)
@@ -126,7 +130,7 @@ const weatherData = weather.data && weather.data[0];
 
  /* console.log(weather.data[0].weather.description) */
  console.log(weatherData.weather.description)
-/* console.log(weather.data[0].app_temp)    */
+
 
 
  
@@ -134,31 +138,95 @@ const weatherData = weather.data && weather.data[0];
 
   return (
     <>
-    <div>
-      
-      <h1>{spotInfo[0]?.spot_name}</h1> 
     
-      <h2>Weather in Amman</h2>,
-      
-       <h3>{weatherData.weather.description} {weatherData.app_temp}<TbTemperatureCelsius />
-       </h3> 
-
-
-
-
-    
-
-    </div>
     <iframe 
-      width="1400" 
-      height="550" 
+      width="1440" 
+      height="450" 
       src={spotInfo[0]?.virtual_tour_url}
       allowFullScreen
     ></iframe> 
+    <Grid container spacing={2}>
+      
+        <Grid item xs={12} md={3}>
+          <Card sx={{ height: '100%', position: 'relative' }}>
+            <CardContent>
+              <Typography variant="h5" gutterBottom>Weather</Typography>
+              {weatherData ? (
+                <>
+                  <Typography variant="body1">{weatherData.weather.description}</Typography>
+                  <Typography variant="body1">{weatherData.app_temp}°C <TbTemperatureCelsius /></Typography>
+                </>
+              ) : (
+                <Typography variant="body1">Loading...</Typography>
+              )}
+            </CardContent>
+            
+            <Box sx={{ position: 'absolute', top: 10, right: 10 }}>
+              <WiDaySunny size={30} color="#FF9800" />
+            </Box>
+          </Card>
+        </Grid>
+
+       
+        <Grid item xs={12} md={3}>
+          <Card sx={{ height: '100%', position: 'relative' }}>
+            <CardContent>
+              <Typography variant="h5" gutterBottom>Site Visits</Typography>
+              <Typography variant="body1">Explore the various attractions and points of interest around {spotInfo[0]?.country_spot}.</Typography>
+            </CardContent>
+            
+            <Box sx={{ position: 'absolute', top: 10, right: 10 }}>
+              <MdLocationOnIcon size={30} color="#4CAF50" />
+            </Box>
+          </Card>
+        </Grid>
+
+       
+        <Grid item xs={12} md={3}>
+          <Card sx={{ height: '100%', position: 'relative' }}>
+            <CardContent>
+              <Typography variant="h5" gutterBottom>E-Commerce</Typography>
+              <Button variant="contained" href="#" target="_blank">Shop Now</Button>
+            </CardContent>
+           
+            <Box sx={{ position: 'absolute', top: 10, right: 10 }}>
+              <FaShoppingCart size={30} color="#2196F3" />
+            </Box>
+          </Card>
+        </Grid>
+
+       
+        <Grid item xs={12} md={3}>
+          <Card sx={{ height: '100%', position: 'relative' }}>
+            <CardContent>
+              <Typography variant="h5" gutterBottom>Book a Stay</Typography>
+              <Button variant="contained" href={`https://www.booking.com/searchresults.html?ss=${spotInfo[0]?.country_spot}`} target="_blank">Find Hotels</Button>
+            </CardContent>
+            
+            <Box sx={{ position: 'absolute', top: 10, right: 10 }}>
+              <HotelIcon  size={30} color="#9C27B0" />
+            </Box>
+          </Card>
+        </Grid>
+      </Grid>
     <br />
-   <h2>{spotInfo[0]?.country_spot}</h2>
-   <p>{spotInfo[0]?.description}</p>
-   <img src={spotInfo[0]?.images[0]} alt={spotInfo[0]?.alt_text}/>
+    <Typography variant="h4">{spotInfo[0]?.country_spot}</Typography>
+    <br />
+      <Grid container spacing={2}>
+        
+        <Grid item xs={12} md={6}>
+          <Paper sx={{ padding: 2 }}>
+            <Typography variant="body1">{spotInfo[0]?.description}</Typography>
+          </Paper>
+        </Grid>
+
+        
+        <Grid item xs={12} md={6}>
+          <img src={spotInfo[0]?.images[0]} alt={spotInfo[0]?.alt_text} style={{ width: '100%', height: 'auto' }} />
+        </Grid>
+      </Grid>
+      <br />
+
    <h1>Photogallery</h1>
       <ImageList sx={{ width: '100%', height: 'auto', display: 'flex', flexWrap: 'wrap', gap: '15px' }} rowHeight={200} gap={8}>
         {spotInfo[0]&& spotInfo[0].images.map((image, index) => (
@@ -186,78 +254,59 @@ const weatherData = weather.data && weather.data[0];
           </ImageListItem>
         ))}
       </ImageList>   
-      
-      <Box
-      component={Paper}
-      sx={{
-        maxWidth: 500,
-        margin: "auto",
-        padding: 3,
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-      }}
-    >
-      <Typography variant="h5" component="h1" align="center" gutterBottom>
-        Add comment 
-      </Typography>
-
-      <TextField
-        label="First Name"
-        variant="outlined"
-        fullWidth
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-
-      <TextField
-        label="Comment"
-        variant="outlined"
-        multiline
-        rows={4}
-        fullWidth
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-
-      <Box>
-        <Typography variant="subtitle1">Rating</Typography>
-        <Rating
-          name="user-rating"
-          value={rating}
-          onChange={(e, newValue) => setRating(newValue)}
-          max={5}
-        />
-      </Box>
-
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
-        Save
-      </Button>
-    </Box>
-
-    <Box>
-      {spotInfo[0]&&spotInfo[0].reviews.map((review, index) => (
-        <Paper key={index} sx={{ padding: 2, marginBottom: 2, borderRadius: 2, boxShadow: 2 }}>
-         
-          <Typography variant="h6" component="div">
-            {review.first_name}
-          </Typography>
-
-         
-          <Typography variant="body1" component="p" sx={{ marginBottom: 1 }}>
-            {review.comment}
-          </Typography>
-
+      <br/>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', my: 4 }}>
           
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Rating name={`rating-${index}`} value={review.rating} readOnly />
-            <Typography variant="body2" color="textSecondary">
-              {review.rating} / 5
-            </Typography>
+          <Box sx={{ flex: 1, paddingRight: 2 }}>
+            <Paper sx={{ padding: 3 }}>
+              <Typography variant="h5" component="h1" align="center" gutterBottom>
+                Add Comment
+              </Typography>
+              <TextField
+                label="Comment"
+                variant="outlined"
+                multiline
+                rows={4}
+                fullWidth
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                sx={{ mb: 2 }}
+              />
+              <Box>
+                <Typography variant="subtitle1">Rating</Typography>
+                <Rating
+                  name="user-rating"
+                  value={rating}
+                  onChange={(e, newValue) => setRating(newValue)}
+                  max={5}
+                />
+              </Box>
+              <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 2 }}>
+                Save
+              </Button>
+            </Paper>
           </Box>
-        </Paper>
-      ))}
-    </Box>
+
+         
+          <Box sx={{ flex: 1 }}>
+            {spotInfo[0] && spotInfo[0].reviews.map((review, index) => (
+              <Paper key={index} sx={{ padding: 2, marginBottom: 2, borderRadius: 2, boxShadow: 2 }}>
+                <Typography variant="h6" component="div">
+                  {review.first_name}
+                </Typography>
+                <Typography variant="body1" component="p" sx={{ marginBottom: 1 }}>
+                  {review.comment}
+                </Typography>
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  <Rating name={`rating-${index}`} value={review.rating} readOnly />
+                  <Typography variant="body2" color="textSecondary">
+                    {review.rating} / 5
+                  </Typography>
+                </Box>
+              </Paper>
+            ))}
+          </Box>
+        </Box>
 
 
     </>
