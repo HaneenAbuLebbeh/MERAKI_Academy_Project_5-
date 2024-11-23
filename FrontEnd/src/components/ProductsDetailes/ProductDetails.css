@@ -193,6 +193,58 @@
     justify-content: space-between; 
 }
 
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; 
+}
+
+
+.quantity-btn-prodetails {
+    background-color:#ff4b2b; 
+    color: white; 
+    border: none; 
+    width: 50px;
+    height: 50px; 
+    font-size: 1.5rem; 
+    /*border-radius: 50%; /*circular shape  */
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    
+}
+
+.quantity-btn-prodetails:hover {
+    background-color: #ff4a3d; 
+    transform: scale(1.1); 
+}
+
+/*The number*/
+.quantity-display {
+    font-size: 1.2rem; /*****/
+    color: #333; 
+    padding: 10px 20px; 
+    background-color: #f7f7f7; 
+    border: 2px solid #ff6f61; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    min-width: 60px; 
+    text-align: center; 
+    font-weight: bold; 
+}
 /*******************/
 .image-container {
     display: flex;
@@ -217,6 +269,39 @@
     100% {
         transform: rotate(360deg); /* the end */
     }
+}
+/***********************************/
+/*********************************/
+/*.total-price {
+
+}*/
+.total-price {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+    text-align: center;
+}
+
+.total-price:hover {
+    transform: scale(1.02); 
+}
+/****************************************/
+/***************************************/
+.view-menu-btn {
+    position: relative;
+    top: -198px; 
+    left: -18px; 
+    background: none;
+    border: none; 
+    cursor: pointer; 
+    padding: 0; 
+}
+
+.view-menu-btn:hover {
+    opacity: 0.7;
 }
 
 .view-menu-btn .fa-arrow-left {
