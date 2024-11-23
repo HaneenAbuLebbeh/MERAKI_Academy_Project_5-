@@ -158,6 +158,43 @@
     /***/background: linear-gradient(120deg, #74ebd5, #9face6);
 
 
+
+
+
+    background: linear-gradient(45deg, #FF7E5F, #FEB47B, #FF6A88, #D2A6FF);
+
+   background: linear-gradient(135deg, #FFD700, #00A8FF);
+   background: linear-gradient(45deg, #FF6A00, #FFD200);
+   background: linear-gradient(180deg, #D4E157, #A5D6A7);
+
+   background: linear-gradient(90deg, #FF5F6D, #FFC371);
+   
+
+
+
+    background: linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA, #93C5FD);
+
+    background: linear-gradient(120deg, #0099f7, #a3c2f0);
+
+  background: linear-gradient(60deg, #56CCF2, #2F80ED);
+
+  background: linear-gradient(120deg, #56ccf2, #2f80ed);
+
+
+    /**/  background: linear-gradient(120deg, #89f7fe, #66a6ff);
+
+    /***/ /**/background: linear-gradient(120deg, #9be7c6, #00bcd4);
+
+    background: linear-gradient(135deg, #1a3d5e, #3a9ad9, #8bd3ff);
+
+
+     background: linear-gradient(145deg, #1e90ff, #00bfff, #87cefa);
+
+     background: linear-gradient(135deg, #0066ff, #00cfff, #72f9ff);
+
+/*background-size: 200% 200%;
+animation: pulseAnimation 8s ease-in-out infinite;*/
+
     border-radius: 0 0 20px 20px; 
     color: #fff; 
     position: absolute;

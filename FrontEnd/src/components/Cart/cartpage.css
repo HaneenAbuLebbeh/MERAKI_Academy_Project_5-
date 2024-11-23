@@ -129,6 +129,10 @@
         margin-top: 9px;
     }
 
+    .quantity-controls button:hover{
+    transform: scale(1.1);    
+    }
+
     .quantity-controls span {
         font-size: 16px;
         font-weight: bold;
@@ -146,6 +150,12 @@
         right: 20px;
         top: 20px;
     }
+
+    .remove-button:hover{
+        transform: scale(1.2); 
+        cursor: pointer;         
+        transition: all 0.3s ease; 
+        }
 
     .cart-total {
         text-align: right;
