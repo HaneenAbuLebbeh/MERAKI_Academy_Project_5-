@@ -33,7 +33,7 @@
 
 
 /*colors*/
-.calori{
+.calorii{
     background: linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA, #93C5FD);
     background: linear-gradient(45deg, #FF7E5F, #FEB47B, #FF6A88, #D2A6FF);
    /**/ background: linear-gradient(120deg, #84fab0, #8fd3f4);
@@ -69,4 +69,204 @@
        /**/background: linear-gradient(120deg, #56ccf2, #74ebd5);
 
 
+}
+/**********************************************************************/
+/**********************************************************************/
+/**********************************************************************/
+
+.alll-cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 58px; /*Above all cards*/
+    justify-content: space-around;
+    padding: 10px;
+    gap: 20px; /*space between cards*/
+    background-color: #f0f0f0;
+    
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card {
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    border-radius: 20px; 
+    margin: 10px;
+    width: 300px; /* ************************************* */
+    height: 420px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    position: relative; 
+    box-sizing: border-box;
+  /*  background-color: #d7d41925;*/
+}
+
+
+/* Circular image*/
+.img-wrapper {
+    /* position: relative; */
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    margin: 20px auto;
+    /* overflow: hidden; */
+}
+
+
+.img-wrapper img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+/*****************************.
+./
+
+/*Default color***Heart icon*/
+.favorite-icon {
+    position: absolute;
+    top: 20px; 
+    right:20px; 
+    color: #ccc; /*Default color*/
+    font-size: 24px; 
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.favorite-icon:hover {
+    color: #ff6f61; 
+}
+
+/*Color when become Favourite***Heart icon*/.favorite-icon.favorited {
+    color: #ff4d4d; 
+}
+
+.details {
+    padding: 20px;
+
+
+    background: linear-gradient(135deg, #ff8a00, #da1b60); 
+    background: linear-gradient(120deg, #56ccf2, #74ebd5);
+/**/background: linear-gradient(120deg, #9be7c6, #00bcd4);
+    /***/background: linear-gradient(120deg, #74ebd5, #9face6);
+
+
+
+
+
+    background: linear-gradient(45deg, #FF7E5F, #FEB47B, #FF6A88, #D2A6FF);
+
+   background: linear-gradient(135deg, #FFD700, #00A8FF);
+   background: linear-gradient(45deg, #FF6A00, #FFD200);
+   background: linear-gradient(180deg, #D4E157, #A5D6A7);
+
+   background: linear-gradient(90deg, #FF5F6D, #FFC371);
+   
+
+
+
+    background: linear-gradient(135deg, #1E3A8A, #3B82F6, #60A5FA, #93C5FD);
+
+    background: linear-gradient(120deg, #0099f7, #a3c2f0);
+
+  background: linear-gradient(60deg, #56CCF2, #2F80ED);
+
+  background: linear-gradient(120deg, #56ccf2, #2f80ed);
+
+
+    /**/  background: linear-gradient(120deg, #89f7fe, #66a6ff);
+
+    /***/ /**/background: linear-gradient(120deg, #9be7c6, #00bcd4);
+
+    background: linear-gradient(135deg, #1a3d5e, #3a9ad9, #8bd3ff);
+
+
+     background: linear-gradient(145deg, #1e90ff, #00bfff, #87cefa);
+
+     background: linear-gradient(135deg, #0066ff, #00cfff, #72f9ff);
+
+/*background-size: 200% 200%;
+animation: pulseAnimation 8s ease-in-out infinite;*/
+
+    border-radius: 0 0 20px 20px; 
+    color: #fff; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 188.5px;     /***********************/
+}
+
+
+.details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px; 
+    margin-top: 24px ;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+
+
+.time-rating {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-top: 10px;
+
+}
+
+
+
+.time-rating p {
+    display: flex;
+    align-items: center;
+    /*gap: 5px;*/ 
+    margin-top: 0 !important; /* Reduce the distance above to raise them*/
+    font-size: 1rem;
+    margin-bottom: 30px !important;
+    font-family: 'Arial', sans-serif;
+}
+
+.time-rating i {
+    color: #ffd700; 
+}
+
+.price {
+    font-size: 18px; 
+  /*  color: hsl(0, 19%, 88%); */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 5px; /* Space between icon and text */
+    margin: 20px 0 30px;
+
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    font-family: 'Arial', sans-serif;
+
+}
+
+.price .material-icons {
+    font-size: 24px; 
+    color: red; 
+    
+}
+
+/*****************/
+.red-icon {
+    font-size: 24px; 
+    color: red; 
+}
+.ratee {
+    font-size: 16px; 
 }

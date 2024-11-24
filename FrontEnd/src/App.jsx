@@ -10,11 +10,10 @@ import TouristSpotsDeatils from './components/TouristSpots/TouristSpotsDeatils'
 import Cart from './components/Cart/cart'
 import Products from './components/Products/Products'
 import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
-import Orders from './components/Orders/Orders'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
-
-
+import UserOrders from './components/Orders/userorders'
+import Market from './components/Market/Market'
 
 import SocketMessages from './components/Socket/SocketMessages'
 import SendSocketMessages from './components/Socket/SendSocketMessages'
@@ -63,6 +62,7 @@ function App() {
     <Route path="/Register" element={<Register/>}/>
     <Route path="/Login" element={<Login/>}/>
     <Route path="/adminPanel" element={<AdminPanel/>} />
+
     <Route path="/TouristSpots/:categoryId" element={<TouristSpots/>} />
     <Route path="/TouristSpots/:categoryId/TouristSpots-Detailes/:spotname" element={<TouristSpotsDeatils/>} />
     <Route path="/Products/:category_id" element={<Products/>} />
@@ -72,14 +72,31 @@ function App() {
     <Route path="/checkout" element={<CheckOutpage/>} />
     <Route path="/Products/:touristSpotsid" element={<Products/>} />
     <Route path="/products/details/:productId" element={<ProductDetailes/>} />
+
+    <Route path="/TouristSpots" element={<TouristSpots/>} />
+    <Route path="/TouristSpots-Detailes" element={<TouristSpotsDeatils/>} />
+
+    <Route path="/Products/:touristSpotsid" element={<Products/>} />
+    <Route path="/products/details/:productId" element={<ProductDetailes/>} />
+    <Route path="/cart" element={<CartPage />} />
+    <Route path="/checkout" element={<CheckOutpage/>} />
+    <Route path="/order/:id" element={<OrderConfirmtion/>} />
+    <Route path="/my-PreviousOrders" element={<UserOrders/>} />
+    <Route path="/Market" element={<Market/>} />
+
+
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
     <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
     
+
     <Route path="/cart" element={<CartPage />} />
+
+
 
     <Route path="/Favourite" element={<Favourite />} />
     <Route path="/Account" element={<AccountSettings />} />
+
 
     <Route path="/order/:id" element={<OrderConfirmtion/>} />
 
@@ -88,6 +105,8 @@ function App() {
     <Route path="/Admin/sidebar" element={<Sidebar />} />
     <Route path="/Admin/Header" element={<Header />} />
     <Route path="/Admin/users" element={<Users />} />
+
+
     </Routes>
     </SocketMessages>
     </>
