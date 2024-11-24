@@ -2,22 +2,28 @@ import React, { useContext, useState, useEffect,useRef  } from 'react';
 import { SocketContext } from './SocketMessages';
 /* import { registerContext } from '../App'; */
 import axios from 'axios';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Typography, List, ListItem } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Typography, List, ListItem,IconButton ,Badge ,Box} from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 
-const ReceiveSocketMessages = () => {
+
+
+
+
+
+const ReceiveSocketMessages = ({ openChat, handleCloseChat }) => {
     const [userFirstname, setuserFirstname] = useState("")
         const [userLastname, setuserLastname] = useState("")
-    
+        const [unreadMessages, setUnreadMessages] = useState(0)
     const [isModalOpen, setIsModalOpen] = useState(false)
-    
+    const messageEndRef = useRef(null);
     const { socket, connectAsSeller } = useContext(SocketContext);
     const user_id=useSelector((initialState)=> initialState.login.userId)
     const tourstGuideId = 35
     const [message, setMessage] = useState("");
     const [allMessages, setAllMessages] = useState([]);
     const customerIdRef = useRef(null)
-
+    const [isTyping, setIsTyping] = useState(false);
+console.log(user_id)
     useEffect(()=>{
         axios.get(`http://localhost:5000/users/userinfo/${tourstGuideId}`).then((res)=>{
           
@@ -78,36 +84,70 @@ console.log(userFirstname,userLastname)
             setMessage(""); 
         }
     };
+  /*   const openChat = () => {
+        setIsModalOpen(true);
+        setUnreadMessages(0); // Reset unread message count when modal opens
+    }; */
 
     return (
         <div>
-        <Button variant="outlined" onClick={() => setIsModalOpen(true)}>Open Chat</Button>
-        <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} maxWidth="sm" fullWidth>
-            <DialogTitle>Messages</DialogTitle>
-            <DialogContent>
-                <List>
-                    {allMessages.map((msg, index) => (
-                        <ListItem key={index}>
-                            <Typography variant="body2">
-                                {msg.senderFirstname} {msg.senderLastname}: {msg.message}
-                            </Typography>
-                        </ListItem>
-                    ))}
-                </List>
-                <TextField
-                    placeholder='Reply'
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    fullWidth
-                    margin="normal"
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={() => setIsModalOpen(false)}>Close</Button>
-                <Button onClick={sendMessage} color="primary">Send</Button>
-            </DialogActions>
-        </Dialog>
-    </div>
+            
+            <Dialog open={openChat} onClose={handleCloseChat} maxWidth="sm" fullWidth>
+                <DialogTitle>Messages</DialogTitle>
+                <DialogContent
+                    style={{
+                        maxHeight: '400px',
+                        overflowY: 'auto', 
+                    }}
+                >
+                    <Box>
+                        {allMessages.map((msg, index) => (
+                            <Box
+                                key={index}
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: msg.from === tourstGuideId ? 'flex-end' : 'flex-start',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                <Box
+                                    style={{
+                                        maxWidth: '60%',
+                                        padding: '10px',
+                                        borderRadius: '10px',
+                                        
+                                        backgroundColor: msg.from === tourstGuideId ? '#0078FF' : '#E4E6E7', 
+                                        color: msg.from === tourstGuideId ? 'white' : 'black',
+                                        wordWrap: 'break-word',
+                                    }}
+                                >
+                                    <Typography variant="body2" style={{ fontWeight: 'bold' }}>
+                                        {msg.senderFirstname} {msg.senderLastname}
+                                    </Typography>
+                                    <Typography variant="body2">{msg.message}</Typography>
+                                </Box>
+                            </Box>
+                        ))}
+                        
+                        <div ref={messageEndRef} />
+                    </Box>
+
+                    
+                    <TextField
+                        placeholder="Type a message..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)} 
+                        fullWidth
+                        margin="normal"
+                    />
+                </DialogContent>
+
+                <DialogActions>
+                    <Button onClick={handleCloseChat}>Close</Button>
+                    <Button onClick={sendMessage} color="primary">Send</Button>
+                </DialogActions>
+            </Dialog>
+        </div>
     );
 }
 

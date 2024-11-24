@@ -26,6 +26,10 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Favourite from './components/Favourite/Favourite'
 
 import AccountSettings from './components/Account/Account'
+ import Sidebar from './components/Admin panel/Sidebar' 
+ import Dashboard from './components/Admin panel/Dashboard' 
+import Header from './components/Admin panel/Header'
+import Users from './components/Admin panel/Users' 
 
 
 
@@ -49,14 +53,26 @@ function App() {
     style={{ top: '50px' }}
     />
 
-    <Navbar/>
+    
     <SocketMessages>
+    <Navbar/>
     <Routes>
     <Route path="/Navbar" element={<Navbar/>}/>
     <Route path="/" element={<HomePage/>}/>
     <Route path="/Register" element={<Register/>}/>
     <Route path="/Login" element={<Login/>}/>
     <Route path="/adminPanel" element={<AdminPanel/>} />
+
+    <Route path="/TouristSpots/:categoryId" element={<TouristSpots/>} />
+    <Route path="/TouristSpots/:categoryId/TouristSpots-Detailes/:spotname" element={<TouristSpotsDeatils/>} />
+    <Route path="/Products/:category_id" element={<Products/>} />
+    <Route path="/Products/Detailes/:product_id" element={<ProductDetailes/>} />
+    <Route path="/my-orders" element={<Orders/>} />
+    <Route path="/Orders/:id" element={<OrderConfirmtion/>} />
+    <Route path="/checkout" element={<CheckOutpage/>} />
+    <Route path="/Products/:touristSpotsid" element={<Products/>} />
+    <Route path="/products/details/:productId" element={<ProductDetailes/>} />
+
     <Route path="/TouristSpots" element={<TouristSpots/>} />
     <Route path="/TouristSpots-Detailes" element={<TouristSpotsDeatils/>} />
 
@@ -68,13 +84,28 @@ function App() {
     <Route path="/my-PreviousOrders" element={<UserOrders/>} />
     <Route path="/Market" element={<Market/>} />
 
+
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
     <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
     
 
+    <Route path="/cart" element={<CartPage />} />
+
+
+
     <Route path="/Favourite" element={<Favourite />} />
     <Route path="/Account" element={<AccountSettings />} />
+
+
+    <Route path="/order/:id" element={<OrderConfirmtion/>} />
+
+    <Route path="/Favourite" element={<Favourite />} />
+    <Route path="/Admin/dashbored" element={<Dashboard />} />
+    <Route path="/Admin/sidebar" element={<Sidebar />} />
+    <Route path="/Admin/Header" element={<Header />} />
+    <Route path="/Admin/users" element={<Users />} />
+
 
     </Routes>
     </SocketMessages>
