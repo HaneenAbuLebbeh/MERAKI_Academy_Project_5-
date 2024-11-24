@@ -69,9 +69,9 @@ function App() {
     <Route path="/Market" element={<Market/>} />
     <Route path="/FavoritesProducts" element={<FavoritesProducts/>} />
 
+    <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
-    <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
     
 
     <Route path="/Favourite" element={<Favourite />} />
