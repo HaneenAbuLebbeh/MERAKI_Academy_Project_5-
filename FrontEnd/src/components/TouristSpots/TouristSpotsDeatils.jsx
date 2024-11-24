@@ -13,7 +13,7 @@ import { WiDaySunny  } from 'react-icons/wi';
 import { FaShoppingCart } from 'react-icons/fa'
 import HotelIcon from '@mui/icons-material/Hotel'
 import MdLocationOnIcon from '@mui/icons-material/LocationOn'; 
-
+import SendSocketMessages from '../Socket/SendSocketMessages';
 const TouristSpotsDeatils = () => {
   const isLoggedIn=useSelector((initialState)=> initialState.login.isLoggedIn)
   const userId=useSelector((initialState)=> initialState.login.userId)
@@ -138,7 +138,7 @@ const weatherData = weather.data && weather.data[0];
 
   return (
     <>
-    
+    <SendSocketMessages/>
     <iframe 
       width="1440" 
       height="450" 

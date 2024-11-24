@@ -51,8 +51,9 @@ function App() {
     style={{ top: '50px' }}
     />
 
-    <Navbar/>
+    
     <SocketMessages>
+    <Navbar/>
     <Routes>
     <Route path="/Navbar" element={<Navbar/>}/>
     <Route path="/" element={<HomePage/>}/>
