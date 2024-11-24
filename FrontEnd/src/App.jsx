@@ -7,26 +7,26 @@ import HomePage from './components/HomrPage.jsx/HomePage'
 import AdminPanel from "./components/AdminPanel/AdminPanel"
 import TouristSpots from './components/TouristSpots/TouristSpots'
 import TouristSpotsDeatils from './components/TouristSpots/TouristSpotsDeatils'
-import Cart from './components/Cart/cart'
+
 import Products from './components/Products/Products'
 import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
+import CartPage from './components/Cart/CartPage'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
 import UserOrders from './components/Orders/userorders'
 import Market from './components/Market/Market'
+import FavoritesProducts from './components/Favourite/FavoritesProducts'
 
 import SocketMessages from './components/Socket/SocketMessages'
 import SendSocketMessages from './components/Socket/SendSocketMessages'
 import ReceiveSocketMessages from './components/Socket/ReciveSocketMessages'
 
-import CartPage from './components/Cart/CartPage'
 import { ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';  
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Favourite from './components/Favourite/Favourite'
 
 import AccountSettings from './components/Account/Account'
-
 
 
 
@@ -67,6 +67,7 @@ function App() {
     <Route path="/order/:id" element={<OrderConfirmtion/>} />
     <Route path="/my-PreviousOrders" element={<UserOrders/>} />
     <Route path="/Market" element={<Market/>} />
+    <Route path="/FavoritesProducts" element={<FavoritesProducts/>} />
 
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
