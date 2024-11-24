@@ -2,13 +2,13 @@
     max-width: 750px;
     margin: 0 auto;
     padding: 20px;
-    background: #fff; 
+    background: #fff !important; 
     border: 2px solid #FADADD;
     border-radius: 15px; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
     font-family: 'Arial', sans-serif;
     color: #333; 
-    margin-top: 50px;
+    margin-top: 50px !important;
     position: relative;
     margin-top: 50px; /*navbar*/
     margin-bottom: 20px;
@@ -21,8 +21,10 @@
     
 }
 .H1Checkout{
+    font-size: 2em;
     margin: 0;
     margin-bottom: -10px;
+    font-weight: bold;
 }
 form {
     background-color: #ffffff;
@@ -58,7 +60,17 @@ z-index: -1;
 }
 
 .checkout-header{
-    margin-top: 40px;
+    margin-top: 40px !important;
+}
+
+.H1Checkout{
+    margin-bottom: 20px;/*************/
+}
+.H2-titless{
+    font-size: 24px ;
+    font-weight: bold;
+    margin-bottom: 19px;
+
 }
 .payment-options {
     width: 100%; 

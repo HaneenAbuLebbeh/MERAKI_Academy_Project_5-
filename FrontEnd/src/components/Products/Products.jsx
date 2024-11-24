@@ -59,7 +59,7 @@ const Products = () => {
                 </div>
             ) : products && products.length > 0 ? (
                 products.map((product) => (
-                    <div key={product.id} className="food-card">
+                    <div key={product.id} className="product-card">
                         <div className="img-wrapper">
                             <img
                                 src={product.image}
@@ -74,8 +74,7 @@ const Products = () => {
                         </div>
                         <div className="details">
                             <h3>{product.name}</h3>
-                            <p className="calori">
-                                <FaDollarSign className="price-icon" />
+                            <p className="price">
                                 Price: {product.price} JD
                             </p>
                             <div className="time-rating">
