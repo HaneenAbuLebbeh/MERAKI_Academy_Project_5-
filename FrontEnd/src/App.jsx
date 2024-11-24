@@ -27,7 +27,10 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Favourite from './components/Favourite/Favourite'
 
 import AccountSettings from './components/Account/Account'
-
+ import Sidebar from './components/Admin panel/Sidebar' 
+ import Dashboard from './components/Admin panel/Dashboard' 
+import Header from './components/Admin panel/Header'
+import Users from './components/Admin panel/Users' 
 
 
 
@@ -69,12 +72,10 @@ function App() {
     <Route path="/checkout" element={<CheckOutpage/>} />
     <Route path="/Products/:touristSpotsid" element={<Products/>} />
     <Route path="/products/details/:productId" element={<ProductDetailes/>} />
-
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
     <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
     
-
     <Route path="/cart" element={<CartPage />} />
 
     <Route path="/Favourite" element={<Favourite />} />
@@ -83,8 +84,10 @@ function App() {
     <Route path="/order/:id" element={<OrderConfirmtion/>} />
 
     <Route path="/Favourite" element={<Favourite />} />
-
-
+    <Route path="/Admin/dashbored" element={<Dashboard />} />
+    <Route path="/Admin/sidebar" element={<Sidebar />} />
+    <Route path="/Admin/Header" element={<Header />} />
+    <Route path="/Admin/users" element={<Users />} />
     </Routes>
     </SocketMessages>
     </>

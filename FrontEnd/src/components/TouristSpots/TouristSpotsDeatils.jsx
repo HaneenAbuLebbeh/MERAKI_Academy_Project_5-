@@ -154,7 +154,7 @@ const weatherData = weather.data && weather.data[0];
               {weatherData ? (
                 <>
                   <Typography variant="body1">{weatherData.weather.description}</Typography>
-                  <Typography variant="body1">{weatherData.app_temp}°C <TbTemperatureCelsius /></Typography>
+                  <Typography variant="body1">{weatherData.app_temp}°C </Typography>
                 </>
               ) : (
                 <Typography variant="body1">Loading...</Typography>
@@ -172,7 +172,7 @@ const weatherData = weather.data && weather.data[0];
           <Card sx={{ height: '100%', position: 'relative' }}>
             <CardContent>
               <Typography variant="h5" gutterBottom>Site Visits</Typography>
-              <Typography variant="body1">Explore the various attractions and points of interest around {spotInfo[0]?.country_spot}.</Typography>
+              <Typography variant="body1"> {spotInfo[0]?.views}.</Typography>
             </CardContent>
             
             <Box sx={{ position: 'absolute', top: 10, right: 10 }}>
