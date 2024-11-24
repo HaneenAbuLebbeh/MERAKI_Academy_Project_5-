@@ -29,9 +29,9 @@ import AccountSettings from './components/Account/Account'
  import Sidebar from './components/Admin panel/Sidebar' 
  import Dashboard from './components/Admin panel/Dashboard' 
 import Header from './components/Admin panel/Header'
-import Users from './components/Admin panel/Users' 
 
-
+import Orders from "./components/Orders/Orders"
+import Users from './components/Admin panel/Users'
 
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
 
     
     <SocketMessages>
-    <Navbar/>
+   {/*  <Navbar/> */}
     <Routes>
     <Route path="/Navbar" element={<Navbar/>}/>
     <Route path="/" element={<HomePage/>}/>
@@ -104,7 +104,7 @@ function App() {
     <Route path="/Admin/dashbored" element={<Dashboard />} />
     <Route path="/Admin/sidebar" element={<Sidebar />} />
     <Route path="/Admin/Header" element={<Header />} />
-    <Route path="/Admin/users" element={<Users />} />
+    <Route path="/Admin/users" element={<Users/>} />
 
 
     </Routes>
