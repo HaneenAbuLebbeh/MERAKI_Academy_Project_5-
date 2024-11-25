@@ -81,11 +81,37 @@ function OrderManage() {
         setOpenSnackbar(false);
     };
 
+    // format Date from iso to => : "10/4/2003 09:05:03"
+    const formatDate= (isoDate) => {
+        const date = new Date(isoDate);
+        const day = date.getDate(); 
+        const month = date.getMonth() + 1; 
+        const year = date.getFullYear(); 
+    
+        const hours = date.getHours(); 
+        const minutes = date.getMinutes(); 
+        const seconds = date.getSeconds(); 
+    
+        const formattedHours = hours < 10 ? `0${hours}` : hours;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+    
+        return `${day}/${month}/${year} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;  
+    };
+    
+/*    const formatDate = (isoDate) => {
+        const date = new Date(isoDate);
+        const day = date.getDate();
+        const month = date.getMonth() + 1; 
+        const year = date.getFullYear(); 
+        return `${day}/${month}/${year}`;  // Example: "10/4/2003"
+    };
+*/   
 
 
     return (
         <Box className="order-management slide-up-animation" sx={{ padding: 2 }}>
-
+        
 {isLoading ? (
         <div className="loading-indicator">
         <DotLoader color="#3498db" size={50} />
@@ -121,7 +147,7 @@ function OrderManage() {
                                 <React.Fragment key={order.id}>
                                     <TableRow className="table-row">
                                         <TableCell>{order.id}</TableCell>
-                                        <TableCell>{order.created_at}</TableCell>
+                                        <TableCell>{formatDate(order.created_at)}</TableCell>
                                         <TableCell>{order.full_address
                                         }</TableCell>
                                         <TableCell>{order.state}</TableCell>
