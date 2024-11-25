@@ -22,7 +22,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 
-//import './OrderManage.css';
+import './Admin.css';
 
 
 function OrderManage() {
@@ -228,13 +228,13 @@ function OrderManage() {
                                     </TableRow>
                                     {/* Details */}
                                     <TableRow>
-                                        <TableCell colSpan={8}>
+                                        <TableCell colSpan={10}>
                                             <Collapse in={expandedOrderId === order.id} timeout="auto" unmountOnExit>
                                                 <Box sx={{ margin: 1 }}>
-                                                    <Typography variant="h6">Order Items</Typography>
                                                     <Table size="small">
                                                         <TableHead>
                                                             <TableRow>
+                                                            <TableCell>Product Image</TableCell>
                                                                 <TableCell>Product ID</TableCell>
                                                                 <TableCell>Product Name</TableCell>
                                                                 <TableCell>Quantity</TableCell>
@@ -244,7 +244,20 @@ function OrderManage() {
                                                         <TableBody>
                                                             {order.items.map((item) => (
                                                                 <TableRow key={item.id}>
-                                                                    <TableCell>{item.id}</TableCell>
+                                                                    <TableCell>
+                                                                        <img 
+                                                                        src={item.image} 
+                                                                        alt={item.name} 
+                                                                        className="Admin-productimage"
+                                                                        style={{
+                                                                        width: '60px',
+                                                                        height: '60px',
+                                                                        objectFit: 'cover',
+                                                                        borderRadius: '50%',
+                                                                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                                                        }} 
+                                                                        />
+                                                                    </TableCell>                                                                    <TableCell>{item.id}</TableCell>
                                                                     <TableCell>{item.name}</TableCell>
                                                                     <TableCell>{item.quantity}</TableCell>
                                                                     <TableCell>${item.price}</TableCell>
