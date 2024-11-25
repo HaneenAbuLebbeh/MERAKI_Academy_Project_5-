@@ -14,6 +14,7 @@ import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
 import UserOrders from './components/Orders/userorders'
 import Market from './components/Market/Market'
+import OrderManage from "./components/Admin panel/OrderManage"
 
 import SocketMessages from './components/Socket/SocketMessages'
 import SendSocketMessages from './components/Socket/SendSocketMessages'
@@ -83,7 +84,7 @@ function App() {
     <Route path="/order/:id" element={<OrderConfirmtion/>} />
     <Route path="/my-PreviousOrders" element={<UserOrders/>} />
     <Route path="/Market" element={<Market/>} />
-
+    
 
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
@@ -104,7 +105,7 @@ function App() {
     <Route path="/Admin/dashbored" element={<Dashboard />} />
     <Route path="/Admin/sidebar" element={<Sidebar />} />
     <Route path="/Admin/Header" element={<Header />} />
-    <Route path="/Admin/users" element={<Users/>} />
+    <Route path="/Admin/Order" element={<OrderManage/>} />
 
 
     </Routes>
