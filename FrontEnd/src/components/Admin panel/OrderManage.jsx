@@ -47,8 +47,16 @@ function OrderManage() {
             });
             console.log("response:",response); 
             if (response.data.success) {
+
+                // Set default status => processing
+                const fetchedOrders = response.data.orders.map(order => ({
+                    ...order,
+                    status: order.status || 'processing', 
+                }));
+
                 setOrders(response.data.orders
                     || []);
+                localStorage.setItem('orders', JSON.stringify(response.data.orders || []));
             } 
             else {
                 setMessage('Failed to fetch orders.');
@@ -70,7 +78,13 @@ function OrderManage() {
     
 
     useEffect(() => {
-        fetchOrders();
+        const storedOrders = localStorage.getItem('orders');
+        if (storedOrders) {
+            setOrders(JSON.parse(storedOrders)); 
+        } 
+        else {
+            fetchOrders();
+        }
     }, []);
 
     console.log("orders:",orders); 
@@ -105,22 +119,25 @@ function OrderManage() {
     };
     
 
-    // set the-status of the order => when clicking on the icons
+    // set the-status of the order => when clicking on the icons (**setOrders=>order+status**)
     const handleOrderStatusChange = (orderId, status) => {
-        setOrders(orders.map(order => 
+        const updatedOrders = orders.map(order => 
             order.id === orderId ? { ...order, status } : order
-        ));
+        );
+        setOrders(updatedOrders);
+        
+        localStorage.setItem('orders', JSON.stringify(updatedOrders));
     };
 
     // set text color based on => order status
     const getStatusColor = (status) => {
         switch (status) {
             case 'completed':
-                return 'green';
+                return 'green';//return '#28a745';
             case 'cancelled':
                 return 'red';
             case 'processing':
-                return '#ccc'; 
+                return '#ffc107'; 
             default:
                 return 'black';
         }
@@ -180,23 +197,23 @@ function OrderManage() {
                                                     {order.status}
                                         </TableCell>
 
-                                        <TableCell>
+                                        <TableCell sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                                     
                                                      <IconButton 
                                                         onClick={() => handleOrderStatusChange(order.id, 'completed')}
-                                                        color={order.status === 'completed' ? 'primary' : 'default'}
+                                                        style={{ color: '#28a745' }} 
                                                     >
                                                         <CheckIcon />
                                                     </IconButton>
                                                      <IconButton 
                                                         onClick={() => handleOrderStatusChange(order.id, 'cancelled')}
-                                                        color={order.status === 'cancelled' ? 'error' : 'default'}
+                                                        style={{ color: '#dc3545' }}
                                                     >
                                                         <CancelIcon />
                                                     </IconButton>
                                                      <IconButton 
                                                         onClick={() => handleOrderStatusChange(order.id, 'processing')}
-                                                        color={order.status === 'processing' ? 'secondary' : 'default'}
+                                                        style={{ color: '#ffc107' }}
                                                     >
                                                         <HourglassEmptyIcon />
                                                     </IconButton>
