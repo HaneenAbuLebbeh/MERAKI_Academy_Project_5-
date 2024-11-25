@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setLoading } from "../../../Redux/reducers/products";
+import { DotLoader} from "react-spinners"; //loading spinner
 import axios from 'axios';
 import {
     Box,
@@ -16,9 +18,12 @@ import {
     Paper,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { setLoading } from "../../../Redux/reducers/products";
-import { DotLoader} from "react-spinners"; //loading spinner
+import CheckIcon from '@mui/icons-material/Check';
+import CancelIcon from '@mui/icons-material/Cancel';
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+
 //import './OrderManage.css';
+
 
 function OrderManage() {
     const dispatch = useDispatch();
@@ -99,15 +104,27 @@ function OrderManage() {
         return `${day}/${month}/${year} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;  
     };
     
-/*    const formatDate = (isoDate) => {
-        const date = new Date(isoDate);
-        const day = date.getDate();
-        const month = date.getMonth() + 1; 
-        const year = date.getFullYear(); 
-        return `${day}/${month}/${year}`;  // Example: "10/4/2003"
-    };
-*/   
 
+    // set the-status of the order => when clicking on the icons
+    const handleOrderStatusChange = (orderId, status) => {
+        setOrders(orders.map(order => 
+            order.id === orderId ? { ...order, status } : order
+        ));
+    };
+
+    // set text color based on => order status
+    const getStatusColor = (status) => {
+        switch (status) {
+            case 'completed':
+                return 'green';
+            case 'cancelled':
+                return 'red';
+            case 'processing':
+                return '#ccc'; 
+            default:
+                return 'black';
+        }
+    };
 
     return (
         <Box className="order-management slide-up-animation" sx={{ padding: 2 }}>
@@ -138,6 +155,8 @@ function OrderManage() {
                             <TableCell>Total Amount</TableCell>
                             <TableCell>Payment Method</TableCell>
                             <TableCell>Location</TableCell>
+                            <TableCell>Order Status</TableCell>
+                            <TableCell>Action</TableCell>
                             <TableCell>Details</TableCell>
                         </TableRow>
                     </TableHead>
@@ -154,10 +173,36 @@ function OrderManage() {
                                         <TableCell>{order.total_amount}</TableCell>
                                         <TableCell>{order.payment_method}</TableCell>
                                         <TableCell>
-                                            {order
-                                                ? `${order.latitude}, ${order.longitude}`
-                                                : 'Location not available'}
+                                            {`${order.latitude}, ${order.longitude}`}
                                         </TableCell>
+
+                                        <TableCell style={{ color: getStatusColor(order.status) }}>
+                                                    {order.status}
+                                        </TableCell>
+
+                                        <TableCell>
+                                                    
+                                                     <IconButton 
+                                                        onClick={() => handleOrderStatusChange(order.id, 'completed')}
+                                                        color={order.status === 'completed' ? 'primary' : 'default'}
+                                                    >
+                                                        <CheckIcon />
+                                                    </IconButton>
+                                                     <IconButton 
+                                                        onClick={() => handleOrderStatusChange(order.id, 'cancelled')}
+                                                        color={order.status === 'cancelled' ? 'error' : 'default'}
+                                                    >
+                                                        <CancelIcon />
+                                                    </IconButton>
+                                                     <IconButton 
+                                                        onClick={() => handleOrderStatusChange(order.id, 'processing')}
+                                                        color={order.status === 'processing' ? 'secondary' : 'default'}
+                                                    >
+                                                        <HourglassEmptyIcon />
+                                                    </IconButton>
+                                        </TableCell>
+
+
                                         <TableCell>
                                             <IconButton onClick={() => handleExpandClick(order.id)} className="expand-button">
                                                 <ExpandMoreIcon />
