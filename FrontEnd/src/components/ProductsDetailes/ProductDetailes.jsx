@@ -68,11 +68,11 @@ const ProductDetailes = () => {
 
                     {/* Quantity control*/}
                     <div className="quantity-selector">
-                        <button className="quantity-btn" 
+                        <button className="quantity-btn-prodetails" 
                             onClick={decreaseQuantity} disabled={quantity === 1}>-
                         </button>
                         <span className="quantity-display">{quantity}</span>
-                        <button className="quantity-btn"
+                        <button className="quantity-btn-prodetails"
                             onClick={increaseQuantity}>+
                         </button>
                     </div>
@@ -80,7 +80,7 @@ const ProductDetailes = () => {
                     <p className="total-price">Total Price : ${totalPrice}</p>
 
                     {/* add to cart button */}
-                        <div className="cart-component">
+                        <div className="cart-component-AddBtn">
                             <Cart 
                                 productId={productDetails.id} 
                                 productName={productDetails.name} 
@@ -101,7 +101,7 @@ const ProductDetailes = () => {
 
                     {/* View Menu Button */}
                     <button className="view-menu-btn" onClick={handleBackClick}>
-                        <span className="arrow-icon">←</span> View Menu
+                        <span className="arrow-icon"></span>
                     </button>
     </div>
   );

@@ -145,7 +145,7 @@ return (
 
         <form onSubmit={handleSubmit} className='slide-up-animation'>
             <div className="checkout-header">
-                <h2>Shipping Address</h2>
+                <h2 className='H2-titless'>Shipping Address</h2>
             </div>
             
             <input 
@@ -194,7 +194,7 @@ return (
           <MapComponent latitude={shippingAddress.latitude} longitude={shippingAddress.longitude} /> {/* Pass coordinates to map component */}
 
             <div className="checkout-header">
-                <h2>Payment Method</h2>
+                <h2 className='H2-titless'>Payment Method</h2>
             </div>
 
             <div className="payment-options">
@@ -220,7 +220,7 @@ return (
             </div>
 
             <div className="checkout-header">
-                <h2>Special Requests</h2>
+                <h2 className='H2-titless'>Special Requests</h2>
             </div>
             
             <textarea 
@@ -230,7 +230,7 @@ return (
             />
 
             <div className="order-summary">
-                <h3>Cart Summary</h3>
+                <h3 className='H3CartSummary'>Cart Summary</h3>
                 <div className="summary-item">
                     <span>Subtotal</span>
                     <span>${subtotal.toFixed(2)}</span>

@@ -6,6 +6,7 @@ import './cartpage.css';
 import { updateCart, updateQuantity, removeFromCart } from "../../../Redux/reducers/cart"
 import { setLoading } from "../../../Redux/reducers/products"
 import { DotLoader} from "react-spinners"; //loading spinner
+import './cartpage.css';
 
 
 function CartPage() {
@@ -179,7 +180,7 @@ function CartPage() {
                         {/* Order Summary */}
                         {cart.length > 0 && subtotal > 0 && (
                         <div className="order-summary">
-                            <h3>Cart Summary</h3>
+                            <h4 className='H3CartSummary'>Cart Summary</h4>
                             <div className="summary-item">
                                 <span>Subtotal</span>
                                 <span>${subtotal.toFixed(2)}</span>
@@ -197,10 +198,10 @@ function CartPage() {
                                 <span>${total.toFixed(2)}</span>
                             </div>
                             <div className="buttons-container">
-                                <button onClick={() => navigate(-1)} className="button-">
+                                <button onClick={() => navigate(-1)} className="button-cart">
                                     Add More
                                 </button>
-                                <button onClick={handleCheckout}>Proceed to Checkout</button>
+                                <button className="button-cart" onClick={handleCheckout}>Proceed to Checkout</button>
                             </div>
                         </div>
                         )}

@@ -1,54 +1,51 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts, toggleFavorite, setLoading } from "../../../Redux/reducers/products";
+import { setProducts, toggleFavorite, setLoading } from "../../../Redux/reducers/products"; 
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { FaHeart, FaDollarSign } from 'react-icons/fa';
 import { MdLocalFireDepartment } from 'react-icons/md';
-import './Products.css';
-import { DotLoader} from "react-spinners"; //loading spinner
+import { DotLoader } from "react-spinners"; 
+//import './products.css'; 
 
-const Products = () => {
+
+const Market = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const products = useSelector((state) => state.products.products);
-    const isLoading = useSelector((state) => state.products.isLoading);  
+    const isLoading = useSelector((state) => state.products.isLoading);
     const favorites = useSelector((state) => state.products.favorites);
-    let touristSpotsid = 1;
+
 
     useEffect(() => {
-        if (touristSpotsid) {  
-            // Start loading
-            dispatch(setLoading(true));
+        //Start loading
+        dispatch(setLoading(true));
 
-            axios.get(`http://localhost:5000/products/${touristSpotsid}`)  
-                .then((response) => {
-                    dispatch(setProducts(response.data.products)); 
-                })
-                .catch((error) => {
-                    console.error('Error fetching products:', error);
-                    dispatch(setProducts([]));
-                })
-                .finally(() => {
-                    // End loading
-                    dispatch(setLoading(false));
-                });
-        }
-    }, [touristSpotsid, dispatch]); // Re-run when touristSpotsid changes
+        axios.get(`http://localhost:5000/products`) 
+            .then((response) => {
+                dispatch(setProducts(response.data.products));
+            })
+            .catch((error) => {
+                console.error('Error fetching products:', error);
+                dispatch(setProducts([])); 
+            })
+            .finally(() => {
+                //End loading
+                dispatch(setLoading(false));
+            });
+    }, [dispatch]);
 
-    // Navigate to product details when the image is clicked
-    const handleproductClick = (productId) => {
-        navigate(`/products/details/${productId}`);
+
+    //Navigate to product-details when the image is clicked
+    const handleProductClick = (productId) => {
+        navigate(`/market/details/${productId}`);
     };
 
-    // Toggle favorite handler
+    //Toggle favorite 
     const toggleFavoriteHandler = (productId) => {
-        dispatch(toggleFavorite(productId));  
+        dispatch(toggleFavorite(productId));
     };
-
-
-    console.log("products", products)
 
 
     return (
@@ -59,24 +56,28 @@ const Products = () => {
                 </div>
             ) : products && products.length > 0 ? (
                 products.map((product) => (
-                    <div key={product.id} className="product-card">
+                    <div key={product.id} className="food-card">
+                        
                         <div className="img-wrapper">
                             <img
                                 src={product.image}
                                 alt={product.name}
                                 className="product-image"
-                                onClick={() => handleproductClick(product.id)}  
+                                onClick={() => handleProductClick(product.id)} 
                             />
                             <FaHeart
                                 className={`favorite-icon ${favorites.includes(product.id) ? 'favorited' : ''}`}
-                                onClick={() => toggleFavoriteHandler(product.id)} 
+                                onClick={() => toggleFavoriteHandler(product.id)} // Toggle favorite
                             />
                         </div>
+                        
                         <div className="details">
                             <h3>{product.name}</h3>
-                            <p className="price">
+                            <p className="calori">
+                                <FaDollarSign className="price-icon" />
                                 Price: {product.price} JD
                             </p>
+                            
                             <div className="time-rating">
                                 <p className="timee">
                                     <MdLocalFireDepartment className="fire-icon" />
@@ -94,4 +95,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default Market;

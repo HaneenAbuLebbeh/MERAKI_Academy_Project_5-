@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState,useEffect,useContext} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Badge from "@mui/material/Badge";
@@ -13,25 +13,56 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import Popover from "@mui/material/Popover"
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
+
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
+
+import ReceiveSocketMessages from "../Socket/ReciveSocketMessages";
+import { setLogout } from "../../../Redux/reducers/login";
+
 const pages = ["Top Spots", "Market", "Cart", "About Us"];
 const settings = ["Account", "Favourites", "Orders", "Logout"];
 
 const Navbar = () => {
+  const dispatch=useDispatch()
+  const [newMessages, setNewMessages] = useState(false); 
   const isLoggedIn = useSelector(
-    (state) => state.login.isLoggedIn // Corrected selector syntax
+    (state) => state.login.isLoggedIn 
   );
+  const [isGuide, setisGuide] = useState(false)
+  const user_id=useSelector((initialState)=> initialState.login.userId)
+  console.log(user_id)
+  useEffect(() => {
+    console.log("user_id:", user_id);
+    if (user_id === 35) {
+      setisGuide(true); 
+    } else {
+      setisGuide(false); 
+    }
+  }, [user_id]);
+
+  useEffect(() => {
+    if (isGuide) {
+      
+      const timer = setInterval(() => {
+        setNewMessages((prev) => !prev); 
+      }, 5000); 
+      return () => clearInterval(timer); 
+    }
+  }, [isGuide]);
+  console.log("isGuide:", isGuide);
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const [openChat, setOpenChat] = useState(false); 
+  const [anchorElMail, setAnchorElMail] = useState(null); 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -67,23 +98,27 @@ const Navbar = () => {
   };
   const navigateToFavourites = () => {
     navigate("/Favourite");
-    handleCloseUserMenu(); // Close the menu when navigating
+    handleCloseUserMenu(); 
   };
 
   const navigateToAccount = () => {
     navigate("/Account");
-    handleCloseUserMenu(); // Close the menu when navigating
+    handleCloseUserMenu(); 
   };
 
   const navigateToOrders = () => {
     navigate("/Orders");
-    handleCloseUserMenu(); // Close the menu when navigating
+    handleCloseUserMenu(); 
   };
 
   const navigateToLogout = () => {
-    // Add your logout logic here (e.g., clear session)
-    navigate("/Logout");
-    handleCloseUserMenu(); // Close the menu when navigating
+    dispatch(setLogout())
+    navigate("/");
+    handleCloseUserMenu(); 
+  };
+  const handleOpenChat = (event) => {
+    setAnchorElMail(event.currentTarget); 
+    setOpenChat(true); 
   };
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -124,6 +159,11 @@ const Navbar = () => {
     },
   }));
 
+
+  const handleCloseChat = () => {
+    setOpenChat(false); 
+    setAnchorElMail(null); 
+  };
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
@@ -163,14 +203,14 @@ const Navbar = () => {
               aria-label="menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={() => {}}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorElNav}
+              anchorEl={null}
               anchorOrigin={{
                 vertical: "center",
                 horizontal: "left",
@@ -180,10 +220,11 @@ const Navbar = () => {
                 vertical: "top",
                 horizontal: "left",
               }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              open={false}
+              onClose={() => {}}
             >
               {pages.map((page) => (
+
                 <MenuItem key={page} sx={{ textAlign: "center", fontSize: "16px", fontFamily: "Roboto" }}  onClick={
                   page === "Top Spots"
                     ? navigateToSpots
@@ -196,6 +237,10 @@ const Navbar = () => {
                     : handleCloseUserMenu
                 }>
                   <Typography >{page}</Typography>
+
+                <MenuItem key={page} onClick={() => {}}>
+                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+
                 </MenuItem>
               ))}
             </Menu>
@@ -205,8 +250,13 @@ const Navbar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
+
                 onClick={handleCloseNavMenu}
                 sx={{ mx: 3, color: "black", display: "block" }}
+
+                onClick={() => {}}
+                sx={{ my: 2, color: "black", display: "block" }}
+
               >
                 {page}
               </Button>
@@ -241,11 +291,23 @@ const Navbar = () => {
             </IconButton>
                   
                 </Tooltip>
+
                 {/* <Box sx={{ color: "action.active" }}>
                   <Badge color="secondary" variant="dot">
                     <MailIcon />
                   </Badge>
                 </Box> */}
+
+                
+                {isGuide && (
+                  <Box sx={{ ml: 2 }}>
+                    <IconButton onClick={handleOpenChat} sx={{ p: 0 }}>
+                      <MailIcon />
+                    </IconButton>
+                  </Box>
+                )}
+                
+
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"
@@ -292,6 +354,8 @@ const Navbar = () => {
           </Box>
         </Toolbar>
       </Container>
+      <ReceiveSocketMessages openChat={openChat} handleCloseChat={handleCloseChat} />
+     
     </AppBar>
   );
 };

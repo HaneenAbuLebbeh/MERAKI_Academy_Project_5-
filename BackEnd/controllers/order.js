@@ -89,10 +89,11 @@ const getUserOrders = async (req, res) => {
 
         const orderIds = ordersResult.rows.map(order => order.id);
 
-        // get all order items that belong to the user orders
+        // get all order items that belong to the user orders + with product names
         const orderItemsResult = await pool.query(`
             SELECT * 
             FROM order_items 
+            JOIN products ON order_items.product_id = products.id 
             WHERE order_id = ANY($1::int[])
         `, [orderIds]);
 
@@ -188,3 +189,15 @@ module.exports = {
     getOrderById,
     getAllOrders
 }
+
+
+/* 
+const orderItemsResult = await pool.query(`
+            SELECT order_items.*, products.name AS product_name
+            FROM order_items
+            JOIN products ON order_items.product_id = products.id
+            JOIN orders ON order_items.order_id = orders.id
+            WHERE orders.user_id = $1
+        `, [userId]); 
+        
+*/
