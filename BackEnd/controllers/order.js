@@ -162,11 +162,12 @@ const getAllOrders = async (req, res) => {
 
         const orders = ordersResult.rows;
 
-        // get order items for each order
+        // get order items for each order +JOIN products =>product-name
         for (const order of orders) {
             const orderItemsResult = await pool.query(`
                 SELECT * 
-                FROM order_items 
+                FROM order_items
+                    JOIN products ON order_items.product_id = products.id
                 WHERE order_id = $1
             `, [order.id]);
 
