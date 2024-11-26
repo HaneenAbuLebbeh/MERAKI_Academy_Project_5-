@@ -3,12 +3,12 @@ const jwt=require("jsonwebtoken")
 const bcrypt=require("bcryptjs") 
 const saltRounds = parseInt(process.env.SALT)
 const register=async (req,res)=>{
-const {firstName,lastName,age,country,email,password}=req.body 
+const {firstName,lastName,age,country,email,password,image}=req.body 
 
 const role_id=1   //1 for user , 2 for Tourist guide , 3 for admin 
 
 const hashedPassword= await bcrypt.hash(password,saltRounds)
-const query = `INSERT INTO users (firstName, lastName, age, country, email, password, role_id) VALUES ($1,$2,$3,$4,$5,$6,$7)`;
+const query = `INSERT INTO users (firstName, lastName, age, country, email, password, role_id,image) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`;
 const data = [
   firstName,
   lastName,
@@ -16,7 +16,8 @@ const data = [
   country,
   email.toLowerCase(),
   hashedPassword,
-  role_id
+  role_id,
+  image
 ];
 pool
   .query(query, data)
@@ -206,6 +207,24 @@ pool.query(query,data).then((result) => {
 })
 }
 
+const getAllUsers=async(req,res)=>{
+ 
+const query=`select * from users where is_deleted=0`
+pool.query(query).then((result) => {
+  res.status(200).json({
+    success: true,
+    message: "User info uploaded successfully",
+    result: result.rows
+  });
+})
+.catch((err) => {
+  res.status(409).json({
+    success: false,
+    message: "Can't find user info",
+    err: console.log(err)
+  });
+})
+}
 
 
 
@@ -216,5 +235,6 @@ pool.query(query,data).then((result) => {
     login,
     googleLogin,
     getUserbyId,
-    updateUserInfo
+    updateUserInfo,
+    getAllUsers
   }

@@ -6,21 +6,24 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import Divider from '@mui/joy/Divider';
 import Typography from '@mui/joy/Typography';
 import IconButton from '@mui/joy/IconButton';
-import Link from '@mui/joy/Link';
+/* import Link from '@mui/joy/Link'; */
 import Favorite from '@mui/icons-material/Favorite';
 import axios from 'axios'
 import Grid from '@mui/joy/Grid'
 import { useDispatch, useSelector } from "react-redux";
+/* import { useTheme } from '@mui/material/styles' */
+import { useParams,Link } from 'react-router-dom'
 
-import { useTheme } from '@mui/material/styles'
 
 
 const TouristSpots = () => {
-
+ /*  const theme = useTheme() */
+ const { categoryId } = useParams()
+ console.log(categoryId)
 const [categoryList, setCategoryList] = useState("")
 const [weather, setWeather] = useState({})
 const [temp, setTemp] = useState([])
-const categoryId=11
+/* const categoryId=11 */
 const userId=useSelector((initialState)=> initialState.login.userId)
 const getSpotsByCategoryId=async()=>{
   try {
@@ -102,7 +105,7 @@ console.log(userId)
 
   return (
     <>
-   <Grid container spacing={2}>
+      <Grid container spacing={2}>
       {categoryList &&
         categoryList.map((elem, i) => (
           <Grid item xs={12} sm={6} md={3} key={i}>
@@ -134,20 +137,20 @@ console.log(userId)
               </CardOverflow>
               <CardContent>
                 <Typography level="title-md">
-                  <Link href="#multiple-actions" overlay underline="none">
+                  <Link to={`TouristSpots-Detailes/${elem.spot_name}`} overlay underline="none">
                     {elem.spot_name} 
                   </Link>
                 </Typography>
                 <Typography level="body-sm">
-                  <Link href="#multiple-actions">{ 'Italy'}</Link>
+                {elem.country_spot}
                 </Typography>
               </CardContent>
               <CardOverflow variant="soft">
                 <Divider inset="context" />
                 <CardContent orientation="horizontal">
-                  <Typography level="body-xs">6.3k views</Typography>
+                  <Typography level="body-xs">{elem.views } views</Typography>
                   <Divider orientation="vertical" />
-                  <Typography level="body-xs">1 hour ago</Typography>
+                  
                   <Typography level="body-xs">
                     {weather[elem.spot_name] ? (
                      
@@ -161,11 +164,12 @@ console.log(userId)
             </Card>
           </Grid>
         ))}
-    </Grid>
+    </Grid>  
+    
     
     
     </>
   )
 }
-
+ 
 export default TouristSpots 
