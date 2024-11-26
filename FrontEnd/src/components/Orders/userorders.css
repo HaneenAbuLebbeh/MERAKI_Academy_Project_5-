@@ -108,3 +108,15 @@ table {
     margin-top: 50px !important;
     margin-bottom: 25px !important;
 }
+
+.product-table-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.product-table-image:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}

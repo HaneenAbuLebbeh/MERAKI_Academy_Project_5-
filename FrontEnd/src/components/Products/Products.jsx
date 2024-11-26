@@ -47,6 +47,10 @@ const Products = () => {
         dispatch(toggleFavorite(productId));  
     };
 
+
+    console.log("products", products)
+
+
     return (
         <section className="alll-cards">
             {isLoading ? (
