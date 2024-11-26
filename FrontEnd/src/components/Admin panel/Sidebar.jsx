@@ -21,7 +21,7 @@ const Sidebar = () => {
         <ListItem button component={Link} to="/products">
           <ListItemText primary="Products" />
         </ListItem>
-        <ListItem button component={Link} to="/orders">
+        <ListItem button component={Link} to="/Admin/order">
           <ListItemText primary="Orders" />
         </ListItem>
         <ListItem button component={Link} to="/users">

@@ -20,6 +20,7 @@ import About from "./components/About/About"
 import UserOrders from './components/Orders/userorders'
 import Market from './components/Market/Market'
 import FavoritesProducts from './components/Favourite/FavoritesProducts'
+import OrderManage from "./components/Admin panel/OrderManage"
 
 
 import SocketMessages from './components/Socket/SocketMessages'
@@ -91,6 +92,7 @@ function App() {
     <Route path="/FavoritesProducts" element={<FavoritesProducts/>} />
 
     <Route path="/recive-socket-message" element={<ReceiveSocketMessages/>} />
+
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
     
@@ -110,7 +112,7 @@ function App() {
     <Route path="/Admin/dashbored" element={<Dashboard />} />
     <Route path="/Admin/sidebar" element={<Sidebar />} />
     <Route path="/Admin/Header" element={<Header />} />
-    <Route path="/Admin/users" element={<Users/>} />
+    <Route path="/Admin/Order" element={<OrderManage/>} />
 
 
     </Routes>
