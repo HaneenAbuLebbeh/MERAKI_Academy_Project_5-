@@ -124,6 +124,7 @@ const Navbar = () => {
     },
   }));
 
+  
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
