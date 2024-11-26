@@ -26,3 +26,73 @@
     font-size: 24px;
     margin-bottom: 20px;
 }
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    color: #555;
+}
+
+.admin-table th {
+    background-color: #3498db;
+    color: white;
+}
+
+
+/****Product Image****/
+.product-table-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.product-table-image:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+/*********************/
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: white;
+}
+
+.featured {
+    background-color: #27ae60;
+}
+
+.not-featured {
+    background-color: #e74c3c;
+}
+
+.action-icon {
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+.edit-icon {
+    color: #2980b9;
+}
+
+.delete-icon {
+    color: #e74c3c;
+}
+
+.no-products-message {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}

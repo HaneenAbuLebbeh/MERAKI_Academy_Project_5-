@@ -68,7 +68,43 @@ const AdminPanel = () => {
                             <th>Actions</th>
                         </tr>
                     </thead>
-
+                    
+                    <tbody>
+                        {products.map((product) => (
+                            <tr key={product.id}>
+                                <td>
+                                    <img
+                                        src={product.image}
+                                        alt={product.name}
+                                        className="product-table-image"
+                                    />
+                                </td>
+                                <td>{product.name}</td>
+                                <td>{product.price} JD</td>
+                                <td>{product.stock_quantity}</td>
+                                <td>⭐ {product.rating}</td>
+                                <td>{product.extra}</td>
+                                <td>
+                                    {product.featured ? (
+                                        <span className="badge featured">Yes</span>
+                                    ) : (
+                                        <span className="badge not-featured">No</span>
+                                    )}
+                                </td>
+                                <td>
+                                    <FaEdit
+                                        className="action-icon edit-icon"
+                                        onClick={() => handleEditProduct(product.id)}
+                                    />
+                                    <FaTrash
+                                        className="action-icon delete-icon"
+                                        onClick={() => handleDeleteProduct(product.id)}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    
                 </table>
             ) : (
                 <p className="no-products-message">No products found.</p>
