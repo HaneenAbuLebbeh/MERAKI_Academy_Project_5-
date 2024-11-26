@@ -88,7 +88,7 @@
 }
 
 .delete-icon {
-    color: #e74c3c;
+    color: hsl(6, 90%, 45%);
 }
 
 .no-products-message {
@@ -96,3 +96,38 @@
     color: #888;
     margin-top: 20px;
 }
+
+
+
+
+
+
+/**********************************************************************************/
+/**********************************************************************************/
+
+.order-table {
+    border-collapse: collapse; 
+    width: 100%; 
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #ddd; 
+    padding: 8px; /* */
+    text-align: left;
+}
+
+.order-table th {
+    background-color: #f4f4f4; 
+    font-weight: bold;
+}
+
+.order-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Highlight even rows with a different color */
+}
+
+/*************************************************/
+/***
+.table-row:hover {
+    background-color:red !important; 
+    cursor: pointer; 
+}*/

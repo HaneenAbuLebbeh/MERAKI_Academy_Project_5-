@@ -181,7 +181,7 @@ function OrderManage() {
                             <TableCell>Details</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody className="table-rowww">
                         {Array.isArray(orders) && orders.length > 0 ? (
                             orders.map((order) => (
                                 <React.Fragment key={order.id}>

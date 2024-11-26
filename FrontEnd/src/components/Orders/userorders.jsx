@@ -75,7 +75,7 @@ const UserOrders = () => {
             {error && <Typography color="error">{error}</Typography>}
             {!loading && !error && orders.length === 0 && <Typography>No orders found.</Typography>}
             <TableContainer component={Paper}>
-                <Table className="slide-up-animation">
+                <Table className="order-table"> {/* تم تغيير هذه الفئة إلى order-table */}
                     <TableHead>
                         <TableRow>
                             <TableCell>Order ID</TableCell>
@@ -101,7 +101,6 @@ const UserOrders = () => {
     );
 };
 
-
 const OrderRow = ({ order, expandedOrderId, handleToggleDetails }) => {
     const isOpen = expandedOrderId === order.id;
 
@@ -123,7 +122,7 @@ const OrderRow = ({ order, expandedOrderId, handleToggleDetails }) => {
                 <TableCell colSpan={5} sx={{ padding: 0 }}>
                     <Collapse in={isOpen} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
-                            <Table size="small" className="slide-up-animation">
+                            <Table size="small" className="order-table"> {/* تم تغيير هذه الفئة إلى order-table */}
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Product Image</TableCell>
@@ -133,8 +132,6 @@ const OrderRow = ({ order, expandedOrderId, handleToggleDetails }) => {
                                         <TableCell>Price</TableCell>
                                     </TableRow>
                                 </TableHead>
-                                
-                                
                                 <TableBody>
                                     {order.items.map((item) => (
                                         <TableRow key={item.id}>
@@ -142,7 +139,7 @@ const OrderRow = ({ order, expandedOrderId, handleToggleDetails }) => {
                                                 <img
                                                     src={item.image}
                                                     alt={item.name}
-                                                    className="Admin-productimage"
+                                                    className="product-table-image"
                                                     style={{
                                                         width: '60px',
                                                         height: '60px',

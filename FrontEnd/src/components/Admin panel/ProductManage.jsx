@@ -6,6 +6,7 @@ import axios from 'axios';
 import { FaHeart, FaEdit, FaTrash } from 'react-icons/fa';
 import { DotLoader } from "react-spinners";
 import Sidebar from './Sidebar';
+import { FaBox, FaDollarSign, FaCogs, FaStar, FaInfoCircle } from 'react-icons/fa';
 import './Admin.css';
 
 
@@ -39,7 +40,7 @@ const AdminPanel = () => {
     };
 
     const handleDeleteProduct = (productId) => {
-            //
+        //
         console.log(`Delete product with ID: ${productId}`);
     };
 
@@ -71,7 +72,7 @@ const AdminPanel = () => {
                     
                     <tbody>
                         {products.map((product) => (
-                            <tr key={product.id}>
+                            <tr key={product.id} >
                                 <td>
                                     <img
                                         src={product.image}
@@ -104,7 +105,7 @@ const AdminPanel = () => {
                             </tr>
                         ))}
                     </tbody>
-                    
+
                 </table>
             ) : (
                 <p className="no-products-message">No products found.</p>
