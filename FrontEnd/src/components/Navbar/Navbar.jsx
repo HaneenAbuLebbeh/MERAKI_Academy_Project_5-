@@ -166,66 +166,67 @@ const Navbar = () => {
   };
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-            <img
-              id="logo"
-              src="./src/assets/Screenshot 2024-11-14 201237.png"
-              alt="Logo"
-              style={{ height: "70px", width: "200px" }}
-              onClick={() => navigate("/")}
-            />
-          </Box>
+    <Container maxWidth="xl">
+      <Toolbar disableGutters>
+        <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+          <img
+            id="logo"
+            src="./src/assets/Screenshot 2024-11-14 201237.png"
+            alt="Logo"
+            style={{ height: "70px", width: "200px" }}
+            onClick={() => navigate("/")}
+          />
+        </Box>
 
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+        <Typography
+          variant="h5"
+          noWrap
+          component="a"
+          href="#app-bar-with-responsive-menu"
+          sx={{
+            mr: 2,
+            display: { xs: "flex", md: "none" },
+            flexGrow: 1,
+            fontFamily: "monospace",
+            fontWeight: 700,
+            letterSpacing: ".3rem",
+            color: "inherit",
+            textDecoration: "none",
+          }}
+        >
+          LOGO
+        </Typography>
+
+        <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, justifyContent: "space-around" }}>
+          <IconButton
+            size="large"
+            aria-label="menu"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="inherit"
           >
-            LOGO
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } ,justifyContent:"space-around"}}>
-            <IconButton
-              size="large"
-              aria-label="menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={() => {}}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={null}
-              anchorOrigin={{
-                vertical: "center",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={false}
-              onClose={() => {}}
-            >
-              {pages.map((page) => (
-
-                <MenuItem key={page} sx={{ textAlign: "center", fontSize: "16px", fontFamily: "Roboto" }}  onClick={
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: "center",
+              horizontal: "left",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+          >
+            {pages.map((page) => (
+              <MenuItem
+                key={page}
+                onClick={
                   page === "Top Spots"
                     ? navigateToSpots
                     : page === "Market"
@@ -234,129 +235,109 @@ const Navbar = () => {
                     ? navigateToCart
                     : page === "About Us"
                     ? navigateToAbout
-                    : handleCloseUserMenu
-                }>
-                  <Typography >{page}</Typography>
-
-                <MenuItem key={page} onClick={() => {}}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
-
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-
-                onClick={handleCloseNavMenu}
-                sx={{ mx: 3, color: "black", display: "block" }}
-
-                onClick={() => {}}
-                sx={{ my: 2, color: "black", display: "block" }}
-
+                    : handleCloseNavMenu
+                }
               >
-                {page}
-              </Button>
+                <Typography>{page}</Typography>
+              </MenuItem>
             ))}
-          </Box>
-          <Box>
-<Search>
+          </Menu>
+        </Box>
+
+        <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          {pages.map((page) => (
+            <Button
+              key={page}
+              onClick={
+                page === "Top Spots"
+                  ? navigateToSpots
+                  : page === "Market"
+                  ? navigateToMarket
+                  : page === "Cart"
+                  ? navigateToCart
+                  : page === "About Us"
+                  ? navigateToAbout
+                  : handleCloseNavMenu
+              }
+              sx={{ mx: 3, color: "black", display: "block" }}
+            >
+              {page}
+            </Button>
+          ))}
+        </Box>
+
+        <Box>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
           </Search>
-</Box>
-          <Box sx={{ flexGrow: 0 }}>
-            {isLoggedIn ? (
-              <>
-                <Tooltip title="Open settings">
-                  
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 2 }}
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              // aria-controls={menuId}
-              aria-haspopup="true"
-              
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-                  
-                </Tooltip>
+        </Box>
 
-                {/* <Box sx={{ color: "action.active" }}>
-                  <Badge color="secondary" variant="dot">
+        <Box sx={{ flexGrow: 0 }}>
+          {isLoggedIn ? (
+            <>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 2 }} size="large" edge="end" aria-label="account of current user" aria-haspopup="true" color="inherit">
+                  <AccountCircle />
+                </IconButton>
+              </Tooltip>
+
+              {isGuide && (
+                <Box sx={{ ml: 2 }}>
+                  <IconButton onClick={handleOpenChat} sx={{ p: 0 }}>
                     <MailIcon />
-                  </Badge>
-                </Box> */}
+                  </IconButton>
+                </Box>
+              )}
 
-                
-                {isGuide && (
-                  <Box sx={{ ml: 2 }}>
-                    <IconButton onClick={handleOpenChat} sx={{ p: 0 }}>
-                      <MailIcon />
-                    </IconButton>
-                  </Box>
-                )}
-                
-
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem
-                      key={setting}
-                      onClick={
-                        setting === "Favourites"
-                          ? navigateToFavourites
-                          : setting === "Account"
-                          ? navigateToAccount
-                          : setting === "Orders"
-                          ? navigateToOrders
-                          : setting === "Logout"
-                          ? navigateToLogout
-                          : handleCloseUserMenu
-                      }
-                    >
-                      <Typography >
-                        {setting}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </>
-            ) : (
-              <Button onClick={handleSignInClick} sx={{ color: "black" }}>
-                Sign In
-              </Button>
-            )}
-          </Box>
-        </Toolbar>
-      </Container>
-      <ReceiveSocketMessages openChat={openChat} handleCloseChat={handleCloseChat} />
-     
-    </AppBar>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem
+                    key={setting}
+                    onClick={
+                      setting === "Favourites"
+                        ? navigateToFavourites
+                        : setting === "Account"
+                        ? navigateToAccount
+                        : setting === "Orders"
+                        ? navigateToOrders
+                        : setting === "Logout"
+                        ? navigateToLogout
+                        : handleCloseUserMenu
+                    }
+                  >
+                    <Typography>{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </>
+          ) : (
+            <Button onClick={handleSignInClick} sx={{ color: "black" }}>
+              Sign In
+            </Button>
+          )}
+        </Box>
+      </Toolbar>
+    </Container>
+    <ReceiveSocketMessages openChat={openChat} handleCloseChat={handleCloseChat} />
+  </AppBar>
   );
 };
 

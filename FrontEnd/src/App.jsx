@@ -16,7 +16,7 @@ import CheckOutpage from './components/CheckoutPage/CheckOutpage'
 
 import About from "./components/About/About"
 
-=======
+
 import UserOrders from './components/Orders/userorders'
 import Market from './components/Market/Market'
 import FavoritesProducts from './components/Favourite/FavoritesProducts'
@@ -62,7 +62,7 @@ function App() {
 
     
     <SocketMessages>
-   {/*  <Navbar/> */}
+     {/* <Navbar/>  */}
     <Routes>
     <Route path="/Navbar" element={<Navbar/>}/>
     <Route path="/" element={<HomePage/>}/>
