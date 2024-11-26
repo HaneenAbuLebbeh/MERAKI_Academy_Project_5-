@@ -62,7 +62,7 @@ function App() {
 
     
     <SocketMessages>
-     {/* <Navbar/>  */}
+     <Navbar/> 
     <Routes>
     <Route path="/Navbar" element={<Navbar/>}/>
     <Route path="/" element={<HomePage/>}/>
@@ -115,7 +115,7 @@ function App() {
     <Route path="/Admin/Header" element={<Header />} />
     <Route path="/Admin/Orders" element={<OrderManage/>} />
     <Route path="/Admin/Products" element={<ProductManage/>} />
-
+    <Route path="/Admin/users" element={<Users/>} />
 
     </Routes>
     </SocketMessages>

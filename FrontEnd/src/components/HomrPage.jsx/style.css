@@ -4,13 +4,17 @@
     object-fit: cover; /* This ensures the video fills the container without distortion */
   }
 
-  .carousel{
-    
+  /* .carousel{
+    padding: 0px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5)
-  }
+  } */
 
   .card {
+    position: relative;
+    top: 20px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
     transition: transform 0.3s ease-in-out;
+
   }
   
   .card:hover {

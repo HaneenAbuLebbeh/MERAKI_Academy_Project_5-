@@ -18,6 +18,22 @@ const Register = () => {
   const [error, setError] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState('');
+
+
+  const handleImageUpload = async (e) => {
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+
+    try {
+      const response = await axios.post('http://localhost:5000/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setImageUrl(response.data.image_url);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  };
 
   const RegisterButton = () => {
     const newError = {};
@@ -44,7 +60,8 @@ const Register = () => {
       age,
       password,
       email,
-      country
+      country,
+     image: imageUrl
     };
 
     axios.post("http://localhost:5000/users/register", body)
@@ -134,7 +151,7 @@ const Register = () => {
                   error={!!error.password}
                   helperText={error.password}
                 />
-
+<input type="file" onChange={handleImageUpload} />
                 <Button
                   variant="contained"
                   color="primary"

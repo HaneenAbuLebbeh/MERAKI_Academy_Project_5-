@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Popover from "@mui/material/Popover"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
@@ -31,8 +32,10 @@ const pages = ["Top Spots", "Market", "Cart", "About Us"];
 const settings = ["Account", "Favourites", "Orders", "Logout"];
 
 const Navbar = () => {
+  const userId=useSelector((initialState)=> initialState.login.userId)
   const dispatch=useDispatch()
   const [newMessages, setNewMessages] = useState(false); 
+  const [image, setimage] = useState("")
   const isLoggedIn = useSelector(
     (state) => state.login.isLoggedIn 
   );
@@ -63,6 +66,29 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openChat, setOpenChat] = useState(false); 
   const [anchorElMail, setAnchorElMail] = useState(null); 
+
+  useEffect(() => {
+    
+    const fetchUserData = async () => {
+      try {
+        
+        const response = await axios.get(`http://localhost:5000/users/userinfo/${userId}`);
+        setimage(response.data.result[0].image); 
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+
+
+
+
+
+
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -149,7 +175,7 @@ const Navbar = () => {
     color: 'inherit',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
+    
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -159,11 +185,15 @@ const Navbar = () => {
     },
   }));
 
+  
+
 
   const handleCloseChat = () => {
     setOpenChat(false); 
     setAnchorElMail(null); 
   };
+  console.log(image)
+
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
     <Container maxWidth="xl">
@@ -273,24 +303,48 @@ const Navbar = () => {
             </SearchIconWrapper>
             <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
           </Search>
-        </Box>
+</Box>
+          <Box sx={{ flexGrow: 0 }}>
+            {isLoggedIn ? (
+              <>
+                <Tooltip title="Open settings">
 
-        <Box sx={{ flexGrow: 0 }}>
-          {isLoggedIn ? (
-            <>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 2 }} size="large" edge="end" aria-label="account of current user" aria-haspopup="true" color="inherit">
-                  <AccountCircle />
-                </IconButton>
-              </Tooltip>
-
-              {isGuide && (
-                <Box sx={{ ml: 2 }}>
-                  <IconButton onClick={handleOpenChat} sx={{ p: 0 }}>
-                    <MailIcon />
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="User" src={image}
+                    /* "./src/assets/user.jpg" */ />
                   </IconButton>
-                </Box>
-              )}
+
+                  
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 2 }}
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              // aria-controls={menuId}
+              aria-haspopup="true"
+              
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+                  
+
+                </Tooltip>
+
+                {/* <Box sx={{ color: "action.active" }}>
+                  <Badge color="secondary" variant="dot">
+                    <MailIcon />
+                  </Badge>
+                </Box> */}
+
+                
+                {isGuide && (
+                  <Box sx={{ ml: 2 }}>
+                    <IconButton onClick={handleOpenChat} sx={{ p: 0 }}>
+                      <MailIcon />
+                    </IconButton>
+                  </Box>
+                )}
+                
 
               <Menu
                 sx={{ mt: "45px" }}
