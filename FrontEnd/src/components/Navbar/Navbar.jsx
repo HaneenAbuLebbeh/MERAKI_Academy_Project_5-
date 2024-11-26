@@ -175,7 +175,7 @@ const Navbar = () => {
     color: 'inherit',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
+    
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -185,12 +185,15 @@ const Navbar = () => {
     },
   }));
 
+  
+
 
   const handleCloseChat = () => {
     setOpenChat(false); 
     setAnchorElMail(null); 
   };
   console.log(image)
+
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
