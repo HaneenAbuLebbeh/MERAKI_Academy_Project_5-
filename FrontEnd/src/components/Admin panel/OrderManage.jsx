@@ -234,7 +234,7 @@ function OrderManage() {
                                                     <Table size="small">
                                                         <TableHead>
                                                             <TableRow>
-                                                            <TableCell>Product Image</TableCell>
+                                                                <TableCell>Product Image</TableCell>
                                                                 <TableCell>Product ID</TableCell>
                                                                 <TableCell>Product Name</TableCell>
                                                                 <TableCell>Quantity</TableCell>
