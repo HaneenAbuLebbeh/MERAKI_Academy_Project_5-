@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Popover from "@mui/material/Popover"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
@@ -23,8 +24,10 @@ const pages = ["Top Spots", "Market", "Cart", "About Us"];
 const settings = ["Account", "Favourites", "Orders", "Logout"];
 
 const Navbar = () => {
+  const userId=useSelector((initialState)=> initialState.login.userId)
   const dispatch=useDispatch()
   const [newMessages, setNewMessages] = useState(false); 
+  const [image, setimage] = useState("")
   const isLoggedIn = useSelector(
     (state) => state.login.isLoggedIn 
   );
@@ -55,6 +58,29 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openChat, setOpenChat] = useState(false); 
   const [anchorElMail, setAnchorElMail] = useState(null); 
+
+  useEffect(() => {
+    
+    const fetchUserData = async () => {
+      try {
+        
+        const response = await axios.get(`http://localhost:5000/users/userinfo/${userId}`);
+        setimage(response.data.result[0].image); 
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+
+
+
+
+
+
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -104,6 +130,7 @@ const Navbar = () => {
     setOpenChat(false); 
     setAnchorElMail(null); 
   };
+  console.log(image)
   return (
     <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
@@ -188,7 +215,8 @@ const Navbar = () => {
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User" src="./src/assets/user.jpg" />
+                    <Avatar alt="User" src={image}
+                    /* "./src/assets/user.jpg" */ />
                   </IconButton>
                 </Tooltip>
                 
