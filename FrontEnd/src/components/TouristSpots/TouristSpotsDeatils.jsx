@@ -20,6 +20,7 @@ const TouristSpotsDeatils = () => {
 
   
 console.log(userId)
+
 const placeName='Amman'
 const {spotname}=useParams()
 const [error, setError] = useState({});
@@ -41,9 +42,9 @@ const [weather, setWeather] = useState("")
 
 if (result?.data?.success){
   setspotInfo(result?.data?.result)
-  setSpotId(result?.data?.result[0].spot_id)
+  setSpotId(result?.data?.result[0].id)
  setFirstName(result?.data?.result[0].firstname)
-
+ console.log(spotId)
 
 }}catch (error) {
   if (error.response) {
@@ -82,6 +83,7 @@ const body={
   comment,
   rating
 }
+
 axios.post("http://localhost:5000/review", body)
 .then((result) => {
   if (result.status === 200) {
@@ -91,6 +93,7 @@ axios.post("http://localhost:5000/review", body)
   }
 })
 .catch((err) => {
+  console.log(body)
   console.log(err);
   setError({ api: "Comment failed. Please try again." });
 });
