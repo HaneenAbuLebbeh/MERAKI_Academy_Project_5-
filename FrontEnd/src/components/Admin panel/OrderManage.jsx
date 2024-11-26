@@ -21,7 +21,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckIcon from '@mui/icons-material/Check';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-
+import Sidebar from './Sidebar';
 import './Admin.css';
 
 
@@ -144,6 +144,10 @@ function OrderManage() {
     };
 
     return (
+        <Box sx={{ display: 'flex', height: '100vh' }}>
+            {/* Sidebar */}
+            <Sidebar />
+
         <Box className="order-management slide-up-animation" sx={{ padding: 2 }}>
         
 {isLoading ? (
@@ -284,6 +288,7 @@ function OrderManage() {
     </>
     )}
         </Box>
+    </Box>
     );
 }
 
