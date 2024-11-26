@@ -144,9 +144,9 @@ function OrderManage() {
     };
 
     return (
-        <Box sx={{ display: 'flex', height: '100vh' }}>
-            {/* Sidebar */}
-            <Sidebar />
+    <Box sx={{ display: 'flex', height: '100vh' }}>
+    {/* Sidebar */}
+    <Sidebar />
 
         <Box className="order-management slide-up-animation" sx={{ padding: 2 }}>
         
@@ -181,7 +181,7 @@ function OrderManage() {
                             <TableCell>Details</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody className="table-rowww">
                         {Array.isArray(orders) && orders.length > 0 ? (
                             orders.map((order) => (
                                 <React.Fragment key={order.id}>
@@ -252,7 +252,7 @@ function OrderManage() {
                                                                         <img 
                                                                         src={item.image} 
                                                                         alt={item.name} 
-                                                                        className="Admin-productimage"
+                                                                        className="product-table-image"
                                                                         style={{
                                                                         width: '60px',
                                                                         height: '60px',
