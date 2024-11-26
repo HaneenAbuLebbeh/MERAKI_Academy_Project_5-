@@ -13,10 +13,15 @@ import ProductDetailes from './components/ProductsDetailes/ProductDetailes'
 import CartPage from './components/Cart/CartPage'
 import OrderConfirmtion from './components/Orders/OrderConfirmtion'
 import CheckOutpage from './components/CheckoutPage/CheckOutpage'
+
+import About from "./components/About/About"
+
+=======
 import UserOrders from './components/Orders/userorders'
 import Market from './components/Market/Market'
 import FavoritesProducts from './components/Favourite/FavoritesProducts'
 import OrderManage from "./components/Admin panel/OrderManage"
+
 
 import SocketMessages from './components/Socket/SocketMessages'
 import SendSocketMessages from './components/Socket/SendSocketMessages'
@@ -91,6 +96,7 @@ function App() {
     <Route path="/SocketMessages" element={<SocketMessages/>} />
     <Route path="/send-socket-message" element={<SendSocketMessages/>} />
     
+    <Route path="/About" element={<About />} />
 
     <Route path="/cart" element={<CartPage />} />
 

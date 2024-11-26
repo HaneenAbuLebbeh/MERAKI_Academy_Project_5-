@@ -5,7 +5,7 @@ import React from 'react'
 
 import Carousel from 'react-bootstrap/Carousel';
 import "./style.css"
-import Input from '@mui/joy/Input';
+// import {Input} from '@mui/joy/Input';
 import Box from "@mui/material/Box";
 function Welcome() {
 
@@ -28,7 +28,7 @@ function Welcome() {
     
       <Carousel.Item  interval={5000}>
       <video autoPlay muted loop className="header-background" >
-          <source src="./src/assets/video2.mp4" type="video/mp4" />
+          <source src="./src/assets/sunset1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video> 
         <Carousel.Caption>
@@ -36,13 +36,13 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="solid"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="solid"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={5000}>
       <video autoPlay muted loop className="header-background" >
-          <source src="./src/assets/video3.mp4" type="video/mp4" />
+          <source src="./src/assets/v2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video> 
         <Carousel.Caption>
@@ -50,13 +50,13 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="soft"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="soft"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={5000}>
       <video autoPlay muted loop className="header-background" >
-          <source src="./src/assets/video4.mp4" type="video/mp4" />
+          <source src="./src/assets/v3.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video> 
         <Carousel.Caption>
@@ -65,13 +65,13 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item >
       <video autoPlay muted loop className="header-background" >
-          <source src="./src/assets/video1.mp4" type="video/mp4" />
+          <source src="./src/assets/.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video> 
         <Carousel.Caption>
@@ -79,7 +79,7 @@ function Welcome() {
       sx={{ py: 2, display: 'grid', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}
     >
       
-      <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/>
+      {/* <Input placeholder="Search in here…" variant="plain"  style={{backgroundColor: "transparent"}}/> */}
     </Box>
         </Carousel.Caption>
       </Carousel.Item>
