@@ -16,7 +16,7 @@ import CheckOutpage from './components/CheckoutPage/CheckOutpage'
 
 import About from "./components/About/About"
 
-=======
+
 import UserOrders from './components/Orders/userorders'
 import Market from './components/Market/Market'
 import FavoritesProducts from './components/Favourite/FavoritesProducts'
@@ -115,7 +115,7 @@ function App() {
     <Route path="/Admin/Header" element={<Header />} />
     <Route path="/Admin/Orders" element={<OrderManage/>} />
     <Route path="/Admin/Products" element={<ProductManage/>} />
-
+    <Route path="/Admin/users" element={<Users/>} />
 
     </Routes>
     </SocketMessages>
