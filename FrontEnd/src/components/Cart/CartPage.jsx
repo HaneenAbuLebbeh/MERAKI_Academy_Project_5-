@@ -6,6 +6,7 @@ import './cartpage.css';
 import { updateCart, updateQuantity, removeFromCart } from "../../../Redux/reducers/cart"
 import { setLoading } from "../../../Redux/reducers/products"
 import { DotLoader} from "react-spinners"; //loading spinner
+import './cartpage.css';
 
 
 function CartPage() {
@@ -121,98 +122,106 @@ function CartPage() {
     };
 
 
-  return (
-    <div className="all-the-page">
-        <div className="cart-page">
+    return (
+        <div className="background">
+          {isLoading ? (
+            <div className="loading-indicator">
+              <DotLoader color="#FF8A00" size={60} />
+            </div>
+          ) : (
+            <div className="all-the-page">
+              <div className="cart-page">
                 <h1 className="YourCart">Your Cart</h1>
                 {error && <p className="error-message">{error}</p>}
-
-            {isLoading ? (
-                <div className="loading-indicator">
-                    <DotLoader color="#3498db" size={60} />
-                </div>
-            ) :
-                Array.isArray(cart) && cart.filter(item => item.product_id && item.quantity > 0).length > 0 && cart.length>0? (
-                    <div className="cart-items">
-                        {cart.map((item, index) => (
-                            item.quantity > 0 && (
-                            <div key={item.product_id} className="cart-item slide-up-animation">
-                                <div className="item-image">
-                                    <img src={item.image} alt={item.product_name} className="product-imagee" />
-                                </div>
-                                <div className="item-details">
-                                    <h2>{item.product_name}</h2>
-                                    <p>
-                                        Price per unit: <strong>${item.price}</strong>
-                                    </p>
-                                    
-                                    <div className="quantity-controls">
-                                        <button
-                                            onClick={() => handleUpdateQuantity(item.product_id
-                                                , item.quantity - 1)}
-                                            disabled={item.quantity === 1}
-                                        >
-                                            -
-                                        </button>
-                                        <span>{item.quantity}</span>
-                                        <button
-                                            onClick={() => handleUpdateQuantity(item.product_id, item.quantity + 1)}
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                    <button
-                                        onClick={() => handleRemoveProduct(item.
-                                        product_id)}
-                                        className="remove-button"
-                                    >
-                                        <i className="fas fa-trash"></i>{/* Delete icon */}
-                                    </button>
-                                    <p>
-                                        Total Price: <strong>${(item.price * item.quantity).toFixed(2)}</strong>
-                                    </p>
-                                </div>
+                {Array.isArray(cart) &&
+                cart.filter((item) => item.product_id && item.quantity > 0).length > 0 ? (
+                  <div className="cart-items">
+                    {cart.map(
+                      (item, index) =>
+                        item.quantity > 0 && (
+                          <div key={item.product_id} className="cart-item slide-up-animation">
+                            <div className="item-image">
+                              <img src={item.image} alt={item.product_name} className="product-imagee" />
                             </div>
-                        )
-                        ))}
-
-                        {/* Order Summary */}
-                        {cart.length > 0 && subtotal > 0 && (
-                        <div className="order-summary">
-                            <h3>Cart Summary</h3>
-                            <div className="summary-item">
-                                <span>Subtotal</span>
-                                <span>${subtotal.toFixed(2)}</span>
-                            </div>
-                            <div className="summary-item">
-                                <span>Delivery Fee</span>
-                                <span>{deliveryFee === 0 ? 'Free' : `$${deliveryFee.toFixed(2)}`}</span>
-                            </div>
-                            <div className="summary-item vat">
-                                <span>VAT (5%)</span>
-                                <span>${vat.toFixed(2)}</span>
-                            </div>
-                            <div className="summary-item total">
-                                <span>Total</span>
-                                <span>${total.toFixed(2)}</span>
-                            </div>
-                            <div className="buttons-container">
-                                <button onClick={() => navigate(-1)} className="button-">
-                                    Add More
+                            <div className="item-details">
+                              <h2>{item.product_name}</h2>
+                              <p>
+                                Price per unit: <strong>${item.price}</strong>
+                              </p>
+      
+                              <div className="quantity-controls">
+                                <button
+                                  onClick={() =>
+                                    handleUpdateQuantity(item.product_id, item.quantity - 1)
+                                  }
+                                  disabled={item.quantity === 1}
+                                >
+                                  -
                                 </button>
-                                <button onClick={handleCheckout}>Proceed to Checkout</button>
+                                <span>{item.quantity}</span>
+                                <button
+                                  onClick={() =>
+                                    handleUpdateQuantity(item.product_id, item.quantity + 1)
+                                  }
+                                >
+                                  +
+                                </button>
+                              </div>
+                              <button
+                                onClick={() => handleRemoveProduct(item.product_id)}
+                                className="remove-button"
+                              >
+                                <i className="fas fa-trash"></i>
+                              </button>
+                              <p>
+                                Total Price:{" "}
+                                <strong>${(item.price * item.quantity).toFixed(2)}</strong>
+                              </p>
                             </div>
+                          </div>
+                        )
+                    )}
+      
+                    {/* Order Summary */}
+                    {cart.length > 0 && subtotal > 0 && (
+                      <div className="order-summary">
+                        <h4 className="H3CartSummary">Cart Summary</h4>
+                        <div className="summary-item">
+                          <span>Subtotal</span>
+                          <span>${subtotal.toFixed(2)}</span>
                         </div>
-                        )}
-                    </div>
+                        <div className="summary-item">
+                          <span>Delivery Fee</span>
+                          <span>{deliveryFee === 0 ? "Free" : `$${deliveryFee.toFixed(2)}`}</span>
+                        </div>
+                        <div className="summary-item vat">
+                          <span>VAT (5%)</span>
+                          <span>${vat.toFixed(2)}</span>
+                        </div>
+                        <div className="summary-item total">
+                          <span>Total</span>
+                          <span>${total.toFixed(2)}</span>
+                        </div>
+                        <div className="buttons-container">
+                          <button onClick={() => navigate(-1)} className="button-cart">
+                            Add More
+                          </button>
+                          <button className="button-cart" onClick={handleCheckout}>
+                            Proceed to Checkout
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 ) : (
-                    <p>Your cart is empty.</p>
+                  <p>Your cart is empty.</p>
                 )}
+              </div>
+            </div>
+          )}
         </div>
-    </div>
-    
-  )
-}
+      );
+    }      
 
 export default CartPage
 

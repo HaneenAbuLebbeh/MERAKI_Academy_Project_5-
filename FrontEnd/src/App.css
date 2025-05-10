@@ -1,9 +1,13 @@
+body {
+  margin-top: 66px !important; /* Add the distance equal to the height of the AppBar */
+}
 
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
     
   }
 
@@ -12,7 +16,7 @@
 .login-card {
     display: flex;
     gap: 20px;
-    border: 2px solid #d24119; 
+    border: 2px solid #D1B28E; 
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
@@ -25,7 +29,7 @@
   
   .login-image{
     width: 100%;
-    height: auto;
+    height: 100%;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
   }
@@ -39,7 +43,35 @@
   .register-card{
     display: flex;
     gap: 20px;
-    border: 2px solid #2819d2; 
+    border: 2px solid #D1B28E; 
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+   
+  }
+
+
+
+.MuiCardContent-root css-vpmu79-JoyCardContent-root{
+background-color: red!important ; 
+
+
+}
+
+
+
+  /**********************************************/
+    /************************************/
+    @keyframes slideUp {
+      0% {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      100% {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+  
+  .slide-up-animation {
+      animation: slideUp 0.5s ease-out;
   }

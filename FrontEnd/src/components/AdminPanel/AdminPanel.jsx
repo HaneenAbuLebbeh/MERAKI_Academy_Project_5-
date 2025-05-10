@@ -31,6 +31,11 @@ console.log(imageUrl)
 <div>
       <input type="file" onChange={handleImageUpload} />
       {imageUrl && <img src={imageUrl} alt="Uploaded" />}
+      <form action="/upload" method="post" enctype="multipart/form-data">
+  <label for="videoFile">Upload your video:</label>
+  <input type="file" id="videoFile" name="videoFile" accept="video/*" required/>
+  
+</form>
     </div> 
 
     </div>

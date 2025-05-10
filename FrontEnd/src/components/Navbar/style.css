@@ -2,3 +2,39 @@
     cursor: pointer;
    
 }
+
+/*********nooran********/
+/*color: #ff5e00 !important;
+color: #05011d !important;
+*/
+.mooon{
+    color: #ffffff !important;
+}
+.mooon:hover{
+    background-color: rgba(255, 255, 255, 0.2)    !important;
+    transform: scale(1.1);
+    border-radius: 20px;
+  /*  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);*/
+
+}
+
+/*.moon-icon:hover{
+    color: #ffcc00;
+    transform: rotate(15deg);
+}*/
+
+.mooon:hover .moon-icon {
+    color: #ffcc00;
+        transform: rotate(15deg); 
+  }
+
+
+ 
+.css-rizt0-MuiTypography-root {
+    font-weight: bold !important;
+  
+}
+
+.css-1y2s3vc-MuiPaper-root-MuiAppBar-root {
+    margin-bottom: 0px !important;  
+  }

@@ -1,0 +1,145 @@
+
+.table-container {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-header {
+    font-weight: bold;
+    text-align: center;
+    background-color: #f5f5f5;
+    color: #1976d2; 
+  }
+  
+ 
+  .table-row:nth-child(odd) {
+    background-color: #fafafa;
+  }
+  
+  
+  .table-row:hover {
+    background-color: #e8f5e9;
+  }
+ 
+  .MuiTableCell-root {
+    padding: 16px;
+  }
+  
+ 
+  h1 {
+    text-align: center;
+  }
+  
+ 
+  .MuiCircularProgress-root {
+    margin-top: 20px;
+  }
+  
+  .header-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    top: 50px ;
+    right:320px ;
+    margin: 20px 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  #info{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  .user-card {
+    margin: 20px;
+  width: 100%; 
+  max-width: 350px; 
+  }
+  
+  .user-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .user-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;  
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%; 
+  }
+  
+  
+  .comments-list {
+    margin-top: 10px;
+  }
+  
+  .comment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .comment-text {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  .comment-item .MuiIconButton-root {
+    padding: 5px;
+  }
+
+  .content-wrapper {
+    margin-left: 250px; 
+    padding: 40px;
+    width: 100%;
+    box-sizing: border-box; 
+    overflow-x: hidden; 
+  }
+  .user-cards-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+  }
+  
+ 
+  .user-card-wrapper {
+    flex: 0 0 48%;
+    margin-bottom: 20px; 
+  }
+  
+
+  .user-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .circle-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .comments-list {
+    margin-top: 10px;
+  }
+  
+  .comment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .comment-text {
+    flex: 1;
+  }

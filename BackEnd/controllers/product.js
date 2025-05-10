@@ -60,12 +60,12 @@ async function getAllProducts(req, res) {
 
 // Get products for specific TouristSpots By TouristSpotsId 
 const getProductsByTouristSpotsId = async (req, res) => {
-    const {touristSpotsid} = req.params;
+    const {spotId} = req.params;
 
     try {
         const result = await pool.query(
-            'SELECT * FROM products WHERE spot_id = $1', 
-            [touristSpotsid]
+            'SELECT * FROM products WHERE spot_id = $1 ORDER BY id ASC', 
+            [spotId]
         );
 
         if (result.rows.length === 0) {

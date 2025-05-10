@@ -59,19 +59,19 @@ FOREIGN KEY (category_id) REFERENCES Country_Categories(id) ON DELETE CASCADE
 ); 
 
 
--- Create a table called **products** in the database
 CREATE TABLE products (
-id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
-description TEXT NOT NULL,
-price DECIMAL(10, 2) NOT NULL,
-category_id INTEGER,  
-spot_id INTEGER,
-image TEXT NOT NULL,
-rating DECIMAL(2, 1) NOT NULL,
-extra  VARCHAR(50) NOT NULL,
-FOREIGN KEY (category_id) REFERENCES Country_Categories(id),
-FOREIGN KEY (spot_id) REFERENCES TouristSpots(id)
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    category_id INTEGER,
+    spot_id INTEGER,
+    image TEXT NOT NULL,
+    rating DECIMAL(2, 1) NOT NULL,
+    extra VARCHAR(50) NOT NULL,
+    stock_quantity INTEGER DEFAULT 0,
+    FOREIGN KEY (category_id) REFERENCES Country_Categories(id),
+    FOREIGN KEY (spot_id) REFERENCES TouristSpots(id)
 );
 
 

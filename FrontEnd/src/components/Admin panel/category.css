@@ -1,0 +1,24 @@
+
+
+.content {
+   
+    display: flex;
+    margin-left: 30px; /* Adjust for sidebar width */
+    padding: 20px;
+    position: relative; /* Make the content container a positioning context */
+    /* background-color: #F4F4F4; */
+  }
+  
+  .add-product-button{
+    
+    /* display: flex !important;
+    justify-content: flex-start !important; */
+    
+   background-color:  hsla(134, 61%, 41%, 0.726)!important;
+  }
+
+
+ .cat-img:hover{
+    transform: scale(1.05); /* Adjust the scale factor as needed */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+ }

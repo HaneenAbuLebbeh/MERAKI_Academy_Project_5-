@@ -18,7 +18,7 @@ productRouter.post("/",authentication, authorization("Admin"),createProduct);
 
 productRouter.get("/",getAllProducts);
 
-productRouter.get("/:touristSpotsid", getProductsByTouristSpotsId);
+productRouter.get("/:spotId", getProductsByTouristSpotsId);
 
 productRouter.get("/details/:productId", getProductById);
 

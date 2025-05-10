@@ -10,6 +10,7 @@ import './ProductDetails.css';
 import Cart from '../Cart/cart';
 import { DotLoader} from "react-spinners"; //loading spinner
 
+
 const ProductDetailes = () => {
     const navigate = useNavigate();
 
@@ -48,7 +49,8 @@ const ProductDetailes = () => {
 
 
   return (
-    <div className="product-details slide-up-animation">
+    <section>
+    <div className="product-details slide-up-animation ">
         {productDetails ? (
             
             <div className="product-info">
@@ -64,23 +66,23 @@ const ProductDetailes = () => {
                 <div className="details-container">
                     <h2 className="product-name">{productDetails.name}</h2>
                     <p className="product-description">{productDetails.description}</p>
-                    <p className="product-price">Price per unit: ${productDetails.price}</p>
+                    <p className="product-price">Price per unit: {productDetails.price} JD</p>
 
                     {/* Quantity control*/}
                     <div className="quantity-selector">
-                        <button className="quantity-btn" 
+                        <button className="quantity-btn-prodetails" 
                             onClick={decreaseQuantity} disabled={quantity === 1}>-
                         </button>
                         <span className="quantity-display">{quantity}</span>
-                        <button className="quantity-btn"
+                        <button className="quantity-btn-prodetails"
                             onClick={increaseQuantity}>+
                         </button>
                     </div>
 
-                    <p className="total-price">Total Price : ${totalPrice}</p>
+                    <p className="total-price">Total Price : {totalPrice} JD</p>
 
                     {/* add to cart button */}
-                        <div className="cart-component">
+                        <div className="cart-component-AddBtn">
                             <Cart 
                                 productId={productDetails.id} 
                                 productName={productDetails.name} 
@@ -95,15 +97,16 @@ const ProductDetailes = () => {
         ) : (
 
         <div className="loading-indicator">
-        <DotLoader color="#3498db" size={50} />
+        <DotLoader color="#FF8A00" size={50} />
         </div>
         )}
 
                     {/* View Menu Button */}
                     <button className="view-menu-btn" onClick={handleBackClick}>
-                        <span className="arrow-icon">←</span> View Menu
+                        <span className="arrow-icon"></span>
                     </button>
     </div>
+    </section>
   );
 };
 

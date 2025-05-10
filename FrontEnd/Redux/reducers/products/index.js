@@ -4,7 +4,7 @@ export const productsSlice = createSlice({
     name: "products",
     initialState: {
         products: [],       
-        favorites: [],       
+        favorites: JSON.parse(localStorage.getItem("favorites")) || [],       
 
         productDetails: null,
         isLoading: false,
@@ -26,6 +26,9 @@ export const productsSlice = createSlice({
                 // If it's not, add it
                 state.favorites.push(productId);
             }
+
+                // Save favorites=>to LocalStorage
+            localStorage.setItem("favorites", JSON.stringify(state.favorites));
         },
 
         setProductDetails: (state, action) => {

@@ -56,7 +56,7 @@ const Cart = ({ productId, productName, productPrice, quantity, setQuantity }) =
 
 
   return (
-    <div>
+    <div className='body'>
 
     <div className="cart-component slide-up-animation">
             <button onClick={handleAddToCart}>Add to Cart</button>

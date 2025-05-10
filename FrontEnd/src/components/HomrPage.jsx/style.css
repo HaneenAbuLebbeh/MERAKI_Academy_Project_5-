@@ -1,0 +1,118 @@
+/* #root{
+  background-color: #FFFCF2;
+} */
+
+.header-background {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover; /* This ensures the video fills the container without distortion */
+  }
+
+  .carousel{
+   
+    /* box-shadow: 5px 5px 5px rgba(84, 83, 83, 0.5); */
+    border-radius: 20px !important;
+  }
+
+  .card {
+    position: relative;
+    top: 20px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    transition: transform 0.3s ease-in-out;
+    border: 5px solid  ;
+    border-radius: 2rem;
+    background-color: #BEBEC0;
+
+  }
+  .row{
+    margin-left: 10px;
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Adjust the scale factor as needed */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+  }
+  /* .image-container{
+    background-color: aqua;
+  } */
+
+
+  /***nooran***/
+  .header-content {
+    position: absolute; 
+    top: 42.5%; /*  */
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    text-align: center;
+    color: white;
+    z-index: 2; 
+    width: 100%; 
+}
+  
+.header-content h1 {
+    font-size: 2.62rem;
+    text-shadow: 2px 2px 4px #000000bc;    
+    margin-bottom: 20px;
+    
+}
+  
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 800px;
+    width: 100%;
+    border-radius: 25px;
+    margin-top: 57px;/**/
+    z-index: 3;
+    max-width: 490px;
+    width: 90%;
+}
+  
+.search-bar input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 25px 0 0 25px;
+    font-size: 16px;
+    outline: none;
+    position: relative;
+    z-index: 3;
+    text-align: center;
+}
+  
+.search-bar button {
+    padding: 12px 20px;
+    border: none;
+    background-color: rgba(237, 194, 83, 0.5);
+    color: white;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: none;
+    transition: background-color 0.3s ease;
+    margin-top: 0 !important;
+    position: relative;
+    position: relative;
+    z-index: 3;
+}
+  
+.search-bar button:hover {
+    background-color: hwb(24 7% 2% / 0.83);
+}
+
+
+.card-img-top{
+  /* height: 18rem  !important; */
+  border-radius: 5px !important;
+  object-fit:cover;
+}
+
+.card-body:hover{
+  background-Color: rgba(237, 194, 83, 0.5) !important
+}
+
+.text{
+  color: hwb(24 7% 2% / 0.83);
+}
